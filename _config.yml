@@ -20,7 +20,7 @@
 
 title: 개발블로그
 email: charles9306@icloud.com
-description: >- 안녕하세요. 여러분 # this means to ignore newlines until "baseurl:"
+description: 안녕하세요. 여러분 # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://get6.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: charles9306
