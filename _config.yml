@@ -27,7 +27,7 @@ twitter_username: charles9306
 github_username: get6
 
 # Build settings
-theme: jekyll-theme-cayman
+theme: minimal-mistakes-jekyll
 plugins:
   - jekyll-feed
 # Exclude from processing.
