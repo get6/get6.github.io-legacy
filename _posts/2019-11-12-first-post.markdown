@@ -1,8 +1,7 @@
 ---
 layout: post
 title: 지킬을 이용해 깃허브에 올릴 때 헷갈린 점
-date: 2019-11-12 10:25:00 +0000
-categories: jekyll update
+author: get6
 ---
 
 > 처음 저장소에 등록을 하고 올렸을 때 메인화면을 바꾸고 싶었다. 그리고 문득 든 생각이 있었는데,

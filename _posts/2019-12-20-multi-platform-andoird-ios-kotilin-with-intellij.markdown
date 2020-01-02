@@ -1,8 +1,7 @@
 ---
 layout: post
 title: 코틀린 멀티플랫폼 프로젝트 실행
-date:   2019-12-20 22:15:00 +0000
-categories: jekyll update
+author: get6
 ---
 며칠전에 poroject를 생성해놓고 에러를 뿜뿜했던 multi-platform android, ios with kotlin를 드디어 실행시켰다.
 

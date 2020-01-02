@@ -1,8 +1,7 @@
 ---
 layout: post
 title: vue run serve error 발생
-date:   2019-12-18 15:19:00 +0000
-categories: jekyll update
+author: get6
 ---
 
 아래와 같은 에러가 발생한다면
