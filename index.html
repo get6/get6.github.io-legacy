@@ -1,0 +1,38 @@
+---
+layout: default
+---
+
+{% for post in paginator.posts %}
+<div>
+  <small class="post-info">{{ post.date | date: "%B %-d, %Y" }}</small>
+  <h1><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h1>
+  <small class="post-info">by {{ post.author | default: site.author }}</small>
+  {{ post.excerpt }}
+  <a href="{{ post.url | relative_url }}">[ Read ]</a>
+</div>
+<br />
+{% endfor %}
+
+<ul class="pagination">
+  <li>
+    {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | relative_url }}">
+      <span class="previous"></span>
+    </a>
+    {% else %}
+    <span class="previous"></span>
+    {% endif %}
+  </li>
+  <li>
+    <span class="page_number ">{{ paginator.page }} of {{ paginator.total_pages }}</span>
+  </li>
+  <li>
+    {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | relative_url }}">
+      <span class="next"></span>
+    </a>
+    {% else %}
+    <span class="next"></span>
+    {% endif %}
+  </li>
+</ul>

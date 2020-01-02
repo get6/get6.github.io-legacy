@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  {% include head.html %}
+  <body>
+    <div class="wrapper">
+      {% include header.html %}
+      {% if site.github.is_project_page %}
+        {% include fork-me.html %}
+      {% endif %}
+      <section>
+        {{ content }}
+      </section>
+      {% include footer.html %}
+    </div>
+  </body>
+</html>
