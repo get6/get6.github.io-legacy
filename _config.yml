@@ -1,5 +1,5 @@
 title: 개발블로그
-description: 안녕하세요. 여러분
+description: 안녕하세요. 여러분. 도움이 되었으면 좋겠습니다.
 url: "https://get6.github.io"
 logo: nes-kirby
 theme: jekyll-theme-8bit
@@ -7,18 +7,19 @@ plugins:
   - jekyll-feed
   - jekyll-paginate
   - jekyll-seo-tag
-#paginate: 2
+paginate: 2
 social:
-  twitter: https://twitter.com/charles9306
-  facebook: https://facebook.com/seongjun.hwang1
   github: https://github.com/get6
+  gmail: mailto:tjdwns075@gmail.com
+  instagram: https://instagram.com/hwang_sung_jun93
+  facebook: https://facebook.com/seongjun.hwang1
+  twitter: https://twitter.com/charles9306
   #youtube: https://youtube.com/channel/ID
   #google: https://plus.google.com/username
   #medium: https://medium.com/@username
   #twitch: https://twitch.com/username
   #reddit: https://www.reddit.com/user/username
   #whatsapp: tel:+5541999999999
-  gmail: mailto:tjdwns075@gmail.com
   #linkedin: https://www.linkedin.com/in/username
   disqus:
   shortname: jekyll-theme-8bit

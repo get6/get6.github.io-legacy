@@ -1,12 +1,20 @@
 <header>
   <div class="nes-container is-rounded blue-border header">
-    {% if site.logo %}
+    <!-- 
+      {% if site.logo %}
       {% if site.logo contains 'nes-' %}
       <i class="{{ site.logo }}"></i>
       {% else %}
       <img src="{{site.logo | relative_url}}" alt="Logo" />
       {% endif %}
-    {% endif %}
+    {% endif %} 
+    -->
+    <section class="icon-list">
+      <!-- Copyright Nintendo -->
+      <i class="nes-bulbasaur"></i>
+      <i class="nes-charmander"></i>
+      <i class="nes-squirtle"></i>
+    </section>
     <h1>
       <a href="{{ "/" | absolute_url }}">{{ site.title | default: site.github.repository_name }}</a>
     </h1>
