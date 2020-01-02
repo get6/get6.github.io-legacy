@@ -1,0 +1,406 @@
+@import "fonts";
+@import "rouge-github";
+
+body {
+  background-color: #fff;
+  font: 14px/1.5 "Noto Sans", Helvetica, Arial, sans-serif;
+  color: #212529;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Press Start 2P", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  margin: 0 0 20px;
+}
+
+h1 {
+  font-size: 28px;
+}
+
+p,
+ul,
+ol,
+table,
+pre,
+dl {
+  margin: 0 0 20px;
+}
+
+a {
+  color: #58c7ff;
+}
+
+a:hover,
+a:focus {
+  color: #3fbfff;
+  text-decoration: none;
+}
+
+a small {
+  font-size: 11px;
+  margin-top: -0.3em;
+  display: block;
+}
+
+blockquote {
+  border-left: 1px solid #e5e5e5;
+  margin: 0;
+  padding: 0 0 0 20px;
+  font-style: italic;
+}
+
+code,
+pre {
+  font-family: "Courier New", Courier, monospace;
+  color: #333;
+}
+
+pre {
+  padding: 8px 15px;
+  background: #f8f8f8;
+  overflow-x: auto;
+  box-shadow: 0 -4px #f8f8f8, 0 -8px #e5e5e5, 4px 0 #f8f8f8, 4px -4px #e5e5e5,
+    8px 0 #e5e5e5, 0 4px #f8f8f8, 0 8px #e5e5e5, -4px 0 #f8f8f8,
+    -4px 4px #e5e5e5, -8px 0 #e5e5e5, -4px -4px #e5e5e5, 4px 4px #e5e5e5;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 5px 10px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+dt {
+  color: #444;
+  font-weight: 700;
+}
+
+th {
+  color: #444;
+}
+
+img {
+  max-width: 100%;
+}
+
+strong {
+  color: #222;
+  font-weight: 700;
+}
+
+small {
+  font-size: 11px;
+}
+
+hr {
+  border: 0;
+  background: #000;
+  height: 4px;
+  margin: 20px 0;
+}
+
+header {
+  width: 270px;
+  float: left;
+}
+
+section {
+  width: 500px;
+  min-height: 810px;
+  float: right;
+  padding: 25px 0 50px;
+  background-color: #fff;
+}
+
+footer {
+  width: 270px;
+  float: left;
+  bottom: 50px;
+}
+
+.nes-container.is-rounded {
+  margin-top: 8px;
+}
+
+.nes-container.blue-border {
+  border-image-source: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M3 1 h1 v1 h-1 z M4 1 h1 v1 h-1 z M2 2 h1 v1 h-1 z M5 2 h1 v1 h-1 z M1 3 h1 v1 h-1 z M6 3 h1 v1 h-1 z M1 4 h1 v1 h-1 z M6 4 h1 v1 h-1 z M2 5 h1 v1 h-1 z M5 5 h1 v1 h-1 z M3 6 h1 v1 h-1 z M4 6 h1 v1 h-1 z" fill="rgb(26,128,178)" /></svg>');
+}
+
+.nes-container.green-border {
+  border-image-source: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M3 1 h1 v1 h-1 z M4 1 h1 v1 h-1 z M2 2 h1 v1 h-1 z M5 2 h1 v1 h-1 z M1 3 h1 v1 h-1 z M6 3 h1 v1 h-1 z M1 4 h1 v1 h-1 z M6 4 h1 v1 h-1 z M2 5 h1 v1 h-1 z M5 5 h1 v1 h-1 z M3 6 h1 v1 h-1 z M4 6 h1 v1 h-1 z" fill="rgb(0,120,0)" /></svg>');
+}
+
+.nes-container.brown-border {
+  border-image-source: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M3 1 h1 v1 h-1 z M4 1 h1 v1 h-1 z M2 2 h1 v1 h-1 z M5 2 h1 v1 h-1 z M1 3 h1 v1 h-1 z M6 3 h1 v1 h-1 z M1 4 h1 v1 h-1 z M6 4 h1 v1 h-1 z M2 5 h1 v1 h-1 z M5 5 h1 v1 h-1 z M3 6 h1 v1 h-1 z M4 6 h1 v1 h-1 z" fill="rgb(139,22,0)" /></svg>');
+}
+
+.nes-container.header {
+  background-color: #58c7ff;
+}
+
+.nes-container .nes-kirby {
+  display: block;
+  margin: 15px auto;
+}
+
+.nes-container h1 a {
+  color: #fff;
+  text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+    -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.description {
+  font: 13px/1.5 "Press Start 2P", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+}
+
+.github-link {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 999;
+  display: flex;
+  height: 100px;
+  color: #333;
+  text-decoration: none;
+}
+.github-link > p.nes-balloon {
+  font-family: "Press Start 2P", Helvetica, Arial, sans-serif;
+  align-self: flex-start;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+  color: #333;
+}
+.github-link > i.nes-octocat {
+  align-self: flex-end;
+}
+
+.nes-container.downloads {
+  font-family: "Press Start 2P", Helvetica, Arial, sans-serif;
+  background-color: #5adb57;
+  margin-top: 12px;
+}
+
+.nes-btn.is-file {
+  color: #fafafa;
+  background-color: #01b801;
+}
+.nes-btn.is-file::after {
+  box-shadow: inset -4px -4px #007800;
+}
+.nes-btn.is-file:hover {
+  background-color: #5adb57;
+}
+.nes-btn.is-file:hover::after {
+  box-shadow: inset -6px -6px #01b801;
+}
+
+.nes-list.is-disc li::before,
+.nes-list.is-circle li::before {
+  top: 2px;
+}
+
+.footer {
+  font-family: "Press Start 2P", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  text-align: center;
+  color: #8b1600;
+  background-color: #ffe4ad;
+}
+
+.footer p {
+  margin-bottom: 5px;
+}
+
+.footer a {
+  color: #ffa347;
+}
+
+.wrapper {
+  width: 860px;
+  margin: 0 auto;
+}
+
+ul.pagination {
+  list-style-type: none;
+  margin: 0 0 30px;
+  padding: 0;
+  overflow: hidden;
+}
+
+ul.pagination li {
+  display: inline-block;
+  float: left;
+}
+
+.page_number {
+  font-family: "Press Start 2P", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: smaller;
+  padding: 0 8px;
+}
+
+.previous,
+.next {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.previous::before,
+.next::before {
+  content: "";
+  width: 2px;
+  height: 2px;
+  color: #212529;
+  position: absolute;
+}
+
+a span.previous::before,
+a span.next::before {
+  color: #58c7ff;
+}
+a:hover span.previous::before,
+a:hover span.next::before {
+  color: #3fbfff;
+}
+
+.previous::before {
+  box-shadow: 2px 8px, 4px 6px, 4px 8px, 4px 10px, 6px 4px, 6px 6px, 6px 8px,
+    6px 10px, 6px 12px, 8px 4px, 8px 6px, 8px 8px, 8px 10px, 8px 12px, 10px 2px,
+    10px 4px, 10px 6px, 10px 8px, 10px 10px, 10px 12px, 10px 14px, 12px 2px,
+    12px 4px, 12px 6px, 12px 8px, 12px 10px, 12px 12px, 12px 14px, 14px 0px,
+    14px 2px, 14px 4px, 14px 6px, 14px 8px, 14px 10px, 14px 12px, 14px 14px,
+    14px 16px, 16px 0px, 16px 2px, 16px 4px, 16px 6px, 16px 8px, 16px 10px,
+    16px 12px, 16px 14px, 16px 16px;
+}
+
+.next::before {
+  box-shadow: 2px 0px, 4px 0px, 2px 2px, 4px 2px, 6px 2px, 8px 2px, 2px 4px,
+    4px 4px, 6px 4px, 8px 4px, 10px 4px, 12px 4px, 2px 6px, 4px 6px, 6px 6px,
+    8px 6px, 10px 6px, 12px 6px, 14px 6px, 2px 8px, 4px 8px, 6px 8px, 8px 8px,
+    10px 8px, 12px 8px, 14px 8px, 16px 8px, 2px 10px, 4px 10px, 6px 10px,
+    8px 10px, 10px 10px, 12px 10px, 14px 10px, 2px 12px, 4px 12px, 6px 12px,
+    8px 12px, 10px 12px, 12px 12px, 2px 14px, 4px 14px, 6px 14px, 8px 14px,
+    2px 16px, 4px 16px;
+}
+
+.post-info {
+  display: block;
+  margin-bottom: 20px;
+  color: #777;
+}
+.post-info b {
+  font-family: "Courier New", Courier, monospace;
+  display: inline-block;
+  background-color: #eee;
+  padding: 1px 3px;
+}
+
+@media print, screen and (max-width: 1024px) {
+  section {
+    margin-top: 85px;
+  }
+}
+
+@media print, screen and (max-width: 960px) {
+  div.wrapper {
+    width: auto;
+    margin: 0;
+  }
+
+  header,
+  footer {
+    width: 260px;
+    margin-left: 5px;
+  }
+
+  section {
+    width: 63%;
+    padding: 15px;
+  }
+
+  header a small {
+    display: inline;
+  }
+
+  header ul {
+    position: absolute;
+    right: 50px;
+    top: 52px;
+  }
+}
+
+@media print, screen and (max-width: 720px) {
+  body {
+    word-wrap: break-word;
+  }
+
+  header,
+  section,
+  footer {
+    float: none;
+    position: static;
+    width: auto;
+  }
+
+  header,
+  section,
+  footer {
+    margin: 0;
+    padding: 0 5px;
+  }
+
+  header p.view {
+    position: static;
+  }
+
+  section {
+    min-height: 0;
+    padding: 0 15px;
+  }
+
+  pre,
+  code {
+    word-wrap: normal;
+  }
+
+  .github-link {
+    position: static;
+    margin: 30px auto 0;
+    padding: 0 8px;
+    justify-content: flex-end;
+  }
+}
+
+@media print, screen and (max-width: 480px) {
+  body {
+    padding: 0 15px 15px;
+  }
+
+  header,
+  section,
+  footer {
+    padding: 0;
+  }
+}
+
+@media print {
+  body {
+    padding: 0 0.4in 0.4in;
+    font-size: 12pt;
+    color: #444;
+  }
+}
