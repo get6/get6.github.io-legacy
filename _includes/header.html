@@ -1,49 +1,19 @@
-<!-- 
-<header>
-  <div class="nes-container is-rounded blue-border header">
-      {% if site.logo %}
-      {% if site.logo contains 'nes-' %}
-      <i class="{{ site.logo }}"></i>
-      {% else %}
-      <img src="{{site.logo | relative_url}}" alt="Logo" />
-      {% endif %}
-    {% endif %} 
-    
-    <h1>
-      <a href="{{ "/" | absolute_url }}">{{ site.title | default: site.github.repository_name }}</a>
-    </h1>
-    <p class="description">{{ site.description | default: site.github.project_tagline }}</p>
-    {% if site.social %}
-      {% include social.html  %}
-    {% endif %}
-  </div>
-  {% if site.show_downloads %}
-    {% include downloads.html %}
-  {% endif %}
-</header>
--->
-
 <header :class="{ sticky: scrollPos > 50 }">
   <div class="container">
     <div class="nav-brand">
-      <a href="{{ "/" | absolute_url }}">
-        <h1><i class="nes-ash brand-logo"></i>{{ site.title | default: site.github.repository_name }}</h1>
-      </a>
-      <p>{{ site.description | default: site.github.project_tagline }}</p>
+      <h1>
+        <a href="{{ "/" | absolute_url }}">#</a>
+        {{ site.title | default: site.github.repository_name }}
+      </h1>
+      <p>{{ site.description | default: site.github.project_tagline }}</p class="nes-text is-primary">
     </div>
 
     <div class="social-buttons">
       <p>Share on SNS</p>
       <div class="share">
         {% if site.social %}
-          {% include social.html  %}
+        {% include social.html  %}
         {% endif %}
-        <!-- 
-          <a href="https://twitter.com/share?text=NES.css%EF%BD%9CNES-style%20CSS%20Framework%20%40bc_rikko&url=https://nostalgic-css.github.io/NES.css/" target="_blank"><i class="nes-icon twitter"></i></a>
-        <a href="https://www.facebook.com/sharer.php?u=https://nostalgic-css.github.io/NES.css/&t=NES.css%EF%BD%9CNES-style%20CSS%20Framework" target="_blank"><i class="nes-icon facebook"></i></a>
-        <a href="https://www.linkedin.com/shareArticle?url=https%3A//nostalgic-css.github.io/NES.css/&title=NES.css%EF%BD%9CNES-style%20CSS%20Framework" target="_blank"><i class="nes-icon linkedin"></i></a>
-        <a href="https://github.com/nostalgic-css/NES.css" target="_blank"><i class="nes-icon github"></i></a> 
-      -->
       </div>
     </div>
   </div>

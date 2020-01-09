@@ -1,9 +1,9 @@
+@charset "utf-8";
+/* cyrillic-ext */
 @font-face {
-  font-family: 'DungGeunMo';
-  font-weight: normal;
+  font-family: "DungGeunMo";
   font-style: normal;
-  src: 
-       url('../fonts/DungGeunMo/DungGeunMo.woff2') format('woff2'),
-       url('../fonts/DungGeunMo/DungGeunMo.woff') format('woff'),
-       url('../fonts/DungGeunMo/DungGeunMo.eot') format('eot')
+  font-weight: normal;
+  src: url("../fonts/DungGeunMo/DungGeunMo.woff2") format("woff2"),
+    url("../fonts/DungGeunMo/DungGeunMo.woff") format("woff"), url("../fonts/DungGeunMo/DungGeunMo.eot") format("eot");
 }

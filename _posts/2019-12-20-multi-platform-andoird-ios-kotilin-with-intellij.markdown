@@ -1,14 +1,14 @@
 ---
 layout: post
 title: 코틀린 멀티플랫폼 프로젝트 실행
-author: get6
+tags: kotlin intellij andorid ios
 ---
 며칠전에 poroject를 생성해놓고 에러를 뿜뿜했던 multi-platform android, ios with kotlin를 드디어 실행시켰다.
 
 나는 이 글을 보고 따라하는데 최신 버전과 
 [이 예제]([https://link](https://medium.com/@cafonsomota/set-up-your-first-kotlin-multiplatform-project-for-android-and-ios-e54c2b6574e7))와 조금 다른게 있어서 헷갈렸다.
 ````
-3. Select “Use auto-import”은 꼭 해줘야 나처럼 고생은 안할것같다.
+1. Select “Use auto-import”은 꼭 해줘야 나처럼 고생은 안할것같다.
 현재 Automatically import this project on changes in build script files와 같아보인다.
 ```` 
 ---

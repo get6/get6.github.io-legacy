@@ -2,14 +2,18 @@
 <html lang="{{ site.lang | default: "ko-KR" }}">
   {% include head.html %}
   <body>
-    <div class="wrapper">
+    <div id="nescss">
       {% include header.html %}
       {% if site.github.is_project_page %}
         {% include fork-me.html %}
       {% endif %}
-      <section>
-        {{ content }}
-      </section>
+      <div class="container">
+        <main class="main-content">
+          <section class="topic"> 
+          {{ content }}
+          </section>
+        </main>
+      </div>
       {% include footer.html %}
     </div>
   </body>

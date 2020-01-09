@@ -1,10 +1,10 @@
 ---
 layout: post
 title: vue run serve error 발생
-author: get6
+tags: vue
 ---
 
-아래와 같은 에러가 발생한다면
+아래와 같은 에러가 발생한다면  
 configuration.entry[2] should be a string. -> a non-empty string
 
 .env 파일에 가서 VUE_TARGET_PAGE가 잘못된 경로로 되어있는지 확인한다.
