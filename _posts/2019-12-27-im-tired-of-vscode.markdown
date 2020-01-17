@@ -2,6 +2,7 @@
 layout: post
 title: vscode preview를 피하는 법
 tags: vscode
+comments: true
 ---
 
 현재 페이지에서 다른 페이지 코드를 참고하려할 때 파일을 열어두고 작업하는 편이다.  

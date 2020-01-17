@@ -2,6 +2,7 @@
 layout: post
 title: Vue npm run serve Error 발생했던 이유
 tags: html vue
+comments: true
 ---
 
 > 프로젝트 진행하는 중에 새로운 메뉴를 만들면서 App.vue에 사용할 컴포넌트들도 붙이고 html, js도 만들고 테스트할겸 npm run serve를 실행했다.

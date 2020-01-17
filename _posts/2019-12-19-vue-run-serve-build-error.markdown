@@ -1,7 +1,8 @@
 ---
 layout: post
 title: vue run serve error 발생
-tags: vue
+tags: vue run serve
+comments: true
 ---
 
 아래와 같은 에러가 발생한다면  

@@ -2,6 +2,7 @@
 layout: post
 title: 저장소마다 user 설정
 tags: git github
+comments: true
 ---
 
 회사 PC에 gitlab계정과 git을 설치하고 내 github 레포지토리도 한 pc에 가져왔다.

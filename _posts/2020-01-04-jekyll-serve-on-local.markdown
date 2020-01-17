@@ -2,6 +2,7 @@
 layout: post
 title: Github pages jekyll 생성 후 로컬에서 build하는 방법
 tags: jekyll blog
+comments: true
 ---
 
 회사 PC에서 생성한 지킬 프로젝트를 집에있는 노트북에다가 옮기는 작업을 이제야했다.  

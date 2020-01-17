@@ -2,6 +2,7 @@
 layout: post
 title: VueJS에서 Dynamic component 사용방법
 tags: vue spc javascript component render
+comments: true
 ---
 Vue를 이용해 프로젝트를 진행 중이다.  
 내가 맡은 부분은 21가지 유형이 조회한 목록 중에서 코드와 일치한 한건만 렌더링이되야한다.  
