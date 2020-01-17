@@ -6,9 +6,9 @@
   <!-- minify -->
   <link rel="stylesheet" href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" />
   <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
-  <link rel="shortcut icon" type="image/png" href="/assets/images/favicon.png">
-  <link rel="shortcut icon" sizes="196x196" href="/assets/images/favicon.png">
-  <link rel="apple-touch-icon" href="/assets/images/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="/docs/favicon.png">
+  <link rel="shortcut icon" sizes="196x196" href="/docs/favicon.png">
+  <link rel="apple-touch-icon" href="/docs/favicon.png">
   <!--[if lt IE 9]>
   <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
   <![endif]-->
@@ -16,4 +16,17 @@
   {% if jekyll.environment == 'production' and  site.google_analytics %}
     {% include google-analytics.html %}
   {% endif %}
+
+  <script src="/docs/lib/vue.min.js"></script>
+  <script src="/docs/lib/dialog-polyfill.js"></script>
+  <script src="/docs/lib/highlight.js"></script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-41640153-4"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-41640153-4");</script>
+  <script>
+    if (window.navigator.userAgent.toLocaleLowerCase().indexOf('trident') !== -1) {
+      window.alert('IE is not supported on this page.')
+    }
+
+  </script>
 </head>

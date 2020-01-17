@@ -13,26 +13,28 @@ layout: default
 <br />
 {% endfor %}
 
-<ul class="pagination">
-  <li>
-    {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path | relative_url }}">
+<div>
+  <ul class="pagination">
+    <li>
+      {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path | relative_url }}">
+        <span class="previous"><<</span>
+      </a>
+      {% else %}
       <span class="previous"></span>
-    </a>
-    {% else %}
-    <span class="previous"></span>
-    {% endif %}
-  </li>
-  <li>
-    <span class="page_number ">{{ paginator.page }} of {{ paginator.total_pages }}</span>
-  </li>
-  <li>
-    {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path | relative_url }}">
+      {% endif %}
+    </li>
+    <li>
+      <span class="page_number ">{{ paginator.page }} of {{ paginator.total_pages }}</span>
+    </li>
+    <li>
+      {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path | relative_url }}">
+        <span class="next">>></span>
+      </a>
+      {% else %}
       <span class="next"></span>
-    </a>
-    {% else %}
-    <span class="next"></span>
-    {% endif %}
-  </li>
-</ul>
+      {% endif %}
+    </li>
+  </ul>
+</div>

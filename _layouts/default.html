@@ -17,4 +17,14 @@
       {% include footer.html %}
     </div>
   </body>
+  <script src="/docs/script.js"></script>
+  <script>
+    const h = document.querySelector('head');
+    ['/docs/lib/dialog-polyfill.css', '/docs/lib/highlight-theme.css'].forEach(a => {
+      const l = document.createElement('link');
+      l.href = a;
+      l.rel = 'stylesheet';
+      h.appendChild(l);
+    })
+  </script>
 </html>

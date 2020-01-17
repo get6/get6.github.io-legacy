@@ -74,6 +74,7 @@ header.sticky .nav-brand p {
 
 /* Footer */
 footer {
+  font-size: small;
   text-align: center;
   margin-bottom: 2rem;
 }
@@ -316,4 +317,23 @@ img.lazy {
   #nescss > .container {
     margin-top: 190px;
   }
+}
+
+.pagination {
+  list-style: none;
+  display: inline-block;
+}
+
+.pagination li {
+  color: black;
+  float: left;
+  padding: 4px 4px;
+  text-decoration: none;
+  vertical-align:middle;
+}
+
+.pagination .previous, .next {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  color: black;
 }

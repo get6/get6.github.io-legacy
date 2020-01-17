@@ -1,10 +1,15 @@
 <footer>
+  <i v-if="selected == 1" class="nes-bulbasaur"></i>
+  <i v-if="selected == 2" class="nes-charmander"></i>
+  <i v-if="selected == 3" class="nes-squirtle"></i>
+  <i v-if="selected == 4" class="nes-ash"></i>
   <p>
-    <i class="nes-ash"></i>
     <span class="nes-text is-primary">Hello World!</span>
-    <a href="https://nostalgic-css.github.io/NES.css/" target="_blank" rel="noopener">I'm inspired by NES.css</a>
-    <span>-</span>
-    <a class="nes-text is-primary" href="{{ site.social.instagram }}" target="_blank" rel="noopener">Please Follow me :)</a>
+    Thanks to <a href="https://nostalgic-css.github.io/NES.css/" target="_blank" rel="noopener">NES.css</a>
+    and <a href="http://julianofernandes.com.br/jekyll-theme-8bit/" target="_blank" rel="noopener">Jekyll-theme-8bit</a>
+    <br>
+    <a class="nes-text is-primary" href="{{ site.social.instagram }}" target="_blank" rel="noopener">Please Follow me
+      :)</a>
   </p>
 </footer>
 <!-- FAB Button -->
