@@ -6,7 +6,7 @@ layout: default
 <div>
   <small class="post-info">{{ post.date | date: "%B %-d, %Y" }}</small>
   <h1><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h1>
-  <small class="post-info">by {{ post.author | default: site.author }}</small>
+  <!-- <small class="post-info">by {{ post.author | default: site.author }}</small> -->
   {{ post.excerpt }}
   <a href="{{ post.url | relative_url }}">[ Read ]</a>
 </div>

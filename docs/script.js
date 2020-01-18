@@ -13,7 +13,26 @@ new Vue({
   },
   computed: {
     selected() {
-      return Math.ceil(Math.random() * 4)
+      let icon = ""
+      switch (Math.ceil(Math.random() * 7)) {
+        case 1: icon = "nes-mario"
+          break;
+        case 2: icon = "nes-ash"
+          break;
+        case 3: icon = "nes-pokeball"
+          break;
+        case 4: icon = "nes-bulbasaur"
+          break;
+        case 5: icon = "nes-charmander"
+          break;
+        case 6: icon = "nes-squirtle"
+          break;
+        case 7: icon = "nes-kirby"
+          break;
+        default:
+          break;
+      }
+      return icon
     }
   },
   filters: {

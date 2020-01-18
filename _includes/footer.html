@@ -1,8 +1,5 @@
 <footer>
-  <i v-if="selected == 1" class="nes-bulbasaur"></i>
-  <i v-if="selected == 2" class="nes-charmander"></i>
-  <i v-if="selected == 3" class="nes-squirtle"></i>
-  <i v-if="selected == 4" class="nes-ash"></i>
+    <i :class="selected"></i>
   <p>
     <span class="nes-text is-primary">Hello World!</span>
     Thanks to <a href="https://nostalgic-css.github.io/NES.css/" target="_blank" rel="noopener">NES.css</a>

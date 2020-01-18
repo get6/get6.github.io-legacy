@@ -17,3 +17,16 @@ ctrl + p and ctrl or alt + enter 를 누르면 측면으로 열림
 ````
 ctrl + p and ctrl + k Enter 를 누르면 새 탭으로 생성
 ````
+
+> 2020-01-18  
+
+좀 전부터 visual studio를 업데이트하고 나서 다시 안되기 시작했다. 결국엔 preview모드를 껐다.  
+아래 설정은 ctrp + p와 같은 단축키로 열때는 preview모드로 실행되진 않지만 project explorer에서 클릭했을 때는 preview 모드로 보인다.
+```
+"workbench.editor.enablePreviewFromQuickOpen": false
+```
+다 끄고 싶을 때는 아래와 같이하면 된다.
+```
+"workbench.editor.enablePreview": false
+```
+전체저장도 ctrl + k + ㄴ 안되구 영어가 아닌 경우에 키값이 달라 적용이 안되는거 같다. 가볍게 쓰기 참 좋지만 주력으로 쓰기에는 아직 알아야 할게 많은거 같다~
