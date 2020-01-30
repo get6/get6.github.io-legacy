@@ -1,7 +1,10 @@
+# s : seo-tag-option
 title: 개발블로그
 description: 안녕하세요. 여러분께 도움이 되었으면 좋겠습니다.
 url: "https://get6.github.io"
-# logo: nes-kirby
+lang: ko
+author: get6
+# e : seo-tag-option
 plugins:
   - jekyll-feed
   - jekyll-paginate
