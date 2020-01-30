@@ -14,6 +14,6 @@ print('2+5의 결과값 =', num) # 2+5의 결과값 = 7
 ```
 이라는 예제가 있었는데 정상적으로 작동하지 않았다. 책 출판시기와 현재와 파이썬 버전이 달라서 그런가하구 구글링을 통해 해결하였다.
 
-![python error]({{ site.baseurl }}/assets/images/python_exec_example.PNG)
+![python error]({{ site.baseurl }}/assets/images/python_exec_example.JPG)
 
 찾다보니 f-string이란게 있었다. 이미지를 보시면 이해가 쉬우실거다.
