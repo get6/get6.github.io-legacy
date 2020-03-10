@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 이직 후 일주일
+tags: developer turn over
 comments: true
 ---
 오늘 월요일로써 이제 딱 일주일 차이다.  

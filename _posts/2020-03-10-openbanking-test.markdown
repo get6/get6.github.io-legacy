@@ -1,6 +1,7 @@
 ---
 layout: post
 title: OpenBanking test 적용
+tags: openbanking api
 comments: true
 ---
 오픈뱅킹 API를 테스트 서버 구동 시 발생하는 상황에 대한 설명이 잘 이루어지지 않아 사용해가며 정리해보려 합니다.
