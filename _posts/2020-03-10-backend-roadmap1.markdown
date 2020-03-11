@@ -24,7 +24,9 @@ comments: true
 IP주소라는 얘기를 할 때 우리는 보통 IPv4(192.168.1.140)를 떠올립니다. IPv4는 총 갯수는 2<sup>32</sup>(약 40억)입니다.  
 인류가 현재 77억쯤되는데 지구촌 사람들이 모두 핸드폰을 하게 되면 IPv4가 남아나지 않을겁니다.   
 그러나 현재도 활발히 IPv4가 사용되고 있는 이유는 고정IP사용자가 아닌 대다수의 사용자들은 [DHCP](https://ko.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%ED%98%B8%EC%8A%A4%ED%8A%B8_%EA%B5%AC%EC%84%B1_%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C)(동적 호스트 구성 프로토콜)라는 IP할당 방법으로 설정이 되어있을 겁니다.  
-![DHCP 설정]({{ site.baseurl }}/assets/images/dhcp_image.PNG){: width="100%" height="100%"}  
+<kbd>
+![DHCP 설정]({{ site.baseurl }}/assets/images/dhcp_image.PNG) 
+</kbd>
 DHCP 서버를 통해 IP주소를 할당받기 때문에 매번 새로운 IP를 임대해 주기 때문에 같은 IP가 여기저기 사용할 수 있게됩니다.
 
 [NAT](https://ko.wikipedia.org/wiki/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_%EC%A3%BC%EC%86%8C_%EB%B3%80%ED%99%98)(네트워크 주소 변환)도 한정적인 IP주소를 기막힌 발상으로 유연하게 쓸 수 있게 해주는 기술입니다.  
