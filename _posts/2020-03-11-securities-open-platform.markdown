@@ -14,9 +14,4 @@ comments: true
 * [eBEST투자증권 xingAPI](http://www.ebestsec.co.kr/xingapi/xingMain.jsp?left_menu_no=360&front_menu_no=1293&parent_menu_no=603&left_menu_no=360&front_menu_no=603&parent_menu_no=360)을 최신버전 설치합니다. 설치 가이드를 알려주는 [사이트](https://wikidocs.net/2871)도 있습니다 - API가 파이썬으로 작성되었습니다.
 * [NH투자증권](https://www.nhqv.com/)은 SPC로 되어있어 URL이 변경되지 않습니다. 트레이딩채널 / QV Open API로 들어갑니다. - C++를 지원합니다.
 
-현재는 신청 서류를 제출해야 하기 때문에 아직 테스트 자료들을 받을 수 없었습니다.
-
-API를 제공하는 증권사들이 많아 어떤 회사를 선택해야하는지에 대한 고민이 있습니다.     
-오픈뱅킹과 같이 통합 API를 이용하고 싶었지만 증권사 특성사 보안과 관련되어 아직까지 통합 플랫폼이 없어 보입니다.  
-더 찾아보고 수정하겠습니다.
-
+각 open API 제공 사이트 마다 개발자 회원가입 시 소속회사 사업자번호와 대표자명을 요구하므로 미리 알아두는게 좋습니다.
