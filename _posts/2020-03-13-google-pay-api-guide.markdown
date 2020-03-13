@@ -14,5 +14,5 @@ Google Pay API를 테스트하기전에 nodeJS express를 통해 웹서버를 �
 
 이제 왼쪽 네비게이션 가이드 - 가이드 메뉴를 누릅니다.
 
-![구글 가이드]({{ site.baseurl }}/assets/images/google-pay-selected-guide.png)
+![구글 가이드]({{ site.baseurl }}/assets/images/google-pay-selected-guide.png){: width="50%"}
 
