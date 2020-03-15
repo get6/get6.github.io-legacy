@@ -23,8 +23,10 @@ Google Pay API를 테스트하기전에 nodeJS express를 통해 웹서버를 �
 <div id="container"></div>
 <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script>
 ```
+
 <div id="container"></div>
 <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script>
+
 아래는 우리쪽에서 파일로 만들어야 할 js입니다.
 
 ```
