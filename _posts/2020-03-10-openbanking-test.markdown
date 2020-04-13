@@ -16,7 +16,7 @@ comments: true
 
 터미널을 키신 후 이제 압축을 해제하신 곳으로 경로를 이동 후 로컬에서 java -jar local-test-boot-1.0.jar로 실행하면 기본포트 8880인 http://localhost:8880/html/index.html 으로 접속하면 
 
-![오픈뱅킹 첫 페이지]({{ site.baseurl }}/assets/images/openbanking_main.png){: width="100%" height="100%"}을 볼 수 있다.
+![오픈뱅킹 첫 페이지]({{ site.baseurl }}/assets/images/openbanking_main.png){: height="100%"}을 볼 수 있다.
 
 처음으로 실행 할 경우에는 input 태그에 빈 값으로 되어있다.
 

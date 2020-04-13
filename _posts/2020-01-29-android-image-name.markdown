@@ -10,6 +10,6 @@ comments: true
 이미지 3개를 drawable 폴더에 1.png, 2.png, 3.png해서 넣어놓고
 build를 했는데 자꾸 에러가 나기에 뭔가 봤더니 파일명이 숫자로 시작하게되면 빌드 시에 에러가 나는 거였다.
 
-![android error]({{ site.baseurl }}/assets/images/android_letter_error.PNG){: width="100%" height="100%"}
+![android error]({{ site.baseurl }}/assets/images/android_letter_error.PNG){: height="100%"}
 
 파일명을 수정하고 build 후 실행됬다.

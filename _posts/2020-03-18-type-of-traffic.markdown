@@ -6,7 +6,7 @@ comments: true
 ---
 네이버페이 API를 보는데 아웃바운드 포트를 443으로 설정하라는 글이 있었다.  
 
-![네이버페이 방화벽]({{ site.baseurl }}/assets/images/naver_pay_firewall.png){: width="100%"}
+![네이버페이 방화벽]({{ site.baseurl }}/assets/images/naver_pay_firewall.png)
 
 "내 서버에서 네이버페이 서버를 접근할때 네이버페이가 443포트로 받기때문에 허용해달라는 말인가..?"하는 궁금증이 생겼다.  
 누구의 입장에서 아웃바운드인지 인바운드인지 헷갈려 정리해보려고 한다.

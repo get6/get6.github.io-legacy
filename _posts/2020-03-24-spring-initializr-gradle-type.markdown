@@ -6,7 +6,7 @@ comments: true
 ---
 Spring Initializr로 프로젝트를 만들다 보면 IntelliJ에서 Type 선택하라고 나온다.
 
-![그래들 타입]({{ site.baseurl }}/assets/images/spring_initializr_gradle.png){: width="100%"}
+![그래들 타입]({{ site.baseurl }}/assets/images/spring_initializr_gradle.png)
 
 나는 Gradle을 이용하고 싶었고 3번과 4번이 뭐가 다른건가 싶었다...
 
