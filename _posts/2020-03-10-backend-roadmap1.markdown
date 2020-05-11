@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Backend Developer - How does the internet work?
-tags: internet packet routing tcp ip dhcp nat
+tags: internet packet routing tcp ip dhcp nat backend roadmap
 comments: true
 ---
 
