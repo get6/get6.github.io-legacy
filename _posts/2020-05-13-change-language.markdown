@@ -16,6 +16,6 @@ AWS S3와 Cloudfront를 사용해 올렸기 때문에 혹시 여기서 지정해
 설정 - 고급 - 언어로 들어가 영어의 우선순위를 올리면  
 **페이지가 이 언어로 번역됩니다.**라고 뜨는 언어로 값을 가지고 올 것이다.  
 
-![크롬 언어]({{ site.baseurl }}/assets/images/chrome-language.png){: width="50%"}
+<img src="/assets/images/chrome-language.png" alt="크롬 언어" style="width:50%;" />
 
 이제 사이트를 접속하면 언어가 바뀌어 있다.
