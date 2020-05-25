@@ -2,7 +2,7 @@
 title: 개발블로그
 description: 안녕하세요. 여러분께 도움이 되었으면 좋겠습니다.
 url: "https://get6.github.io"
-lang: ko
+lang: ko-KR
 author: get6
 # e : seo-tag-option
 plugins:
@@ -10,6 +10,7 @@ plugins:
   - jekyll-paginate
   - jekyll-seo-tag
 paginate: 3
+google_analytics: UA-167553052-1
 disqus:
   shortname: get6
 social:
@@ -17,12 +18,18 @@ social:
   instagram: https://instagram.com/hwang_sung_jun93
   facebook: https://facebook.com/seongjun.hwang1
   twitter: https://twitter.com/charles9306
-  gmail: mailto:tjdwns075@gmail.com
+  gmail: mailto:ittae.com@gmail.com
   #youtube: https://youtube.com/channel/ID
   #google: https://plus.google.com/username
-  #medium: https://medium.com/@username
+  medium: https://medium.com/@sjhwang_82459
   #twitch: https://twitch.com/username
   #reddit: https://www.reddit.com/user/username
   #whatsapp: tel:+5541999999999
   #linkedin: https://www.linkedin.com/in/username
-
+# collections:
+#   flutter:
+#     output: true  
+#   spring_msa:
+#     output: true
+#   others:
+#     output: true

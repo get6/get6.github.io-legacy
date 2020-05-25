@@ -17,10 +17,9 @@ comments: true
   {{ content }}
 </div>
 {% if page.tags %}
-<b>Tags: {{ page.tags | join: "</b> <b>" }}</b>
-
-
+  <b>Tags: {{ page.tags | join: "</b> <b>" }}</b>
 {% endif %}
+
 {% if site.disqus.shortname %}
-{% include comments.html %}
+  {% include comments.html %}
 {% endif %}
