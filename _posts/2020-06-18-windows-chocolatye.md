@@ -31,11 +31,15 @@ choco install openjdk
 choco install flutter  
 refreshenv  
 choco install jekyll  
+  
+java같은 환경변수를 편집해야하 하는 프로그램은 알아서 환경변수 등록을 해준다.
 
 .install이 붙은게 있고 아닌게 있다.  
 7zip.install과 7zip 패키지가 존재하는데 일반적으로 .install이 붙은 곳이 다운로드 수가 높았다.  
 chocolatey는 가상패키지와 메타패키지 개념을 가지고 있다.  
 .install이 붙는 패키지는 웹사이트에서 다운로드 받은 것처럼 설치가 되는거 같다.  
 프로그램 자체가 아닌 경우에 구분하는 거 같음(git을 다른 프로그램에서 사용할 수도 있고 git을 cmd에서 실행할 수 있어서?)
+
+찾아보니 <b>cinst</b>라는 명령어가 있는데 choco install을 줄인 명령어였다.
 
 마지막에 설치한 jekyll은 에러가 난다.. 해결책을 찾아봐야겠다.
