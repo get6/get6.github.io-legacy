@@ -3,6 +3,8 @@ layout: post
 title: vue run serve error 발생
 tags: vue run serve
 comments: true
+category: javascript vue
+order: 1
 ---
 
 아래와 같은 에러가 발생한다면  

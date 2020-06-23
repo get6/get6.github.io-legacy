@@ -3,6 +3,8 @@ layout: post
 title: 지킬을 이용해 깃허브에 올릴 때 헷갈린 점
 tags: jekyll blog github
 comments: true
+category: git
+order: 1
 ---
 
 > 처음 저장소에 등록을 하고 올렸을 때 메인화면을 바꾸고 싶었다. 그리고 문득 든 생각이 있었는데,
@@ -26,6 +28,6 @@ comments: true
 
 > 2019-12-21 내가 github에 push를 해도 바로 반영되는게 아니고 jekyll build를 해줘야 볼 수 있다.
 
-에러가 났던건 _config.yml에 깃에서 제공하는 theme 말고 다른걸 사용해보고 싶었는데 설정을 잘 못 잡아서 그랬다.  
+에러가 났던건 \_config.yml에 깃에서 제공하는 theme 말고 다른걸 사용해보고 싶었는데 설정을 잘 못 잡아서 그랬다.  
 더 세세한 설정은 외부 테마 config를 적용 후 내가 원하는 곳을 바꿔야 한다. 현재는 오류난게 보기 싫고 CSS적용이 되게 외부 theme 설정만 붙여놨다.  
 근데 여기는 remote theme이랑 theme은 주석이네...

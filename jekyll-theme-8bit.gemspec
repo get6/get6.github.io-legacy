@@ -1,19 +1,22 @@
 # frozen_string_literal: true
 
 Gem::Specification.new do |spec|
-  spec.name     = 'minima'
-  spec.version  = '0.3.0'
-  spec.authors  = ['Sung Jun Hwang']
-  spec.email    = ['charles9306@icloud.com']
-  spec.summary  = 'A Jekyll theme inspired by classic 8bit games.'
-  spec.homepage = 'https://github.com/julianolf/jekyll-theme-8bit'
-  spec.license  = 'MIT'
+  spec.name        = 'githubPages'
+  spec.version     = '0.4.1'
+  spec.licenses    = ['MIT']
+  spec.summary     = "This is My blog!"
+  spec.description = "Write here My experience!"
+  spec.authors     = ['Sung Jun Hwang']
+  spec.email       = 'ittae.com@gmail.com'
+  spec.files       = ["lib/example.rb"]
+  spec.homepage    = 'https://get6.github.io'
+  # spec.metadata    = { "source_code_uri" => "https://get6.github.io/" }
 
-  spec.files    = `git ls-files -z`.split("\x0").select do |f|
+  spec.files       = `git ls-files -z`.split("\x0").select do |f|
     f.match(/^(assets|_layouts|_includes|_sass|LICENSE|README)/i)
   end
 
-  spec.platform = Gem::Platform::RUBY
+  spec.platform    = Gem::Platform::RUBY
   spec.add_runtime_dependency 'jekyll', '>= 3.8.5', '< 4.1.0'
   spec.add_runtime_dependency 'jekyll-paginate', '~> 1.1.0'
   spec.add_runtime_dependency 'jekyll-seo-tag', '~> 2.5'
