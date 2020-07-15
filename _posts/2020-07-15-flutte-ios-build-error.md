@@ -7,11 +7,11 @@ comments: true
 
 플러터 프로젝트를 클론 받아오고 나서 아래 이미지와 같은 에러가 발생했다.  
 
-![flutter-ios-build1]({{ site.baseurl }}/assets/images/flutter-ios-build1.png)
+![flutter-ios-build1]({{ site.baseurl }}/assets/images/flutter-ios-build-error1.png)
 
 구글링하다보니 해결책을 찾았다.  
 
-![flutter-ios-build2]({{ site.baseurl }}/assets/images/flutter-ios-build2.png)
+![flutter-ios-build2]({{ site.baseurl }}/assets/images/flutter-ios-build-error2.png)
 
 아래명령어를 차례대로 실행하면 된다.
 ```
