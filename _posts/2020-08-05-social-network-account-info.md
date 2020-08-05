@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 플러터 project 위치 변경 후 에러
+title: 간편로그인 계정 검수 가이드
 tags: SNS login
 comments: true
 ---
