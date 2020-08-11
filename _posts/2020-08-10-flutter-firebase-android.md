@@ -6,6 +6,8 @@ comments: true
 ---
 Flutter Firebase Andoird 연동 설명입니다.
 
+ios 연동은 [Flutter Firebase IOS](https://get6.github.io/2020/08/10/flutter-firebase-ios.html)를 참고해주세요.
+
 ios가 Android 보다 설정이 쉽습니다.
 
 #### 1. 앱 등록

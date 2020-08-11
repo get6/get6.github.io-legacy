@@ -6,6 +6,8 @@ comments: true
 ---
 Flutter Firebase IOS 연동 설명입니다.
 
+Android 연동은 [Flutter Firebase Android](https://get6.github.io/2020/08/10/flutter-firebase-android.html)을 참고해주세요.
+
 #### 1. 앱 등록
 
 IOS 번들 ID는 필수로 입력해야 합니다.
@@ -25,3 +27,5 @@ Runner/Runner안에 위치에 파일을 옮깁니다.
 이 부분은 다 뛰어넘어가도 됩니다.
 
 저는 여기에 있는 부분을 추가하니 자꾸 안되서 구글링을 했었습니다.
+
+[Flutter 연동 가이드 영문](https://codelabs.developers.google.com/codelabs/flutter-firebase/index.html#6)을 참고 하시면 더 도움이 됩니다.
