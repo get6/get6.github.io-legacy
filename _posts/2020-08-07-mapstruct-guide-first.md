@@ -56,6 +56,12 @@ unmappedTargetPolicy - DTO와 Entity에 선언된 변수들이 ignore = true로 
 
 nullValueMappingStrategy - null인 변수를 초기화 해줍니다. Entity로 변환된 객체에서 .get{OtherEntity}()를 할때 NullpointException을 방지해줍니다.  
 
+#### 변경사항 2020.08.12
+nullValueMappingStrategy = NullValueMappingStrategy.RETURN_DEFAULT)를 사용한 Mapper를 이용해 JPA Repository .save(Entity 구현 객체)함수를 실행했지만 이상한 동작이 생겼습니다.  
+문제는 위 설정을 통해 항상 NullPointException을 방지하고자 객체를 만듭니다.  
+그런 경우 JPA쪽에서 새로운 객체가 생성되고 연관 객체도 Null이 아니여서 Null이 아니지만 텅 빈 객체가 저장될 경우에도 insert를 시도하려고 합니다.  
+이러한 상황때문에 거의 모든 경우에 저 설정을 해제했습니다.   
+
 ---
 
 public abstract class UserMapper로 만들어서 beforeMapping이나 afterMapping을 통해 제어도 가능하지만,  
