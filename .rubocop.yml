@@ -1,8 +1,0 @@
-inherit_mode:
-  merge:
-    - Exclude
-
-AllCops:
-  Exclude:
-    - _site/**/*
-  TargetRubyVersion: 2.6

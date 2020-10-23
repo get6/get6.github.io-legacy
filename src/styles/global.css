@@ -1,0 +1,28 @@
+body {
+  --bg: white !important;
+  --textNormal: #222 !important;
+  --textTitle: #222 !important;
+  --textLink: blue !important;
+  --hr: hsla(0, 0%, 0%, 0.2) !important;
+
+  background-color: var(--bg) !important;
+}
+
+body.dark {
+  -webkit-font-smoothing: antialiased !important;
+
+  --bg: black !important;
+  --textNormal: rgba(255, 255, 255, 0.88) !important;
+  --textTitle: white !important;
+  --textLink: yellow !important;
+  --hr: hsla(0, 0%, 100%, 0.2) !important;
+  
+}
+
+body.dark p:not(.card-text) {
+  color: var(--textTitle);
+}
+
+body.dark footer {
+  color: var(--textTitle);
+}

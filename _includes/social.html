@@ -1,9 +1,0 @@
-
-  <!-- twitter,facebook,github,youtube,google,medium,twitch,reddit,whatsapp,gmail,linkedin,instagram -->
-  {% assign networks = "twitter,facebook,github,gmail,instagram" %}
-  {% for entry in site.social %}
-    {% if networks contains entry[0] %}
-      <a href="{{ entry[1] }}" target="_blank"><i class="nes-icon {{ entry[0] }}"></i></a>
-    {% endif %}
-  {% endfor %}
-
