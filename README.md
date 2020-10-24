@@ -17,3 +17,4 @@ Kakaotalk QR
 <image src="./content/assets/kakaotalk_qr.jpeg" width="150px;" />
 
 ## 🎓 I want to join flutter study group
+## 🙆‍♂️ 플러터 관련 스터디 그룹 참여하고 싶어요.
