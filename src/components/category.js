@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Alert, Button, Fade, Nav, NavLink } from "reactstrap"
+import { Button, Fade, Nav, NavLink } from "reactstrap"
 
 const Category = ({ categories, getAlertName }) => {
   const [fadeIn, setFadeIn] = useState(false)

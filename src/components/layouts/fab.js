@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from "react"
+import React, { useRef } from "react"
 import { HiArrowCircleUp } from "react-icons/hi"
 import "./fab.css"
 

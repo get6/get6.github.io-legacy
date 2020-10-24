@@ -95,7 +95,7 @@ module.exports = {
                 ) {
                   edges {
                     node {
-                      except
+                      excerpt
                       html
                       fields { slug }
                       frontmatter {
