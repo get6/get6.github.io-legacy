@@ -1,4 +1,12 @@
+html,
 body {
+   margin:0;
+   padding:0;
+   height:100%;
+}
+
+body {
+  position: relative;
   --bg: white !important;
   --textNormal: #222 !important;
   --textTitle: #222 !important;

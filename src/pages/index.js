@@ -15,6 +15,7 @@ import {
   CardColumns,
   CardSubtitle,
   Jumbotron,
+  Container,
 } from "reactstrap"
 import Category from "../components/category"
 
@@ -90,83 +91,89 @@ const BlogIndex = ({ data, location }) => {
 
     if (0 < filteredPosts.length) {
       jumbotronList.push(
-        <Jumbotron key={i}>
-          <Alert color="light" style={{ marginTop: `-3em` }} id={tagName}>
-            {alertName}
-          </Alert>
-          <CardColumns>
-            {filteredPosts.map(({ node }, i) => {
-              const title = node.frontmatter.title || node.fields.slug
-              const random = Math.random()
-              const isInverse = random <= 0.6
-              const postDate = new Date(node.frontmatter.date.split(",")[0])
+        <Jumbotron fluid key={i}>
+          <Container fluid>
+            <Alert color="light" id={tagName}>
+              {alertName}
+            </Alert>
+            <CardColumns>
+              {filteredPosts.map(({ node }, i) => {
+                const title = node.frontmatter.title || node.fields.slug
+                const random = Math.random()
+                const isInverse = random <= 0.6
+                const postDate = new Date(node.frontmatter.date.split(",")[0])
 
-              let attribute = {
-                key: i,
-                body: true,
-                inverse: isInverse,
-              }
-              if (isInverse) {
-                switch (Math.ceil(random * 10)) {
-                  case 1:
-                    attribute.color = "primary"
-                    break
-                  case 2:
-                    attribute.color = "success"
-                    break
-                  case 3:
-                    attribute.color = "info"
-                    break
-                  case 4:
-                    attribute.color = "warning"
-                    break
-                  case 5:
-                    attribute.color = "danger"
-                    break
-                  default:
-                    attribute.style = {
-                      backgroundColor: "#333",
-                      borderColor: "#333",
-                    }
+                let attribute = {
+                  key: i,
+                  body: true,
+                  inverse: isInverse,
                 }
-              }
+                if (isInverse) {
+                  switch (Math.ceil(random * 10)) {
+                    case 1:
+                      attribute.color = "primary"
+                      break
+                    case 2:
+                      attribute.color = "success"
+                      break
+                    case 3:
+                      attribute.color = "info"
+                      break
+                    case 4:
+                      attribute.color = "warning"
+                      break
+                    case 5:
+                      attribute.color = "danger"
+                      break
+                    default:
+                      attribute.style = {
+                        backgroundColor: "#333",
+                        borderColor: "#333",
+                      }
+                  }
+                }
 
-              return (
-                <Card {...attribute}>
-                  <article
-                    key={node.fields.slug}
-                    itemScope
-                    itemType="http://schema.org/Article"
-                  >
-                    <CardTitle>
-                      <Link
-                        to={node.fields.slug}
-                        itemProp="url"
-                        style={isInverse ? { color: "white" } : null}
-                      >
-                        {title}
-                      </Link>
-                      {i < 1 ||
-                        (Math.round(
-                          Math.abs((postDate - today) / (24 * 60 * 60 * 1000))
-                        ) < 15 && <Badge color="secondary">New✨</Badge>)}
-                    </CardTitle>
-                    <CardSubtitle>
-                      <small className={!isInverse ? "text-muted" : null}>
-                        {node.frontmatter.date}
-                      </small>
-                    </CardSubtitle>
-                    <CardText
-                      dangerouslySetInnerHTML={{
-                        __html: node.frontmatter.description || node.excerpt,
-                      }}
-                      itemProp="description"
-                    ></CardText>
-                  </article>
-                </Card>
-              )
-            })}
-          </CardColumns>
+                return (
+                  <Card {...attribute}>
+                    <article
+                      key={node.fields.slug}
+                      itemScope
+                      itemType="http://schema.org/Article"
+                    >
+                      <CardTitle>
+                        <Link
+                          to={node.fields.slug}
+                          itemProp="url"
+                          style={isInverse ? { color: "white" } : null}
+                        >
+                          {title}
+                        </Link>{" "}
+                        {i < 1 ||
+                          (Math.round(
+                            Math.abs((postDate - today) / (24 * 60 * 60 * 1000))
+                          ) < 15 && (
+                            <Badge color={isInverse ? "light" : "secondary"}>
+                              ✨new✨
+                            </Badge>
+                          ))}
+                      </CardTitle>
+                      <CardSubtitle>
+                        <small className={!isInverse ? "text-muted" : null}>
+                          {node.frontmatter.date}
+                        </small>
+                      </CardSubtitle>
+                      <CardText
+                        dangerouslySetInnerHTML={{
+                          __html: node.frontmatter.description || node.excerpt,
+                        }}
+                        itemProp="description"
+                      ></CardText>
+                    </article>
+                  </Card>
+                )
+              })}
+            </CardColumns>
+          </Container>
         </Jumbotron>
       )
     } else {
