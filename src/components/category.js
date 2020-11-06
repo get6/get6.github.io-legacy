@@ -18,9 +18,9 @@ const Category = ({ categories, getAlertName }) => {
       <Nav color="info" className="justify-content-center">
         {categories.map((category, i) => {
           return (
-            <NavLink key={i} href={"#" + category.toLowerCase()}>
+            <NavLink key={i} href={"#" + category.name.toLowerCase()}>
               <Button color="info" outline>
-                {getAlertName(category)}
+                {getAlertName(category.name)}
               </Button>
             </NavLink>
           )

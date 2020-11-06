@@ -3,7 +3,7 @@ module.exports = {
     title: `Jun Wick's Blog`,
     author: {
       name: `Sung Jun, Hwang`,
-      summary: `I' am trying to get closer to say "Hello, World!"`,
+      summary: `I'm trying to get closer to say "Hello, World!"`,
     },
     description: `My development's histories`,
     siteUrl: `https://get6.github.io/`,
@@ -13,7 +13,85 @@ module.exports = {
       facebook: ``,
       instagram: `hwang_sung_jun93`,
     },
-    keywords: [`development`, `flutter`, `dart`, `spring`, `aws`, `java`],
+    keywords: [`development`, "developer", `개발`, `개발자`],
+    categories: [
+      {
+        name: "FrontEnd",
+        link: "/frontend",
+        children: [
+          {
+            name: "Flutter",
+            link: "/flutter",
+          },
+          {
+            name: "React",
+            link: "/react",
+          },
+          {
+            name: "Vue",
+            link: "/vue",
+          },
+        ],
+      },
+      {
+        name: "BackEnd",
+        link: "/backend",
+        children: [
+          {
+            name: "Spring",
+            link: "/spring",
+          },
+          {
+            name: "SQL",
+            link: "/sql",
+          },
+        ],
+      },
+      {
+        name: "DevOps",
+        link: "/devops",
+        children: [
+          {
+            name: "linux",
+            link: "/linux",
+          },
+          {
+            name: "cloud",
+            link: "/cloud",
+          },
+          {
+            name: "docker",
+            link: "/docker",
+          },
+          {
+            name: "git",
+            link: "/git",
+          },
+        ],
+      },
+      {
+        name: "Tools",
+        link: "/tools",
+        children: [
+          {
+            name: "Atlassian",
+            link: "/atlassian",
+          },
+          {
+            name: "Notion",
+            link: "/notion",
+          },
+          {
+            name: "Figma",
+            link: "/figma",
+          },
+        ],
+      },
+      {
+        name: "Others",
+        link: "/others",
+      },
+    ],
   },
   plugins: [
     {
@@ -144,5 +222,7 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
     `gatsby-plugin-sass`,
+    `gatsby-plugin-material-ui`,
+    `gatsby-plugin-smoothscroll`,
   ],
 }

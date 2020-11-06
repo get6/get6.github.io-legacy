@@ -1,46 +1,106 @@
-import React, { useState } from "react"
-import Switch from "./switch"
+import React from "react"
+import PropTypes from "prop-types"
+import Link from "@material-ui/core/Link"
+import Toolbar from "@material-ui/core/Toolbar"
+import Typography from "@material-ui/core/Typography"
+import { makeStyles } from "@material-ui/core/styles"
 import { SiAboutDotMe } from "react-icons/si"
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  NavbarText,
-} from "reactstrap"
+import Switch from "./switch"
 
-const Header = props => {
-  const [isOpen, setIsOpen] = useState(false)
+const useStyles = makeStyles(theme => ({
+  toolbar: {
+    borderBottom: `1px solid ${theme.palette.divider}`,
+  },
+  toolbarTitle: {
+    flex: 1,
+  },
+  toolbarSecondary: {
+    justifyContent: "space-around",
+    overflowX: "auto",
+  },
+  toolbarLink: {
+    padding: theme.spacing(1),
+    flexShrink: 0,
+  },
+}))
 
-  const toggle = () => setIsOpen(!isOpen)
+const Header = ({ title, dark, darkToggle, categories }) => {
+  console.log(categories)
+  const classes = useStyles()
+  const sections = [
+    {
+      title: "Tags",
+      url: "/tags",
+      icon: "",
+    },
+    {
+      title: "About ",
+      url: "/about",
+      icon: <SiAboutDotMe />,
+    },
+  ]
 
   return (
     <header>
-      <Navbar expand="md" light={!props.dark} dark={props.dark}>
-        <NavbarBrand href="/">{props.title}</NavbarBrand>
-        <NavbarToggler onClick={toggle} className="mr-2" />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="ml-auto" navbar>
-            <NavItem>
-              <NavLink href="/tags/">Tags</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/about/">
-                About&nbsp;
-                <SiAboutDotMe />
-              </NavLink>
-            </NavItem>
-          </Nav>
-          <NavbarText>
-            <Switch isOn={props.dark} handleToggle={props.onChangeDarkMode} />
-          </NavbarText>
-        </Collapse>
-      </Navbar>
+      <Toolbar className={classes.toolbar}>
+        <Typography
+          component="h3"
+          variant="h6"
+          noWrap
+          className={classes.toolbarTitle}
+        >
+          <Link color="inherit" href="/">
+            {title}
+          </Link>
+        </Typography>
+        {sections.map(section => (
+          <Link
+            color="inherit"
+            noWrap
+            key={section.title}
+            variant="body2"
+            href={section.url}
+            className={classes.toolbarLink}
+          >
+            {section.title}
+            {section.icon}
+          </Link>
+        ))}
+        <Switch isOn={dark} handleToggle={darkToggle} />
+      </Toolbar>
+      <Toolbar
+        component="nav"
+        variant="dense"
+        className={classes.toolbarSecondary}
+      >
+        {categories.map((category, i) => (
+          <Link
+            color="inherit"
+            noWrap
+            key={i}
+            variant="body2"
+            href={category.link}
+            className={classes.toolbarLink}
+          >
+            {category.icon}
+            {category.name}
+          </Link>
+        ))}
+      </Toolbar>
     </header>
   )
+}
+
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
+  dark: PropTypes.bool.isRequired,
+  darkToggle: PropTypes.func.isRequired,
+  // sections: PropTypes.arrayOf(
+  //   PropTypes.shape({
+  //     title: PropTypes.string.isRequired,
+  //     url: PropTypes.string.isRequired,
+  //   }),
+  // ).isRequired,
 }
 
 export default Header

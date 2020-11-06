@@ -5,7 +5,7 @@ import SEO from "../components/seo"
 import Image from "gatsby-image"
 
 import { rhythm } from "../utils/typography"
-
+import { Box, makeStyles, Paper } from "@material-ui/core"
 import {
   GrInstagram,
   GrFacebook,
@@ -21,33 +21,49 @@ import {
  *
  */
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    padding: theme.spacing(2),
+  },
+  contents: {
+    display: "flex",
+  },
+}))
+
 const About = ({ data, location }) => {
+  const classes = useStyles()
   const { author } = data.site.siteMetadata
   const siteTitle = data.site.siteMetadata.title
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="About me" />
-      <h1>About me</h1>
-      <Image
-        fixed={data.avatar.childImageSharp.fixed}
-        alt={author.name}
-        style={{
-          marginRight: rhythm(1 / 2),
-          marginBottom: 0,
-          minWidth: 50,
-          borderRadius: `100%`,
-        }}
-        imgStyle={{
-          borderRadius: `50%`,
-        }}
-      />
-      <h4>황성준</h4>
-      <h4>Sung Jun, Hwang</h4>
-      <GrMailOption />
-      <GrGithub />
-      <GrInstagram />
-      <GrTwitter />
-      <GrFacebook />
+      <Box component="h2">🤣 About me</Box>
+      <Paper variant="outlined" className={classes.root}>
+        <Box component="span" display="flex">
+          <Image
+            fixed={data.avatar.childImageSharp.fixed}
+            alt={author.name}
+            style={{
+              marginRight: rhythm(1 / 2),
+              marginBottom: 0,
+              minWidth: 50,
+              borderRadius: `100%`,
+            }}
+            imgStyle={{
+              borderRadius: `50%`,
+            }}
+          />
+          <Box componen="span">
+            <h4>황성준</h4>
+            <h4>Sung Jun, Hwang</h4>
+            <GrMailOption />
+            <GrGithub />
+            <GrInstagram />
+            <GrTwitter />
+            <GrFacebook />
+          </Box>
+        </Box>
+      </Paper>
     </Layout>
   )
 }
