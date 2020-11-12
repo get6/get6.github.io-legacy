@@ -25,7 +25,6 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Header = ({ title, dark, darkToggle, categories }) => {
-  console.log(categories)
   const classes = useStyles()
   const sections = [
     {

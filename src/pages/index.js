@@ -1,61 +1,31 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link, graphql } from "gatsby"
 import "bootstrap/dist/css/bootstrap.min.css"
 import Category from "../components/category"
-import FiberNewIcon from "@material-ui/icons/FiberNew"
+
 import { makeStyles } from "@material-ui/core/styles"
-import {
-  Button,
-  Card,
-  CardContent,
-  CardActions,
-  Grid,
-  GridList,
-  GridListTile,
-  Chip,
-  ListSubheader,
-  Typography,
-} from "@material-ui/core"
+import { Box, Paper } from "@material-ui/core"
 
 import SEO from "../components/seo"
 import Layout from "../components/layout"
-import NewPost from "../components/new-post"
+import NewPost from "../components/home/new-post"
+import PostsPerCategory from "../components/home/posts-per-category"
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    overflow: "hidden",
-    backgroundColor: theme.palette.background.paper,
-  },
+  root: {},
   gridList: {
     // width: 800,
-    height: 450,
+    height: "auto",
   },
-  icon: {
-    color: "rgba(255, 255, 255, 0.54)",
-  },
-  card: {
-    root: {
-      minWidth: 275,
-    },
-    bullet: {
-      display: "inline-block",
-      margin: "0 2px",
-      transform: "scale(0.8)",
-    },
-    title: {
-      fontSize: 14,
-    },
-    pos: {
-      marginBottom: 12,
-    },
+  postList: {
+    margin: theme.spacing(2),
+    padding: theme.spacing(2),
   },
 }))
 
 const BlogIndex = ({ data, location }) => {
   const classes = useStyles()
+
   // 오늘 날짜
   const today = new Date()
   // 최근 글 기준일
@@ -73,33 +43,6 @@ const BlogIndex = ({ data, location }) => {
       limitNewPostDay
     )
   }
-  // Category명 구하기
-  const getAlertName = category => {
-    let alertName = category
-    switch (category.toLowerCase()) {
-      case "frontend":
-        alertName = "🌟 " + alertName
-        break
-      case "backend":
-        alertName = "🔥 " + alertName
-        break
-      case "devops":
-        alertName = "☁️ " + alertName
-        break
-      case "figma":
-        alertName = "🌈 " + alertName
-        break
-      case "notion":
-        alertName = "💡 " + alertName
-        break
-      case "others":
-        alertName = "🙋‍♀️ " + alertName
-        break
-      default:
-        alertName = "😍 All Posts"
-    }
-    return alertName
-  }
 
   // 페이지 제목
   const siteTitle = data.site.siteMetadata.title
@@ -111,13 +54,12 @@ const BlogIndex = ({ data, location }) => {
   const newPosts = posts.filter(post => isNewPost(post))
 
   // Rendering Target List
-  let jumbotronList = []
+  let postsPerCategories = []
   let exceptList = []
 
   for (let i = 0; i < categories.length; i++) {
     const category = categories[i]
     const tagName = category.name.toLowerCase()
-    const alertName = getAlertName(category.name)
 
     let filteredIndex = []
     let filteredPosts = posts.filter((post, j) => {
@@ -129,97 +71,15 @@ const BlogIndex = ({ data, location }) => {
       return false
     })
 
-    // 마지막은 전체 목록으로 표시한다.
-    if (tagName === "allposts") {
-      filteredPosts = posts
-    }
-
     // 카테고리와 일치하는 항목만 담기
     if (0 < filteredPosts.length) {
-      jumbotronList.push(
-        <div className={classes.root} key={i}>
-          <GridList className={classes.gridList} cols={3}>
-            <GridListTile key="Subheader" cols={3} style={{ height: "auto" }}>
-              <ListSubheader component="div" id={tagName}>
-                {alertName} <Chip size="small" label={filteredPosts.length} />
-              </ListSubheader>
-            </GridListTile>
-            {filteredPosts.map(({ node }, i) => {
-              const title = node.frontmatter.title || node.fields.slug
-              const random = Math.random()
-              const isInverse = random <= 0.6
-
-              let attribute = {
-                key: i,
-              }
-              if (isInverse) {
-                switch (Math.ceil(random * 10)) {
-                  case 1:
-                    attribute.color = "primary"
-                    break
-                  case 2:
-                    attribute.color = "success"
-                    break
-                  case 3:
-                    attribute.color = "info"
-                    break
-                  case 4:
-                    attribute.color = "warning"
-                    break
-                  case 5:
-                    attribute.color = "danger"
-                    break
-                  default:
-                    attribute.style = {
-                      backgroundColor: "#333",
-                      borderColor: "#333",
-                    }
-                }
-              }
-
-              return (
-                <GridListTile {...attribute}>
-                  <Card className={classes.card.root} variant="outlined">
-                    <CardContent>
-                      {/*<Link
-                          to={node.fields.slug}
-                          itemProp="url"
-                          style={isInverse ? { color: "white" } : null}
-                        > */}
-                      <Typography variant="h5" component="h2">
-                        {title}
-                      </Typography>
-                      {isNewPost(node) && (
-                        <>
-                          ✨<FiberNewIcon />✨
-                        </>
-                      )}
-                      <Typography
-                        className={classes.card.pos}
-                        color="textSecondary"
-                      >
-                        {node.frontmatter.date}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        component="p"
-                        dangerouslySetInnerHTML={{
-                          __html: node.frontmatter.description || node.excerpt,
-                        }}
-                        itemProp="description"
-                      ></Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button size="small" href={node.fields.slug}>
-                        More
-                      </Button>
-                    </CardActions>
-                  </Card>
-                </GridListTile>
-              )
-            })}
-          </GridList>
-        </div>
+      postsPerCategories.push(
+        <PostsPerCategory key={i} category={category} posts={filteredPosts} />
+      )
+    } else if (tagName == "all posts") {
+      // TODO 전체 목록을 if에서 빼낼 수 있는지 확인
+      postsPerCategories.push(
+        <PostsPerCategory key={i} category={category} posts={posts} />
       )
     } else {
       exceptList.push(category)
@@ -232,20 +92,22 @@ const BlogIndex = ({ data, location }) => {
   })
 
   return (
-    <Layout location={location} title={siteTitle} categories={categories}>
+    <Layout location={location} title={siteTitle}>
       <SEO title="All Posts" />
-      {/* <Bio /> */}
-      <Category categories={categories} getAlertName={getAlertName} />
-      {0 < newPosts.length && (
-        <Grid container spacing={4}>
-          {newPosts.map((post, i) => (
-            <NewPost key={i} {...post} />
-          ))}
-        </Grid>
-      )}
-      {jumbotronList.map(jombotron => {
-        return jombotron
-      })}
+      {/* <Category categories={categories} getAlertName={getAlertName} /> */}
+      <Paper elevation={20} className={classes.root}>
+        {0 < newPosts.length && (
+          <Box component="span" className={classes.postList}>
+            <Box component="h3">✨ New Post</Box>
+            {newPosts.map((post, i) => (
+              <NewPost key={i} {...post} />
+            ))}
+          </Box>
+        )}
+        {postsPerCategories.map(postsPerCategory => {
+          return postsPerCategory
+        })}
+      </Paper>
     </Layout>
   )
 }

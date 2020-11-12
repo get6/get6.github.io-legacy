@@ -52,19 +52,19 @@ module.exports = {
         link: "/devops",
         children: [
           {
-            name: "linux",
+            name: "Linux",
             link: "/linux",
           },
           {
-            name: "cloud",
+            name: "Cloud",
             link: "/cloud",
           },
           {
-            name: "docker",
+            name: "Docker",
             link: "/docker",
           },
           {
-            name: "git",
+            name: "Git",
             link: "/git",
           },
         ],
@@ -73,6 +73,10 @@ module.exports = {
         name: "Tools",
         link: "/tools",
         children: [
+          {
+            name: "Programming Tools",
+            link: "/tools",
+          },
           {
             name: "Atlassian",
             link: "/atlassian",
@@ -90,6 +94,10 @@ module.exports = {
       {
         name: "Others",
         link: "/others",
+      },
+      {
+        name: "All Posts",
+        link: "/tags",
       },
     ],
   },
@@ -130,8 +138,8 @@ module.exports = {
         ],
       },
     },
-    `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
