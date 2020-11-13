@@ -1,8 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import Link from "@material-ui/core/Link"
-import Toolbar from "@material-ui/core/Toolbar"
-import Typography from "@material-ui/core/Typography"
+import { Link, Toolbar, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { SiAboutDotMe } from "react-icons/si"
 import Switch from "./switch"
@@ -38,6 +36,32 @@ const Header = ({ title, dark, darkToggle, categories }) => {
       icon: <SiAboutDotMe />,
     },
   ]
+
+  // for (const i in categories) {
+  //   if (categories.hasOwnProperty(i)) {
+  //     const category = categories[i]
+  //     switch (category.name.toLowerCase()) {
+  //       case "frontend":
+  //         category.icon = "⭐️ "
+  //         break
+  //       case "backend":
+  //         category.icon = "🔥 "
+  //         break
+  //       case "devops":
+  //         category.icon = "☁️ "
+  //         break
+  //       case "tools":
+  //         category.icon = "🛠 "
+  //         break
+  //       case "others":
+  //         category.icon = "🙋‍♀️ "
+  //         break
+  //       case "all posts":
+  //         category.icon = "😍 "
+  //         break
+  //     }
+  //   }
+  // }
 
   return (
     <header>

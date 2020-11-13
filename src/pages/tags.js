@@ -46,7 +46,6 @@ const TagsPage = ({
   const clickTagButton = e => {
     const targetValue = e.target.textContent
     if (selectedButton == targetValue) {
-      console.log(1)
       setSelectedTags([])
       setSelectedButton("")
       return
@@ -64,7 +63,9 @@ const TagsPage = ({
   return (
     <Layout location={location} title={title}>
       <Helmet title={title} />
-      <Box component="h2">🏷 Tags</Box>
+      <Box component="h1" mb={0}>
+        🏷 Tags
+      </Box>
       {/* a to z 목록을 제공해 걸러진 tag 목록 제공 */}
       <ProTip>Please click on the button below to filter some tag.</ProTip>
       <Grid
@@ -106,7 +107,9 @@ const TagsPage = ({
           </Grid>
         </Grid>
         <Divider />
-        <Box component="h3">All Tags</Box>
+        <Box component="h1" mb={0}>
+          All Tags
+        </Box>
         <Grid item xs={12}>
           <Grid container spacing={1}>
             {tags.map((tag, i) => (

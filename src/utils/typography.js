@@ -1,9 +1,6 @@
-import "../styles/global.css"
-
 import Typography from "typography"
-import githubTheme from "typography-theme-github"
 
-const typography = new Typography(githubTheme)
+const typography = new Typography()
 
 // Hot reload typography in development.
 if (process.env.NODE_ENV !== `production`) {

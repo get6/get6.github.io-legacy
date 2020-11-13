@@ -3,14 +3,15 @@ module.exports = {
     title: `Jun Wick's Blog`,
     author: {
       name: `Sung Jun, Hwang`,
-      summary: `I'm trying to get closer to say "Hello, World!"`,
+      summary: `I'm trying to get closer to you and say "Hello, World!"`,
     },
     description: `My development's histories`,
     siteUrl: `https://get6.github.io/`,
     social: {
       twitter: `charles9306`,
       github: `get6`,
-      facebook: ``,
+      gmail: `ittae.com@gmail.com`,
+      facebook: `sjhwang93`,
       instagram: `hwang_sung_jun93`,
     },
     keywords: [`development`, "developer", `개발`, `개발자`],
@@ -220,12 +221,6 @@ module.exports = {
       },
     },
     `gatsby-plugin-react-helmet`,
-    {
-      resolve: `gatsby-plugin-typography`,
-      options: {
-        pathToConfigModule: `src/utils/typography`,
-      },
-    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

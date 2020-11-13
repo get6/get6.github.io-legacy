@@ -1,16 +1,22 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
 import Image from "gatsby-image"
-
-import { rhythm } from "../utils/typography"
-import { Box, makeStyles, Paper, Grid } from "@material-ui/core"
+import {
+  Box,
+  makeStyles,
+  Paper,
+  Grid,
+  Link,
+  Typography,
+} from "@material-ui/core"
 import GitHubIcon from "@material-ui/icons/GitHub"
 import InstagramIcon from "@material-ui/icons/Instagram"
 import FacebookIcon from "@material-ui/icons/Facebook"
 import MailOutlineIcon from "@material-ui/icons/MailOutline"
 import TwitterIcon from "@material-ui/icons/Twitter"
+
+import SEO from "../components/seo"
+import Layout from "../components/layout"
 
 /**
  * 나의 대한 이력
@@ -23,8 +29,15 @@ const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(2),
   },
-  contents: {
-    display: "flex",
+  box: {
+    border: "1px solid",
+    padding: theme.spacing(2),
+    margin: theme.spacing(1),
+  },
+  sns: {
+    "& > * + *": {
+      marginLeft: theme.spacing(2),
+    },
   },
 }))
 
@@ -32,52 +45,114 @@ const About = ({ data, location }) => {
   const classes = useStyles()
   const { author } = data.site.siteMetadata
   const siteTitle = data.site.siteMetadata.title
+  const sns = data.site.siteMetadata.social
+
+  const today = new Date()
+  const birthDate = new Date("1993-06-22")
 
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="About me" />
-      <Box component="h2">🤣 About me</Box>
+      <Box component="h1" mb={0}>
+        🤣 About me
+      </Box>
       <Paper variant="outlined" className={classes.root}>
-        <Box component="span" display="flex">
-          <Image
-            fixed={data.avatar.childImageSharp.fixed}
-            alt={author.name}
-            style={{
-              marginRight: rhythm(1 / 2),
-              marginBottom: 0,
-              minWidth: 50,
-              borderRadius: `100%`,
-            }}
-            imgStyle={{
-              borderRadius: `50%`,
-            }}
-          />
-          <Box componen="span">
-            <h4>이름: 황성준</h4>
-            <h4>Name: Sung Jun, Hwang</h4>
-            <Box component="p" border={1} padding={1}>
-              <h4>Description</h4>
+        <Grid container>
+          <Grid item xs={12} sm={3}>
+            {/* TODO SVG Hello World!가 이미지 위를 둥글게 감싸게 */}
+            <Image
+              fixed={data.avatar.childImageSharp.fixed}
+              alt={author.name}
+              style={{
+                marginBottom: 0,
+                borderRadius: `100%`,
+              }}
+              imgStyle={{
+                borderRadius: `50%`,
+              }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={9}>
+            <Grid item sm={12} className={classes.box}>
+              <Box component="h2" m={0}>
+                👨🏻‍💻 Profile
+              </Box>
+              <Typography variant="body1">
+                Name: 황성준 / Sung Jun, Hwang
+                <br />
+                Age: {today.getFullYear() - birthDate.getFullYear() + 1} in
+                Korea
+                <br />
+                Now Working as Back-End developer at{" "}
+                <Link href="https://socialbx.com" target="_blank">
+                  SocialBox
+                </Link>
+              </Typography>
+            </Grid>
+            <Grid item sm={12} className={classes.box}>
+              <Box component="h2" m={0}>
+                🌏 My SNS
+              </Box>
+              <Typography className={classes.sns} gutterBottom>
+                <Link
+                  href={"mailto:" + sns.gmail}
+                  target="_blank"
+                  color="inherit"
+                >
+                  <MailOutlineIcon /> Gmail
+                </Link>
+                <Link
+                  href={"https://github.com/" + sns.github}
+                  target="_blank"
+                  color="inherit"
+                >
+                  <GitHubIcon /> GitHub
+                </Link>
+                <Link
+                  href={"https://www.instagram.com/" + sns.instagram}
+                  target="_blank"
+                  color="inherit"
+                >
+                  <InstagramIcon /> Instagram
+                </Link>
+                <Link
+                  href={"https://www.facebook.com/" + sns.facebook}
+                  target="_blank"
+                  color="inherit"
+                >
+                  <FacebookIcon /> Facebook
+                </Link>
+                <Link
+                  href={"https://twitter.com/" + sns.twitter}
+                  target="_blank"
+                  color="inherit"
+                >
+                  <TwitterIcon /> Twitter
+                </Link>
+              </Typography>
+              <Typography variant="caption">
+                If you have any interest on your mind, please follow sns or send
+                me an email :)
+              </Typography>
+            </Grid>
+            <Grid item sm={12} className={classes.box}>
+              <Box component="h2" m={0}>
+                💬 To you
+              </Box>
               Hello my dear!
               <br />
+              I live in Seoul and like to learn development.
+              <br />
               I've started to work as a software developer since November 1th
-              2017.
-              <br />I like to study about development. So I like Flutter, React,
-              Spring, aws ...
-              <br />I will release some service.
-              <br /> Thank you for coming! 😘
-            </Box>
-            <Box component="h5">🌏 My SNS</Box>
-            <Grid container spacing={3}>
-              <Grid item>
-                <MailOutlineIcon />
-                <GitHubIcon />
-                <InstagramIcon />
-                <TwitterIcon />
-                <FacebookIcon />
-              </Grid>
+              2017
+              <br />
+              I like learning many things like Flutter, React, Spring, Cloud,
+              Figma, Notion...and English🤣
+              <br />
+              Thank you for coming! 😘
             </Grid>
-          </Box>
-        </Box>
+          </Grid>
+        </Grid>
       </Paper>
     </Layout>
   )
@@ -100,6 +175,7 @@ export const pageQuery = graphql`
         social {
           twitter
           github
+          gmail
           facebook
           instagram
         }

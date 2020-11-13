@@ -14,6 +14,7 @@ import {
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import FiberNewIcon from "@material-ui/icons/FiberNew" // TODO 날짜 비교해서 아이콘 붙여주기
+import Post from "../home/post"
 
 const useStyles = makeStyles(theme => ({
   heading: {
@@ -34,7 +35,7 @@ const PostsPerCategory = ({ category, posts }) => {
     let displatName = name
     switch (name.toLowerCase()) {
       case "frontend":
-        displatName = "🌟 " + displatName
+        displatName = "⭐️ " + displatName
         break
       case "backend":
         displatName = "🔥 " + displatName
@@ -81,64 +82,7 @@ const PostsPerCategory = ({ category, posts }) => {
       </AccordionSummary>
       <AccordionDetails>
         {posts.map(({ node }, i) => {
-          const title = node.frontmatter.title || node.fields.slug
-          const date = node.frontmatter.date
-          const description = node.frontmatter.description || node.excerpt
-          const href = node.fields.slug
-
-          const random = Math.random()
-          const isInverse = random <= 0.6
-
-          let attribute = {
-            key: i,
-          }
-          if (isInverse) {
-            switch (Math.ceil(random * 10)) {
-              case 1:
-                attribute.color = "primary"
-                break
-              case 2:
-                attribute.color = "success"
-                break
-              case 3:
-                attribute.color = "info"
-                break
-              case 4:
-                attribute.color = "warning"
-                break
-              case 5:
-                attribute.color = "danger"
-                break
-              default:
-                attribute.style = {
-                  backgroundColor: "#333",
-                  borderColor: "#333",
-                }
-            }
-          }
-          return (
-            <Card key={i}>
-              <CardContent>
-                <Typography variant="h5" component="h2">
-                  {title}
-                </Typography>
-                <Typography color="textSecondary">{date}</Typography>
-                <Typography
-                  variant="body2"
-                  component="p"
-                  dangerouslySetInnerHTML={{
-                    __html: description,
-                  }}
-                  itemProp="description"
-                ></Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small" href={href}>
-                  More
-                </Button>
-              </CardActions>
-            </Card>
-          )
+          return <Post key={i} node={node} />
         })}
       </AccordionDetails>
     </Accordion>

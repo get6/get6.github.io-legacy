@@ -1,11 +1,7 @@
-import React, { useState } from "react"
+import React from "react"
 import { Link, graphql } from "gatsby"
-import "bootstrap/dist/css/bootstrap.min.css"
-import Category from "../components/category"
-
 import { makeStyles } from "@material-ui/core/styles"
-import { Box, Paper } from "@material-ui/core"
-
+import { Box, Grid, Paper } from "@material-ui/core"
 import SEO from "../components/seo"
 import Layout from "../components/layout"
 import NewPost from "../components/home/new-post"
@@ -18,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     height: "auto",
   },
   postList: {
-    margin: theme.spacing(2),
+    // margin: theme.spacing(2),
     padding: theme.spacing(2),
   },
 }))
@@ -94,15 +90,24 @@ const BlogIndex = ({ data, location }) => {
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="All Posts" />
+      <Box component="h1" mb={0}>
+        🗽 Posts
+      </Box>
       {/* <Category categories={categories} getAlertName={getAlertName} /> */}
       <Paper elevation={20} className={classes.root}>
         {0 < newPosts.length && (
-          <Box component="span" className={classes.postList}>
-            <Box component="h3">✨ New Post</Box>
-            {newPosts.map((post, i) => (
-              <NewPost key={i} {...post} />
-            ))}
-          </Box>
+          <Grid container className={classes.postList}>
+            <Grid item xs={12}>
+              <Box component="h2" mt={0}>
+                ✨ New Post
+              </Box>
+            </Grid>
+            <Grid item container spacing={2}>
+              {newPosts.map((post, i) => (
+                <NewPost key={i} {...post} />
+              ))}
+            </Grid>
+          </Grid>
         )}
         {postsPerCategories.map(postsPerCategory => {
           return postsPerCategory

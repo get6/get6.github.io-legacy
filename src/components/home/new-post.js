@@ -8,25 +8,24 @@ import CardActionArea from "@material-ui/core/CardActionArea"
 import CardContent from "@material-ui/core/CardContent"
 import CardMedia from "@material-ui/core/CardMedia"
 import Hidden from "@material-ui/core/Hidden"
+import { Box } from "@material-ui/core"
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   card: {
     display: "flex",
+    border: "1px solid",
   },
   cardDetails: {
     flex: 1,
   },
-  cardMedia: {
-    width: 160,
-  },
-})
+}))
 
 const NewPost = post => {
   const classes = useStyles()
   return (
-    <Grid item xs={12}>
+    <Grid item xs={12} sm={6}>
       <Card className={classes.card}>
-        <div className={classes.cardDetails}>
+        <Box className={classes.cardDetails}>
           <CardContent>
             <Typography variant="h6" component="h2" gutterBottom>
               {post.node.frontmatter.title}
@@ -45,7 +44,7 @@ const NewPost = post => {
               Continue reading...
             </Typography>
           </CardContent>
-        </div>
+        </Box>
       </Card>
     </Grid>
   )
