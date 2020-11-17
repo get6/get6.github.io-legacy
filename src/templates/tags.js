@@ -1,38 +1,70 @@
 import React from "react"
 import PropTypes from "prop-types"
-
-// Components
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
+import {
+  Avatar,
+  Box,
+  Divider,
+  Hidden,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemSecondaryAction,
+  ListItemText,
+  makeStyles,
+  Paper,
+} from "@material-ui/core"
+import SEO from "../components/seo"
 import Layout from "../components/layout"
+import Emoji from "../components/emoji"
 
-const Tags = ({ pageContext, data }) => {
+const useStyles = makeStyles(theme => ({
+  avatar: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+  },
+}))
+
+const ListItemLink = props => {
+  return <ListItem button component="a" {...props} />
+}
+
+const Tags = ({ pageContext, data, location }) => {
+  const classes = useStyles()
   const { tag } = pageContext
   const { edges, totalCount } = data.allMarkdownRemark
+  const upperTag = tag.charAt(0).toUpperCase() + tag.slice(1)
   const tagHeader = `${totalCount} post${
     totalCount === 1 ? "" : "s"
-  } tagged with "${tag}"`
+  } tagged with ${upperTag}`
+  const siteTitle = data.site.siteMetadata.title
 
   return (
-    <Layout>
-      <div>
-        <h1>{tagHeader}</h1>
-        <ul>
-          {edges.map(({ node }) => {
+    <Layout location={location} title={siteTitle}>
+      <SEO title={upperTag} />
+      <Box component="h1" mb={0}>
+        <Emoji label="lightbulb" emoji={"💡"} /> {tagHeader}
+      </Box>
+      <Paper>
+        <List component="nav" aria-label="tag list">
+          {edges.map(({ node }, i) => {
             const { slug } = node.fields
-            const { title } = node.frontmatter
+            const { title, date } = node.frontmatter
             return (
-              <li key={slug}>
-                <Link to={slug}>{title}</Link>
-              </li>
+              <React.Fragment key={i}>
+                <ListItemLink href={slug}>
+                  <ListItemText primary={title} />
+                  <Hidden xsDown>
+                    <ListItemSecondaryAction>
+                      <Box component="span">{date}</Box>
+                    </ListItemSecondaryAction>
+                  </Hidden>
+                </ListItemLink>
+              </React.Fragment>
             )
           })}
-        </ul>
-        {/* 
-                This links to a page that doen not yet exist.
-                You'll come back to it!
-             */}
-        <Link to="/tags">All tags</Link>
-      </div>
+        </List>
+      </Paper>
     </Layout>
   )
 }
@@ -77,8 +109,14 @@ export const pageQuery = graphql`
           }
           frontmatter {
             title
+            date
           }
         }
+      }
+    }
+    site {
+      siteMetadata {
+        title
       }
     }
   }

@@ -1,7 +1,7 @@
 import React from "react"
 import scrollTo from "gatsby-plugin-smoothscroll"
-import { useScrollTrigger, makeStyles, Zoom } from "@material-ui/core"
-import { HiArrowCircleUp } from "react-icons/hi"
+import { Fab, useScrollTrigger, makeStyles, Zoom } from "@material-ui/core"
+import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward"
 
 const useStyles = makeStyles(theme => ({
   icon: {
@@ -23,14 +23,16 @@ const FloatingActionButton = () => {
 
   return (
     <Zoom in={trigger}>
-      <HiArrowCircleUp
-        title="scroll back to top"
+      <Fab
+        size="small"
+        aria-label="scroll back to top"
         className={classes.icon}
-        size={50}
         onClick={() => {
           scrollTo("body")
         }}
-      />
+      >
+        <ArrowUpwardIcon fontSize="small" />
+      </Fab>
     </Zoom>
   )
 }

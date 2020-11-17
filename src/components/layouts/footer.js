@@ -1,6 +1,4 @@
 import React from "react"
-import { GrGithub } from "react-icons/gr"
-import Container from "@material-ui/core/Container"
 import Box from "@material-ui/core/Box"
 import FooterBackground from "./footer-background.png"
 

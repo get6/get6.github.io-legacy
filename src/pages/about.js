@@ -17,6 +17,7 @@ import TwitterIcon from "@material-ui/icons/Twitter"
 
 import SEO from "../components/seo"
 import Layout from "../components/layout"
+import Emoji from "../components/emoji"
 
 /**
  * 나의 대한 이력
@@ -24,6 +25,18 @@ import Layout from "../components/layout"
  * 이메일
  *
  */
+
+// SNS url component
+const SNSIcon = ({ href, icon, iconName }) => {
+  return (
+    <Link href={href} target="_blank" color="inherit">
+      <Grid item container spacing={1} alignItems="center">
+        <Grid item>{icon}</Grid>
+        <Grid item>{iconName}</Grid>
+      </Grid>
+    </Link>
+  )
+}
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -35,8 +48,8 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
   },
   sns: {
-    "& > * + *": {
-      marginLeft: theme.spacing(2),
+    "& > a": {
+      marginRight: theme.spacing(1),
     },
   },
 }))
@@ -54,11 +67,11 @@ const About = ({ data, location }) => {
     <Layout location={location} title={siteTitle}>
       <SEO title="About me" />
       <Box component="h1" mb={0}>
-        🤣 About me
+        <Emoji label="smile" emoji={"🤣"} /> About me
       </Box>
       <Paper variant="outlined" className={classes.root}>
-        <Grid container>
-          <Grid item xs={12} sm={3}>
+        <Grid container spacing={1} justify="center" alignItems="center">
+          <Grid item alignItems="center">
             {/* TODO SVG Hello World!가 이미지 위를 둥글게 감싸게 */}
             <Image
               fixed={data.avatar.childImageSharp.fixed}
@@ -71,11 +84,18 @@ const About = ({ data, location }) => {
                 borderRadius: `50%`,
               }}
             />
+
+            <Typography variant="body1" align="center">
+              We first make our habits,
+              <br />
+              and then our habits make us.
+              <br />- John Dryden -
+            </Typography>
           </Grid>
-          <Grid item xs={12} sm={9}>
-            <Grid item sm={12} className={classes.box}>
+          <Grid item xs={12} sm>
+            <Grid item sm className={classes.box}>
               <Box component="h2" m={0}>
-                👨🏻‍💻 Profile
+                <Emoji label="developer" emoji={"👨🏻‍💻"} /> Profile
               </Box>
               <Typography variant="body1">
                 Name: 황성준 / Sung Jun, Hwang
@@ -89,67 +109,66 @@ const About = ({ data, location }) => {
                 </Link>
               </Typography>
             </Grid>
-            <Grid item sm={12} className={classes.box}>
+            <Grid item sm className={classes.box}>
               <Box component="h2" m={0}>
-                🌏 My SNS
+                <Emoji label="earth" emoji={"🌏"} /> My SNS
               </Box>
-              <Typography className={classes.sns} gutterBottom>
-                <Link
+              <Grid
+                item
+                container
+                xs={6}
+                sm
+                direction="row"
+                className={classes.sns}
+              >
+                <SNSIcon
                   href={"mailto:" + sns.gmail}
-                  target="_blank"
-                  color="inherit"
-                >
-                  <MailOutlineIcon /> Gmail
-                </Link>
-                <Link
+                  icon={<MailOutlineIcon />}
+                  iconName="Gmail"
+                />
+                <SNSIcon
                   href={"https://github.com/" + sns.github}
-                  target="_blank"
-                  color="inherit"
-                >
-                  <GitHubIcon /> GitHub
-                </Link>
-                <Link
+                  icon={<GitHubIcon />}
+                  iconName="GitHub"
+                />
+                <SNSIcon
                   href={"https://www.instagram.com/" + sns.instagram}
-                  target="_blank"
-                  color="inherit"
-                >
-                  <InstagramIcon /> Instagram
-                </Link>
-                <Link
+                  icon={<InstagramIcon />}
+                  iconName="Instagram"
+                />
+                <SNSIcon
                   href={"https://www.facebook.com/" + sns.facebook}
-                  target="_blank"
-                  color="inherit"
-                >
-                  <FacebookIcon /> Facebook
-                </Link>
-                <Link
+                  icon={<FacebookIcon />}
+                  iconName="Facebook"
+                />
+                <SNSIcon
                   href={"https://twitter.com/" + sns.twitter}
-                  target="_blank"
-                  color="inherit"
-                >
-                  <TwitterIcon /> Twitter
-                </Link>
-              </Typography>
+                  icon={<TwitterIcon />}
+                  iconName="Twitter"
+                />
+              </Grid>
               <Typography variant="caption">
                 If you have any interest on your mind, please follow sns or send
                 me an email :)
               </Typography>
             </Grid>
-            <Grid item sm={12} className={classes.box}>
+            <Grid item sm className={classes.box}>
               <Box component="h2" m={0}>
-                💬 To you
+                <Emoji label="talking" emoji={"💬"} /> To you
               </Box>
-              Hello my dear!
-              <br />
-              I live in Seoul and like to learn development.
-              <br />
-              I've started to work as a software developer since November 1th
-              2017
-              <br />
-              I like learning many things like Flutter, React, Spring, Cloud,
-              Figma, Notion...and English🤣
-              <br />
-              Thank you for coming! 😘
+              <Typography variant="body2">
+                Hello my dear! <Emoji label="hand up" emoji={"🙌"} />
+                <br />
+                I live in Seoul and like to learn development.
+                <br />
+                I've started to work as a software developer since November 1th
+                2017
+                <br />
+                I like learning many things like Flutter, React, Spring, Cloud,
+                Figma, Notion...and even English 🤣
+                <br />
+                Thank you for coming! 😘
+              </Typography>
             </Grid>
           </Grid>
         </Grid>

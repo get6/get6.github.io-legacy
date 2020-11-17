@@ -1,9 +1,11 @@
 import React from "react"
 import PropTypes from "prop-types"
+
 import { Link, Toolbar, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { SiAboutDotMe } from "react-icons/si"
+import { AboutDotMe } from "@icons-pack/react-simple-icons"
 import Switch from "./switch"
+import InheritLink from "./inherit-link"
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -33,35 +35,9 @@ const Header = ({ title, dark, darkToggle, categories }) => {
     {
       title: "About ",
       url: "/about",
-      icon: <SiAboutDotMe />,
+      icon: <AboutDotMe size={14} />,
     },
   ]
-
-  // for (const i in categories) {
-  //   if (categories.hasOwnProperty(i)) {
-  //     const category = categories[i]
-  //     switch (category.name.toLowerCase()) {
-  //       case "frontend":
-  //         category.icon = "⭐️ "
-  //         break
-  //       case "backend":
-  //         category.icon = "🔥 "
-  //         break
-  //       case "devops":
-  //         category.icon = "☁️ "
-  //         break
-  //       case "tools":
-  //         category.icon = "🛠 "
-  //         break
-  //       case "others":
-  //         category.icon = "🙋‍♀️ "
-  //         break
-  //       case "all posts":
-  //         category.icon = "😍 "
-  //         break
-  //     }
-  //   }
-  // }
 
   return (
     <header>
@@ -72,22 +48,17 @@ const Header = ({ title, dark, darkToggle, categories }) => {
           noWrap
           className={classes.toolbarTitle}
         >
-          <Link color="inherit" href="/">
-            {title}
-          </Link>
+          <InheritLink to={"/"}>{title}</InheritLink>
         </Typography>
         {sections.map(section => (
-          <Link
-            color="inherit"
-            noWrap
+          <InheritLink
             key={section.title}
-            variant="body2"
-            href={section.url}
+            to={section.url}
             className={classes.toolbarLink}
           >
             {section.title}
             {section.icon}
-          </Link>
+          </InheritLink>
         ))}
         <Switch isOn={dark} handleToggle={darkToggle} />
       </Toolbar>
@@ -97,17 +68,14 @@ const Header = ({ title, dark, darkToggle, categories }) => {
         className={classes.toolbarSecondary}
       >
         {categories.map((category, i) => (
-          <Link
-            color="inherit"
-            noWrap
+          <InheritLink
             key={i}
-            variant="body2"
-            href={category.link}
+            to={"/tags" + category.link}
             className={classes.toolbarLink}
           >
             {category.icon}
             {category.name}
-          </Link>
+          </InheritLink>
         ))}
       </Toolbar>
     </header>
@@ -118,12 +86,6 @@ Header.propTypes = {
   title: PropTypes.string.isRequired,
   dark: PropTypes.bool.isRequired,
   darkToggle: PropTypes.func.isRequired,
-  // sections: PropTypes.arrayOf(
-  //   PropTypes.shape({
-  //     title: PropTypes.string.isRequired,
-  //     url: PropTypes.string.isRequired,
-  //   }),
-  // ).isRequired,
 }
 
 export default Header

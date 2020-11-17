@@ -1,14 +1,11 @@
 import React, { useState } from "react"
 import PropTypes from "prop-types"
-// Utilities
-import kebabCase from "lodash/kebabCase"
-// Components
-import { Helmet } from "react-helmet"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
+import { Box, Button, Chip, Divider, Grid, makeStyles } from "@material-ui/core"
 import Layout from "../components/layout"
-import Chip from "@material-ui/core/Chip"
-import { Box, Button, makeStyles, Grid, Divider } from "@material-ui/core"
 import ProTip from "../components/pro-tip"
+import Emoji from "../components/emoji"
+import SEO from "../components/seo"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -45,14 +42,14 @@ const TagsPage = ({
   // 버튼 클릭시 발생할 이벤트 (필터 목록 반환)
   const clickTagButton = e => {
     const targetValue = e.target.textContent
-    if (selectedButton == targetValue) {
+    if (selectedButton === targetValue) {
       setSelectedTags([])
       setSelectedButton("")
       return
     }
     const filterdTags = tags.filter(tag => {
       return (
-        targetValue.toLocaleLowerCase() ==
+        targetValue.toLocaleLowerCase() ===
         tag.fieldValue.charAt(0).toLocaleLowerCase()
       )
     })
@@ -62,9 +59,9 @@ const TagsPage = ({
 
   return (
     <Layout location={location} title={title}>
-      <Helmet title={title} />
+      <SEO title="Tags" />
       <Box component="h1" mb={0}>
-        🏷 Tags
+        <Emoji label="tag image" emoji={"🏷"} /> Tags
       </Box>
       {/* a to z 목록을 제공해 걸러진 tag 목록 제공 */}
       <ProTip>Please click on the button below to filter some tag.</ProTip>
@@ -80,7 +77,7 @@ const TagsPage = ({
             <Grid item>
               {alphabet.map((tag, i) => (
                 <Button
-                  {...(tag == selectedButton
+                  {...(tag === selectedButton
                     ? { variant: "outlined", color: "primary" }
                     : {})}
                   key={i}
@@ -97,11 +94,16 @@ const TagsPage = ({
           <Grid container justify="center" spacing={1}>
             {selectedTags.map((tag, i) => (
               <Grid item key={i}>
-                <Chip
-                  size="small"
-                  clickable
-                  label={tag.fieldValue + " " + tag.totalCount}
-                />
+                <Link
+                  to={"/tags/" + tag.fieldValue.toLowerCase()}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Chip
+                    size="small"
+                    clickable
+                    label={tag.fieldValue + " " + tag.totalCount}
+                  />
+                </Link>
               </Grid>
             ))}
           </Grid>
@@ -119,11 +121,16 @@ const TagsPage = ({
               //   href={"/tags/" + kebabCase(tag.fieldValue)}
               // >
               <Grid item key={i}>
-                <Chip
-                  size="small"
-                  clickable
-                  label={tag.fieldValue + " " + tag.totalCount}
-                />
+                <Link
+                  to={"/tags/" + tag.fieldValue.toLowerCase()}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Chip
+                    size="small"
+                    clickable
+                    label={tag.fieldValue + " " + tag.totalCount}
+                  />
+                </Link>
               </Grid>
             ))}
           </Grid>

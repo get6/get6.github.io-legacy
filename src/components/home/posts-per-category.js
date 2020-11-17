@@ -4,16 +4,12 @@ import {
   AccordionSummary,
   AccordionDetails,
   Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
   makeStyles,
   Typography,
   Hidden,
+  Grid,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import FiberNewIcon from "@material-ui/icons/FiberNew" // TODO 날짜 비교해서 아이콘 붙여주기
 import Post from "../home/post"
 
 const useStyles = makeStyles(theme => ({
@@ -52,6 +48,7 @@ const PostsPerCategory = ({ category, posts }) => {
       case "all posts":
         displatName = "😍 All Posts"
         break
+      default:
     }
     return displatName
   }
@@ -81,9 +78,11 @@ const PostsPerCategory = ({ category, posts }) => {
         </Hidden>
       </AccordionSummary>
       <AccordionDetails>
-        {posts.map(({ node }, i) => {
-          return <Post key={i} node={node} />
-        })}
+        <Grid container spacing={1}>
+          {posts.map(({ node }, i) => {
+            return <Post key={i} node={node} />
+          })}
+        </Grid>
       </AccordionDetails>
     </Accordion>
   )

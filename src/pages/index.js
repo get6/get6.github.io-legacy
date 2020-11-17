@@ -1,20 +1,15 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
-import { makeStyles } from "@material-ui/core/styles"
-import { Box, Grid, Paper } from "@material-ui/core"
+import { graphql } from "gatsby"
+import { Box, Container, Grid, makeStyles, Paper } from "@material-ui/core"
 import SEO from "../components/seo"
 import Layout from "../components/layout"
 import NewPost from "../components/home/new-post"
 import PostsPerCategory from "../components/home/posts-per-category"
+import ProTip from "../components/pro-tip"
+import Emoji from "../components/emoji"
 
 const useStyles = makeStyles(theme => ({
-  root: {},
-  gridList: {
-    // width: 800,
-    height: "auto",
-  },
   postList: {
-    // margin: theme.spacing(2),
     padding: theme.spacing(2),
   },
 }))
@@ -72,7 +67,7 @@ const BlogIndex = ({ data, location }) => {
       postsPerCategories.push(
         <PostsPerCategory key={i} category={category} posts={filteredPosts} />
       )
-    } else if (tagName == "all posts") {
+    } else if (tagName === "all posts") {
       // TODO 전체 목록을 if에서 빼낼 수 있는지 확인
       postsPerCategories.push(
         <PostsPerCategory key={i} category={category} posts={posts} />
@@ -91,7 +86,7 @@ const BlogIndex = ({ data, location }) => {
     <Layout location={location} title={siteTitle}>
       <SEO title="All Posts" />
       <Box component="h1" mb={0}>
-        🗽 Posts
+        <Emoji label="postit" emoji={"🗒"} /> Posts
       </Box>
       {/* <Category categories={categories} getAlertName={getAlertName} /> */}
       <Paper elevation={20} className={classes.root}>
@@ -99,7 +94,7 @@ const BlogIndex = ({ data, location }) => {
           <Grid container className={classes.postList}>
             <Grid item xs={12}>
               <Box component="h2" mt={0}>
-                ✨ New Post
+                <Emoji label="shining" emoji={"✨"} /> New Post
               </Box>
             </Grid>
             <Grid item container spacing={2}>
@@ -109,6 +104,9 @@ const BlogIndex = ({ data, location }) => {
             </Grid>
           </Grid>
         )}
+        <Container>
+          <ProTip>Click the below one of buttons to open.</ProTip>
+        </Container>
         {postsPerCategories.map(postsPerCategory => {
           return postsPerCategory
         })}
