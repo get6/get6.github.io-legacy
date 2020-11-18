@@ -67,15 +67,22 @@ const BlogIndex = ({ data, location }) => {
       postsPerCategories.push(
         <PostsPerCategory key={i} category={category} posts={filteredPosts} />
       )
-    } else if (tagName === "all posts") {
-      // TODO 전체 목록을 if에서 빼낼 수 있는지 확인
-      postsPerCategories.push(
-        <PostsPerCategory key={i} category={category} posts={posts} />
-      )
     } else {
       exceptList.push(category)
     }
   }
+
+  // 전체 목록
+  postsPerCategories.push(
+    <PostsPerCategory
+      key={categories.length}
+      category={{
+        link: "/all",
+        name: "All Posts",
+      }}
+      posts={posts}
+    />
+  )
 
   // 게시글이 없는 메뉴를 제외한 목록 반환
   categories = categories.filter(category => {

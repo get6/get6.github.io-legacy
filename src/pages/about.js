@@ -69,9 +69,9 @@ const About = ({ data, location }) => {
       <Box component="h1" mb={0}>
         <Emoji label="smile" emoji={"🤣"} /> About me
       </Box>
-      <Paper variant="outlined" className={classes.root}>
+      <Paper elevation={20} variant="outlined" className={classes.root}>
         <Grid container spacing={1} justify="center" alignItems="center">
-          <Grid item alignItems="center">
+          <Grid item>
             {/* TODO SVG Hello World!가 이미지 위를 둥글게 감싸게 */}
             <Image
               fixed={data.avatar.childImageSharp.fixed}

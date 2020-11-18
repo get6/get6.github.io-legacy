@@ -2,35 +2,23 @@ import React from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 import {
-  Avatar,
   Box,
-  Divider,
   Hidden,
   List,
   ListItem,
-  ListItemAvatar,
   ListItemSecondaryAction,
   ListItemText,
-  makeStyles,
   Paper,
 } from "@material-ui/core"
 import SEO from "../components/seo"
 import Layout from "../components/layout"
 import Emoji from "../components/emoji"
 
-const useStyles = makeStyles(theme => ({
-  avatar: {
-    width: theme.spacing(4),
-    height: theme.spacing(4),
-  },
-}))
-
 const ListItemLink = props => {
   return <ListItem button component="a" {...props} />
 }
 
 const Tags = ({ pageContext, data, location }) => {
-  const classes = useStyles()
   const { tag } = pageContext
   const { edges, totalCount } = data.allMarkdownRemark
   const upperTag = tag.charAt(0).toUpperCase() + tag.slice(1)
@@ -45,7 +33,7 @@ const Tags = ({ pageContext, data, location }) => {
       <Box component="h1" mb={0}>
         <Emoji label="lightbulb" emoji={"💡"} /> {tagHeader}
       </Box>
-      <Paper>
+      <Paper elevation={20}>
         <List component="nav" aria-label="tag list">
           {edges.map(({ node }, i) => {
             const { slug } = node.fields
@@ -93,6 +81,63 @@ Tags.protoTypes = {
 }
 
 export default Tags
+
+// TODO 전체 태그 목록 보여주는 방법 생각하기
+const query =
+  Tags.tag === "all"
+    ? `
+query {
+  allMarkdownRemark(
+    limit: 2000
+    sort: { fields: [frontmatter___date], order: DESC }
+  ) {
+    totalCount
+    edges {
+      node {
+        fields {
+          slug
+        }
+        frontmatter {
+          title
+          date
+        }
+      }
+    }
+  }
+  site {
+    siteMetadata {
+      title
+    }
+  }
+}
+`
+    : `
+        query($tag: String) {
+          allMarkdownRemark(
+            limit: 2000
+            sort: { fields: [frontmatter___date], order: DESC }
+            filter: { frontmatter: { tags: { in: [$tag] } } }
+          ) {
+            totalCount
+            edges {
+              node {
+                fields {
+                  slug
+                }
+                frontmatter {
+                  title
+                  date
+                }
+              }
+            }
+          }
+          site {
+            siteMetadata {
+              title
+            }
+          }
+        }
+      `
 
 export const pageQuery = graphql`
   query($tag: String) {

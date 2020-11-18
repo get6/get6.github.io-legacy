@@ -1,17 +1,33 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-
-import Bio from "../components/bio"
+import { Box, Grid, Paper, makeStyles } from "@material-ui/core"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import Bio from "../components/bio"
+import Emoji from "../components/emoji"
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    padding: theme.spacing(2),
+  },
+}))
+/**
+ * 들어가야 할 것
+ * 목차 목록 (클릭 시 이동)
+ * 연관글
+ * 댓글
+ * 스타일잡기
+ */
 const BlogPostTemplate = ({ data, pageContext, location }) => {
+  const classes = useStyles()
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata.title
   const image = post.frontmatter.image
     ? post.frontmatter.image.childImageSharp.resize
     : null
   const { previous, next } = pageContext
+
+  console.log(data)
 
   return (
     <Layout location={location} title={siteTitle}>
@@ -21,42 +37,30 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
         image={image}
         pathname={location.pathname}
       />
-      <article itemScope itemType="http://schema.org/Article">
-        <header>
-          <h1
-            itemProp="headline"
-            style={{
-              // marginTop: rhythm(1),
-              marginBottom: 0,
-            }}
-          >
-            {post.frontmatter.title}
-          </h1>
-          <p
-            style={{
-              // ...scale(-1 / 5),
-              display: `block`,
-              // marginBottom: rhythm(1),
-            }}
-          >
+      <Box component="h1" mb={0}>
+        <Emoji label="smile" emoji={"📇"} /> {post.frontmatter.title}
+      </Box>
+      <Paper elevation={20} variant="outlined" className={classes.root}>
+        <Grid container spacing={0}>
+          <Grid item container alignContent="flex-end">
             {post.frontmatter.date}
-          </p>
-        </header>
-        <section
-          dangerouslySetInnerHTML={{ __html: post.html }}
-          itemProp="articleBody"
-        />
-        <hr
-          style={
-            {
-              // marginBottom: rhythm(1),
-            }
-          }
-        />
-        <footer>
-          <Bio />
-        </footer>
-      </article>
+          </Grid>
+          <Grid item xs>
+            <article itemScope itemType="http://schema.org/Article">
+              <Box
+                component="section"
+                dangerouslySetInnerHTML={{ __html: post.html }}
+                itemProp="articleBody"
+              />
+            </article>
+          </Grid>
+        </Grid>
+        <Grid item>
+          <Box>연관 글</Box>
+        </Grid>
+
+        <Grid item></Grid>
+      </Paper>
 
       <nav>
         <ul
@@ -84,6 +88,9 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
           </li>
         </ul>
       </nav>
+      <footer>
+        <Bio />
+      </footer>
     </Layout>
   )
 }
@@ -91,7 +98,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
 export default BlogPostTemplate
 
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
+  query BlogPostBySlug($slug: String!, $tag: String!) {
     site {
       siteMetadata {
         title
@@ -115,6 +122,23 @@ export const pageQuery = graphql`
               height
               width
             }
+          }
+        }
+      }
+    }
+    allMarkdownRemark(
+      limit: 2000
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { tags: { in: [$tag] } } }
+    ) {
+      edges {
+        node {
+          fields {
+            slug
+          }
+          frontmatter {
+            title
+            date
           }
         }
       }

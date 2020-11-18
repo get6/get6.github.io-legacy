@@ -1,8 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-
-import { Link, Toolbar, Typography } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
+import { Toolbar, Typography, makeStyles } from "@material-ui/core"
 import { AboutDotMe } from "@icons-pack/react-simple-icons"
 import Switch from "./switch"
 import InheritLink from "./inherit-link"
@@ -42,12 +40,7 @@ const Header = ({ title, dark, darkToggle, categories }) => {
   return (
     <header>
       <Toolbar className={classes.toolbar}>
-        <Typography
-          component="h3"
-          variant="h6"
-          noWrap
-          className={classes.toolbarTitle}
-        >
+        <Typography noWrap className={classes.toolbarTitle}>
           <InheritLink to={"/"}>{title}</InheritLink>
         </Typography>
         {sections.map(section => (

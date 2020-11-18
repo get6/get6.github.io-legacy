@@ -50,6 +50,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       component: blogPostTemplate,
       context: {
         slug: post.node.fields.slug,
+        tag: post.node.frontmatter.tags[0],
         previous,
         next,
       },
@@ -68,6 +69,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         tag: tag.fieldValue,
       },
     })
+  })
+
+  // Create All Tag Page
+  createPage({
+    path: `/tags/all/`,
+    component: tagTemplate,
+    context: {
+      tag: "all",
+    },
   })
 }
 

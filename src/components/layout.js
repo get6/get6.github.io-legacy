@@ -24,6 +24,12 @@ const Layout = ({ location, title, children }) => {
             }
           }
         }
+        allMarkdownRemark {
+          group(field: frontmatter___tags) {
+            fieldValue
+            totalCount
+          }
+        }
       }
     `
   )
@@ -65,6 +71,17 @@ const Layout = ({ location, title, children }) => {
   )
 
   const categories = data.site.siteMetadata.categories
+  const tags = data.allMarkdownRemark.group
+
+  // Tag있는 게시글만 찾음
+  const filterdCategories = categories.filter(category => {
+    // Find index in tags
+    const i = tags.findIndex(
+      tag => tag.fieldValue.toLowerCase() === category.name.toLowerCase()
+    )
+    const tag = tags[i]
+    return tag ? 0 < tag.totalCount : false
+  })
 
   return (
     <ThemeProvider theme={theme}>
@@ -75,7 +92,7 @@ const Layout = ({ location, title, children }) => {
           title={title}
           dark={dark}
           darkToggle={darkToggle}
-          categories={categories}
+          categories={filterdCategories}
         />
         <main>{children}</main>
         <FAB />

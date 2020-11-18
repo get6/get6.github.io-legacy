@@ -93,12 +93,12 @@ module.exports = {
         ],
       },
       {
-        name: "Others",
-        link: "/others",
+        name: "Books",
+        link: "/books",
       },
       {
-        name: "All Posts",
-        link: "/tags",
+        name: "Others",
+        link: "/others",
       },
     ],
   },

@@ -7,10 +7,11 @@ const useStyles = makeStyles(() => ({
   hover: {
     color: "inherit",
     textDecoration: "none",
+    whiteSpace: "nowrap",
+    overflow: "auto",
     "&:hover": {
       textDecoration: "underline",
     },
-    whiteSpace: "nowrap",
   },
 }))
 
