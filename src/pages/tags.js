@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { graphql, Link } from "gatsby"
+import _ from "lodash"
 import { Box, Button, Chip, Divider, Grid, makeStyles } from "@material-ui/core"
 import Layout from "../components/layout"
 import ProTip from "../components/pro-tip"
@@ -95,7 +96,7 @@ const TagsPage = ({
             {selectedTags.map((tag, i) => (
               <Grid item key={i}>
                 <Link
-                  to={"/tags/" + tag.fieldValue.toLowerCase()}
+                  to={"/tags/" + _.kebabCase(tag.fieldValue)}
                   style={{ textDecoration: "none" }}
                 >
                   <Chip
@@ -122,7 +123,7 @@ const TagsPage = ({
               // >
               <Grid item key={i}>
                 <Link
-                  to={"/tags/" + tag.fieldValue.toLowerCase()}
+                  to={"/tags/" + _.kebabCase(tag.fieldValue)}
                   style={{ textDecoration: "none" }}
                 >
                   <Chip

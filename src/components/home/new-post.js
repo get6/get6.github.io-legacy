@@ -25,7 +25,7 @@ const NewPost = post => {
       <Card className={classes.card}>
         <Box className={classes.cardDetails}>
           <CardContent>
-            <Typography variant="h6" component="h2" gutterBottom>
+            <Typography variant="h5" gutterBottom>
               {post.node.frontmatter.title}
             </Typography>
             <Typography variant="subtitle2" color="textSecondary" gutterBottom>

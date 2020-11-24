@@ -3,7 +3,7 @@ module.exports = {
     title: `Jun Wick's Blog`,
     author: {
       name: `Sung Jun, Hwang`,
-      summary: `I'm trying to get closer to you and say "Hello, World!"`,
+      summary: `Live Well, Love Much, Laugh Often"`,
     },
     description: `My development's histories`,
     siteUrl: `https://get6.github.io/`,
@@ -97,6 +97,10 @@ module.exports = {
         link: "/books",
       },
       {
+        name: "Bookmarks",
+        link: "/bookmarks",
+      },
+      {
         name: "Others",
         link: "/others",
       },
@@ -133,6 +137,7 @@ module.exports = {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
+          `gatsby-remark-prismjs`,
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
         ],
@@ -223,8 +228,13 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
-    `gatsby-plugin-sass`,
     `gatsby-plugin-material-ui`,
     `gatsby-plugin-smoothscroll`,
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/utils/typography`,
+      },
+    },
   ],
 }

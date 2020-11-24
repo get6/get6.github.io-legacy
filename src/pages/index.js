@@ -1,12 +1,13 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { Box, Container, Grid, makeStyles, Paper } from "@material-ui/core"
+import { Box, Grid, makeStyles, Paper } from "@material-ui/core"
 import SEO from "../components/seo"
 import Layout from "../components/layout"
 import NewPost from "../components/home/new-post"
 import PostsPerCategory from "../components/home/posts-per-category"
 import ProTip from "../components/pro-tip"
 import Emoji from "../components/emoji"
+import { isNewPost } from "../utils/common"
 
 const useStyles = makeStyles(theme => ({
   postList: {
@@ -17,24 +18,6 @@ const useStyles = makeStyles(theme => ({
 const BlogIndex = ({ data, location }) => {
   const classes = useStyles()
 
-  // 오늘 날짜
-  const today = new Date()
-  // 최근 글 기준일
-  const limitNewPostDay = 14
-  // 최근 작성된 게시글인지 확인
-  const isNewPost = post => {
-    // json 형식으로 오는 객체 중에 node가 없는 형식이 있음
-    if (!post.node) {
-      return false
-    }
-    // post.frontmatter.date
-    const postDate = new Date(post.node.frontmatter.date.split(",")[0])
-    return (
-      Math.round(Math.abs((postDate - today) / (24 * 60 * 60 * 1000))) <=
-      limitNewPostDay
-    )
-  }
-
   // 페이지 제목
   const siteTitle = data.site.siteMetadata.title
   // 메뉴 카테고리
@@ -42,7 +25,7 @@ const BlogIndex = ({ data, location }) => {
   // 게시글들
   const posts = data.allMarkdownRemark.edges
   // 최신 게시글 목록
-  const newPosts = posts.filter(post => isNewPost(post))
+  const newPosts = posts.filter(post => isNewPost(post.node.frontmatter.date))
 
   // Rendering Target List
   let postsPerCategories = []
@@ -111,9 +94,9 @@ const BlogIndex = ({ data, location }) => {
             </Grid>
           </Grid>
         )}
-        <Container>
+        <Grid container>
           <ProTip>Click the below one of buttons to open.</ProTip>
-        </Container>
+        </Grid>
         {postsPerCategories.map(postsPerCategory => {
           return postsPerCategory
         })}

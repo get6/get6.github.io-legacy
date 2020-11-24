@@ -8,11 +8,15 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core"
-import FiberNewIcon from "@material-ui/icons/FiberNew" // TODO 날짜 비교해서 아이콘 붙여주기
+import FiberNewIcon from "@material-ui/icons/FiberNew"
+import { isNewPost } from "../../utils/common"
 
 const useStyles = makeStyles(_ => ({
   card: {
     border: "1px solid",
+  },
+  actions: {
+    float: "right",
   },
 }))
 
@@ -77,7 +81,8 @@ const Post = ({ node }) => {
             itemProp="description"
           ></Typography>
         </CardContent>
-        <CardActions>
+        <CardActions className={classes.actions}>
+          {isNewPost(date) && <FiberNewIcon />}
           <Button size="small" href={href}>
             More
           </Button>

@@ -2,3 +2,7 @@ html {
   min-height: 100vh;
   position: relative;
 }
+
+h1, h2, h3 {
+  border-bottom: none;
+}

@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { useStaticQuery, graphql } from "gatsby"
 import { Toolbar, Typography, makeStyles } from "@material-ui/core"
 import { AboutDotMe } from "@icons-pack/react-simple-icons"
 import Switch from "./switch"
@@ -22,8 +23,35 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const Header = ({ title, dark, darkToggle, categories }) => {
+const Header = ({ title, dark, darkToggle }) => {
   const classes = useStyles()
+  const data = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+          categories {
+            name
+            link
+            children {
+              name
+              link
+            }
+          }
+        }
+      }
+      allMarkdownRemark {
+        group(field: frontmatter___tags) {
+          fieldValue
+          totalCount
+        }
+      }
+    }
+  `)
+
+  const categories = data.site.siteMetadata.categories
+  const tags = data.allMarkdownRemark.group
+
   const sections = [
     {
       title: "Tags",
@@ -36,6 +64,16 @@ const Header = ({ title, dark, darkToggle, categories }) => {
       icon: <AboutDotMe size={14} />,
     },
   ]
+
+  // Tag있는 게시글만 찾음
+  const filterdCategories = categories.filter(category => {
+    // Find index in tags
+    const i = tags.findIndex(
+      tag => tag.fieldValue.toLowerCase() === category.name.toLowerCase()
+    )
+    const tag = tags[i]
+    return tag ? 0 < tag.totalCount : false
+  })
 
   return (
     <header>
@@ -60,7 +98,7 @@ const Header = ({ title, dark, darkToggle, categories }) => {
         variant="dense"
         className={classes.toolbarSecondary}
       >
-        {categories.map((category, i) => (
+        {filterdCategories.map((category, i) => (
           <InheritLink
             key={i}
             to={"/tags" + category.link}

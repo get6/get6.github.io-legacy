@@ -34,6 +34,7 @@ const SEO = ({
             social {
               twitter
               github
+              gmail
               facebook
               instagram
             }

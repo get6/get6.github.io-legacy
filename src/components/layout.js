@@ -1,39 +1,15 @@
 import React, { useState } from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import Container from "@material-ui/core/Container"
+import {
+  Container,
+  CssBaseline,
+  createMuiTheme,
+  ThemeProvider,
+} from "@material-ui/core"
 import Header from "./layouts/header"
 import FAB from "./layouts/fab"
 import Footer from "./layouts/footer"
-import { CssBaseline } from "@material-ui/core"
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles"
 
 const Layout = ({ location, title, children }) => {
-  const data = useStaticQuery(
-    graphql`
-      query LayoutQuery {
-        site {
-          siteMetadata {
-            title
-            categories {
-              name
-              link
-              children {
-                name
-                link
-              }
-            }
-          }
-        }
-        allMarkdownRemark {
-          group(field: frontmatter___tags) {
-            fieldValue
-            totalCount
-          }
-        }
-      }
-    `
-  )
-
   const getDarkMode = () => {
     // 스위치를 만진 적이 있다면
     const storageDarkMode = localStorage.getItem("dark")
@@ -70,19 +46,6 @@ const Layout = ({ location, title, children }) => {
     [dark]
   )
 
-  const categories = data.site.siteMetadata.categories
-  const tags = data.allMarkdownRemark.group
-
-  // Tag있는 게시글만 찾음
-  const filterdCategories = categories.filter(category => {
-    // Find index in tags
-    const i = tags.findIndex(
-      tag => tag.fieldValue.toLowerCase() === category.name.toLowerCase()
-    )
-    const tag = tags[i]
-    return tag ? 0 < tag.totalCount : false
-  })
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -92,11 +55,10 @@ const Layout = ({ location, title, children }) => {
           title={title}
           dark={dark}
           darkToggle={darkToggle}
-          categories={filterdCategories}
         />
         <main>{children}</main>
-        <FAB />
       </Container>
+      <FAB />
       <Footer />
     </ThemeProvider>
   )

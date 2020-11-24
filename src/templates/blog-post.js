@@ -1,14 +1,45 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import { Box, Grid, Paper, makeStyles } from "@material-ui/core"
+import { Box, Divider, Fab, Grid, Paper, makeStyles } from "@material-ui/core"
+import { ArrowBack, ArrowForward } from "@material-ui/icons"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Bio from "../components/bio"
 import Emoji from "../components/emoji"
+import PostList from "../components/post-list"
+import { shuffle } from "../utils/common"
+import Utterances from "../components/utterances"
 
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(2),
+  },
+  article: {
+    overflowX: "auto",
+  },
+  date: {
+    float: "right",
+  },
+  nav: {
+    margin: 0,
+    width: "auto",
+    display: `flex`,
+    flexWrap: `wrap`,
+    listStyle: `none`,
+    alignItems: "center",
+    justifyContent: `space-between`,
+    paddingTop: theme.spacing(2),
+    "& li h6": {
+      color: "inherit",
+    },
+    "& li > a": {
+      color: "inherit",
+    },
+    "& li > a > button": {
+      color: "inherit",
+      boxShadow: "none",
+      backgroundColor: "inherit",
+    },
   },
 }))
 /**
@@ -27,8 +58,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
     : null
   const { previous, next } = pageContext
 
-  console.log(data)
-
+  const relativePosts = shuffle(data.allMarkdownRemark.edges).slice(0, 4)
   return (
     <Layout location={location} title={siteTitle}>
       <SEO
@@ -41,56 +71,67 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
         <Emoji label="smile" emoji={"📇"} /> {post.frontmatter.title}
       </Box>
       <Paper elevation={20} variant="outlined" className={classes.root}>
-        <Grid container spacing={0}>
-          <Grid item container alignContent="flex-end">
+        <Grid
+          component="article"
+          itemScope
+          itemType="http://schema.org/Article"
+          className={classes.article}
+        >
+          <Box p={(1, 1, 0, 0)} className={classes.date}>
             {post.frontmatter.date}
+          </Box>
+
+          <Grid
+            item
+            component="section"
+            dangerouslySetInnerHTML={{ __html: post.html }}
+            itemProp="articleBody"
+          />
+        </Grid>
+        <Divider />
+        {0 < relativePosts.length && (
+          <Grid item>
+            <Box component="h3" mt={1} mb={0}>
+              <Emoji label="smile" emoji={"🖥"} /> 연관 글
+            </Box>
+            <Grid item>
+              <PostList items={relativePosts} border />
+            </Grid>
           </Grid>
-          <Grid item xs>
-            <article itemScope itemType="http://schema.org/Article">
-              <Box
-                component="section"
-                dangerouslySetInnerHTML={{ __html: post.html }}
-                itemProp="articleBody"
-              />
-            </article>
-          </Grid>
+        )}
+
+        <Grid item component="nav">
+          <Box component="ul" className={classes.nav}>
+            <Box component="li">
+              {previous && (
+                <Link to={previous.fields.slug} rel="prev">
+                  <Fab>
+                    <ArrowBack />
+                  </Fab>{" "}
+                  {previous.frontmatter.title}
+                </Link>
+              )}
+            </Box>
+            <Box component="li">
+              <Bio />
+            </Box>
+            <Box component="li">
+              {next && (
+                <Link to={next.fields.slug} rel="next">
+                  {next.frontmatter.title}
+                  <Fab>
+                    {" "}
+                    <ArrowForward />
+                  </Fab>
+                </Link>
+              )}
+            </Box>
+          </Box>
         </Grid>
         <Grid item>
-          <Box>연관 글</Box>
+          <Utterances />
         </Grid>
-
-        <Grid item></Grid>
       </Paper>
-
-      <nav>
-        <ul
-          style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: 0,
-          }}
-        >
-          <li>
-            {previous && (
-              <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
-              </Link>
-            )}
-          </li>
-          <li>
-            {next && (
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
-              </Link>
-            )}
-          </li>
-        </ul>
-      </nav>
-      <footer>
-        <Bio />
-      </footer>
     </Layout>
   )
 }
@@ -129,7 +170,10 @@ export const pageQuery = graphql`
     allMarkdownRemark(
       limit: 2000
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { tags: { in: [$tag] } } }
+      filter: {
+        frontmatter: { tags: { in: [$tag] } }
+        fields: { slug: { ne: $slug } }
+      }
     ) {
       edges {
         node {
