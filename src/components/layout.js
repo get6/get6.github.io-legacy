@@ -4,32 +4,33 @@ import {
   CssBaseline,
   createMuiTheme,
   ThemeProvider,
+  useMediaQuery,
 } from "@material-ui/core"
 import Header from "./layouts/header"
 import FAB from "./layouts/fab"
 import Footer from "./layouts/footer"
 
 const Layout = ({ location, title, children }) => {
-  const getDarkMode = () => {
-    // 스위치를 만진 적이 있다면
-    const storageDarkMode = localStorage.getItem("dark")
-    const hasPersistedPreference = typeof storageDarkMode === "string"
+  // const getDarkMode = () => {
+  //   // 스위치를 만진 적이 있다면
+  //   const storageDarkMode = localStorage.getItem("dark")
+  //   const hasPersistedPreference = typeof storageDarkMode === "string"
 
-    if (hasPersistedPreference) return storageDarkMode === "true"
+  //   if (hasPersistedPreference) return storageDarkMode === "true"
 
-    // 기본 다크모드 설정
-    const mql = window.matchMedia("(prefers-color-scheme: dark)")
-    const hasMediaQueryPreference = typeof prefersDarkMode === "boolean"
+  //   // 기본 다크모드 설정
+  //   const mql = window.matchMedia("(prefers-color-scheme: dark)")
+  //   const hasMediaQueryPreference = typeof prefersDarkMode === "boolean"
 
-    if (hasMediaQueryPreference) {
-      return mql.matches ? true : false
-    }
+  //   if (hasMediaQueryPreference) {
+  //     return mql.matches ? true : false
+  //   }
 
-    return false
-  }
+  //   return false
+  // }
 
   // 다크모드
-  const [dark, setDark] = useState(getDarkMode())
+  const [dark, setDark] = useMediaQuery(`(prefers-color-scheme: dark)`)
   // 다크모드 설정
   const darkToggle = () => {
     setDark(!dark)

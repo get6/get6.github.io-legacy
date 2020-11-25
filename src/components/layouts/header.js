@@ -91,7 +91,7 @@ const Header = ({ title, dark, darkToggle }) => {
             {section.icon}
           </InheritLink>
         ))}
-        <Switch isOn={dark} handleToggle={darkToggle} />
+        {/* <Switch isOn={dark} handleToggle={darkToggle} /> */}
       </Toolbar>
       <Toolbar
         component="nav"
