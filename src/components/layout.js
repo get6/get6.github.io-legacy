@@ -30,10 +30,11 @@ const Layout = ({ location, title, children }) => {
   // }
 
   // 다크모드
-  const [dark, setDark] = useMediaQuery(`(prefers-color-scheme: dark)`)
+  const dark = useMediaQuery(`(prefers-color-scheme: dark)`)
+  // const [dark, setDark] = useMediaQuery(`(prefers-color-scheme: dark)`)
   // 다크모드 설정
   const darkToggle = () => {
-    setDark(!dark)
+    // setDark(!dark)
     localStorage.setItem("dark", !dark)
   }
 
