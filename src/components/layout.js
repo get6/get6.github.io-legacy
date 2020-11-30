@@ -5,6 +5,7 @@ import {
   createMuiTheme,
   useMediaQuery,
   ThemeProvider,
+  useMediaQuery,
 } from "@material-ui/core"
 import Header from "./layouts/header"
 import FAB from "./layouts/fab"
