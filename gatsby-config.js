@@ -3,7 +3,7 @@ module.exports = {
     title: `Jun Wick's Blog`,
     author: {
       name: `Sung Jun, Hwang`,
-      summary: `Live Well, Love Much, Laugh Often"`,
+      summary: `Live Well, Love Much, Laugh Often`,
     },
     description: `My development's histories`,
     siteUrl: `https://get6.github.io/`,

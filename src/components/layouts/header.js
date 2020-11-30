@@ -5,6 +5,7 @@ import { Toolbar, Typography, makeStyles } from "@material-ui/core"
 import { AboutDotMe } from "@icons-pack/react-simple-icons"
 import Switch from "./switch"
 import InheritLink from "./inherit-link"
+import { connect } from "react-redux"
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -75,6 +76,20 @@ const Header = ({ title, dark, darkToggle }) => {
     return tag ? 0 < tag.totalCount : false
   })
 
+  const Dark = ({ dark, change }) => (
+    <Switch isOn={dark} handleToggle={change} />
+  )
+
+  const mapStateToProps = ({ dark }) => {
+    return dark
+  }
+
+  const mapDispatchToProps = dispatch => {
+    return { change: () => dispatch({ type: `CHANGE` }) }
+  }
+
+  const ConnectedDark = connect(mapStateToProps, mapDispatchToProps)(Dark)
+
   return (
     <header>
       <Toolbar className={classes.toolbar}>
@@ -91,7 +106,7 @@ const Header = ({ title, dark, darkToggle }) => {
             {section.icon}
           </InheritLink>
         ))}
-        <Switch isOn={dark} handleToggle={darkToggle} />
+        <ConnectedDark />
       </Toolbar>
       <Toolbar
         component="nav"
@@ -115,8 +130,6 @@ const Header = ({ title, dark, darkToggle }) => {
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
-  dark: PropTypes.bool.isRequired,
-  darkToggle: PropTypes.func.isRequired,
 }
 
 export default Header

@@ -1,5 +1,4 @@
 import React, { useRef, useLayoutEffect } from "react"
-import { Box } from "@material-ui/core"
 
 const Utterances = () => {
   const src = "https://utteranc.es/client.js"
@@ -22,7 +21,7 @@ const Utterances = () => {
     commentBox.current.appendChild(utterances)
   }, [])
 
-  return <Box ref={commentBox} />
+  return <div ref={commentBox} />
 }
 
 export default Utterances

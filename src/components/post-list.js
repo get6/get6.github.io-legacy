@@ -11,10 +11,13 @@ import {
 import InheritLink from "./layouts/inherit-link"
 
 const useStyles = makeStyles(theme => ({
-  list: {
+  root: {
     width: "auto",
-    margin: theme.spacing(1),
     border: "1px solid",
+    margin: theme.spacing(1),
+  },
+  text: {
+    overflowX: "auto",
   },
 }))
 
@@ -35,8 +38,8 @@ const PostList = ({ items, border }) => {
         const { title, date } = node.frontmatter
         return (
           <React.Fragment key={i}>
-            <ListItemLink href={slug} className={border && classes.list}>
-              <ListItemText primary={title} />
+            <ListItemLink href={slug} className={border && classes.root}>
+              <ListItemText primary={title} className={classes.text} />
               <Hidden xsDown>
                 <ListItemSecondaryAction>
                   <Box component="span">{date}</Box>

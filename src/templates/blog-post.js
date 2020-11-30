@@ -1,6 +1,14 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import { Box, Divider, Fab, Grid, Paper, makeStyles } from "@material-ui/core"
+import {
+  Box,
+  Divider,
+  Fab,
+  Grid,
+  Paper,
+  makeStyles,
+  Hidden,
+} from "@material-ui/core"
 import { ArrowBack, ArrowForward } from "@material-ui/icons"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -77,10 +85,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
           itemType="http://schema.org/Article"
           className={classes.article}
         >
-          <Box p={(1, 1, 0, 0)} className={classes.date}>
-            {post.frontmatter.date}
-          </Box>
-
+          <Box className={classes.date}>{post.frontmatter.date}</Box>
           <Grid
             item
             component="section"
@@ -112,9 +117,11 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
                 </Link>
               )}
             </Box>
-            <Box component="li">
-              <Bio />
-            </Box>
+            <Hidden xsDown>
+              <Box component="li">
+                <Bio />
+              </Box>
+            </Hidden>
             <Box component="li">
               {next && (
                 <Link to={next.fields.slug} rel="next">
