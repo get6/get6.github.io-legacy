@@ -4,9 +4,9 @@ import { graphql, Link } from "gatsby"
 import _ from "lodash"
 import { Box, Button, Chip, Divider, Grid, makeStyles } from "@material-ui/core"
 import Layout from "../components/layout"
-import ProTip from "../components/pro-tip"
-import Emoji from "../components/emoji"
-import SEO from "../components/seo"
+import ProTip from "../components/molecules/pro-tip"
+import Emoji from "../components/atoms/emoji"
+import SEO from "../components/organisms/seo"
 
 const useStyles = makeStyles(theme => ({
   root: {

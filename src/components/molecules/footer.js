@@ -1,6 +1,6 @@
 import React from "react"
 import { Box, makeStyles } from "@material-ui/core"
-import FooterBackground from "./footer-background.png"
+import FooterBackground from "../../../content/assets/footer-background.png"
 
 const useStyles = makeStyles(theme => ({
   root: {

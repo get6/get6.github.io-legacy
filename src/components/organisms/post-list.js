@@ -8,7 +8,7 @@ import {
   ListItemText,
   makeStyles,
 } from "@material-ui/core"
-import InheritLink from "./layouts/inherit-link"
+import InheritLink from "../atoms/inherit-link"
 
 const useStyles = makeStyles(theme => ({
   root: {

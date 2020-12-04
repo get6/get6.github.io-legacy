@@ -11,12 +11,12 @@ import {
 } from "@material-ui/core"
 import { ArrowBack, ArrowForward } from "@material-ui/icons"
 import Layout from "../components/layout"
-import SEO from "../components/seo"
-import Bio from "../components/bio"
-import Emoji from "../components/emoji"
-import PostList from "../components/post-list"
+import SEO from "../components/organisms/seo"
+import Bio from "../components/organisms/bio"
+import Emoji from "../components/atoms/emoji"
+import PostList from "../components/organisms/post-list"
 import { shuffle } from "../utils/common"
-import Utterances from "../components/utterances"
+import Utterances from "../components/molecules/utterances"
 
 const useStyles = makeStyles(theme => ({
   root: {

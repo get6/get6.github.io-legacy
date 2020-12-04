@@ -3,8 +3,8 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import { Toolbar, Typography, makeStyles } from "@material-ui/core"
 import { AboutDotMe } from "@icons-pack/react-simple-icons"
-import Switch from "./switch"
-import InheritLink from "./inherit-link"
+import Switch from "../atoms/switch"
+import InheritLink from "../atoms/inherit-link"
 import { connect } from "react-redux"
 
 const useStyles = makeStyles(theme => ({

@@ -3,13 +3,12 @@ import {
   Container,
   CssBaseline,
   createMuiTheme,
-  useMediaQuery,
   ThemeProvider,
   useMediaQuery,
 } from "@material-ui/core"
-import Header from "./layouts/header"
-import FAB from "./layouts/fab"
-import Footer from "./layouts/footer"
+import Header from "./organisms/header"
+import FAB from "./molecules/fab"
+import Footer from "./molecules/footer"
 import MaterialProvider, { dark, darkToggle } from "./material-provider"
 
 const Layout = ({ location, title, children }) => {

@@ -2,10 +2,10 @@ import React from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 import { Box, Paper } from "@material-ui/core"
-import SEO from "../components/seo"
+import SEO from "../components/organisms/seo"
 import Layout from "../components/layout"
-import Emoji from "../components/emoji"
-import PostList from "../components/post-list"
+import Emoji from "../components/atoms/emoji"
+import PostList from "../components/organisms/post-list"
 
 const Tags = ({ pageContext, data, location }) => {
   const { tag } = pageContext

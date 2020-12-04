@@ -10,7 +10,7 @@ import {
   Grid,
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import Post from "../home/post"
+import Post from "./post"
 
 const useStyles = makeStyles(theme => ({
   heading: {

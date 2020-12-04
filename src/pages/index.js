@@ -1,12 +1,12 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { Box, Grid, makeStyles, Paper } from "@material-ui/core"
-import SEO from "../components/seo"
+import SEO from "../components/organisms/seo"
 import Layout from "../components/layout"
-import NewPost from "../components/home/new-post"
-import PostsPerCategory from "../components/home/posts-per-category"
-import ProTip from "../components/pro-tip"
-import Emoji from "../components/emoji"
+import NewPost from "../components/organisms/new-post"
+import PostsPerCategory from "../components/organisms/posts-per-category"
+import ProTip from "../components/molecules/pro-tip"
+import Emoji from "../components/atoms/emoji"
 import { isNewPost } from "../utils/common"
 
 const useStyles = makeStyles(theme => ({

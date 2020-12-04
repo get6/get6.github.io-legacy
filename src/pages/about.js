@@ -15,9 +15,9 @@ import FacebookIcon from "@material-ui/icons/Facebook"
 import MailOutlineIcon from "@material-ui/icons/MailOutline"
 import TwitterIcon from "@material-ui/icons/Twitter"
 
-import SEO from "../components/seo"
+import SEO from "../components/organisms/seo"
 import Layout from "../components/layout"
-import Emoji from "../components/emoji"
+import Emoji from "../components/atoms/emoji"
 
 /**
  * 나의 대한 이력

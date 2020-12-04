@@ -1,6 +1,6 @@
 import React from "react"
 import { Provider } from "react-redux"
-import createStore from "./state/create-store"
+import createStore from "../state/create-store"
 
 const WrapWithProvider = ({ element }) => {
   const store = createStore()
