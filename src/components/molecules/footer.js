@@ -2,7 +2,7 @@ import React from "react"
 import { Box, makeStyles } from "@material-ui/core"
 import FooterBackground from "../../../content/assets/footer-background.png"
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(_ => ({
   root: {
     left: 0,
     bottom: 0,
@@ -18,7 +18,6 @@ const Footer = () => {
     <footer>
       <Box
         width={1}
-        // height="100vh"
         component="img"
         className={classes.root}
         src={FooterBackground}

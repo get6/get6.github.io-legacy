@@ -4,6 +4,8 @@ const Utterances = () => {
   const src = "https://utteranc.es/client.js"
   const repo = "get6/get6.github.io"
   const commentBox = useRef(null)
+
+  // after rendering component
   useLayoutEffect(() => {
     const utterances = document.createElement("script")
     const attributes = {
