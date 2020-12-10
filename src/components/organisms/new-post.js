@@ -8,6 +8,7 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core"
+import InheritLink from "../atoms/inherit-link"
 
 const useStyles = makeStyles(_ => ({
   card: {
@@ -34,13 +35,9 @@ const NewPost = post => {
             <Typography variant="body1" paragraph>
               {post.node.frontmatter.description || post.node.excerpt}
             </Typography>
-            <Typography
-              variant="caption"
-              component="a"
-              href={post.node.fields.slug}
-            >
+            <InheritLink to={post.node.fields.slug}>
               Continue reading...
-            </Typography>
+            </InheritLink>
           </CardContent>
         </Box>
       </Card>
