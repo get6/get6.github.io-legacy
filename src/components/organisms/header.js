@@ -5,7 +5,6 @@ import { Toolbar, Typography, makeStyles } from "@material-ui/core"
 import { AboutDotMe } from "@icons-pack/react-simple-icons"
 import Switch from "../atoms/switch"
 import InheritLink from "../atoms/inherit-link"
-import { connect } from "react-redux"
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -24,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const Header = ({ title, dark, darkToggle }) => {
+const Header = ({ title }) => {
   const classes = useStyles()
   const data = useStaticQuery(graphql`
     query {
@@ -76,20 +75,6 @@ const Header = ({ title, dark, darkToggle }) => {
     return tag ? 0 < tag.totalCount : false
   })
 
-  const Dark = ({ dark, change }) => (
-    <Switch isOn={dark} handleToggle={change} />
-  )
-
-  const mapStateToProps = ({ dark }) => {
-    return dark
-  }
-
-  const mapDispatchToProps = dispatch => {
-    return { change: () => dispatch({ type: `CHANGE` }) }
-  }
-
-  const ConnectedDark = connect(mapStateToProps, mapDispatchToProps)(Dark)
-
   return (
     <header>
       <Toolbar className={classes.toolbar}>
@@ -106,7 +91,7 @@ const Header = ({ title, dark, darkToggle }) => {
             {section.icon}
           </InheritLink>
         ))}
-        <ConnectedDark />
+        <Switch />
       </Toolbar>
       <Toolbar
         component="nav"

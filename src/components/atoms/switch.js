@@ -1,5 +1,6 @@
 import React from "react"
 import { makeStyles } from "@material-ui/core"
+import ThemeContext from "../atoms/theme-context"
 
 const switchCSS = {
   toggleSize: "1rem",
@@ -57,22 +58,26 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-const Switch = ({ isOn, handleToggle }) => {
+const Switch = () => {
   const classes = useStyles()
 
   return (
-    <>
-      <input
-        onChange={handleToggle}
-        checked={isOn}
-        id="theme-toggle"
-        type="checkbox"
-        className={classes.input}
-      />
-      <label htmlFor="theme-toggle">
-        <span></span>
-      </label>
-    </>
+    <ThemeContext.Consumer>
+      {theme => (
+        <>
+          <input
+            onChange={theme.toggleDark}
+            checked={theme.dark}
+            id="theme-toggle"
+            type="checkbox"
+            className={classes.input}
+          />
+          <label htmlFor="theme-toggle">
+            <span></span>
+          </label>
+        </>
+      )}
+    </ThemeContext.Consumer>
   )
 }
 

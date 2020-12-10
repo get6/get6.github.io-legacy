@@ -1,15 +1,9 @@
-import React, { useEffect, useState, useMemo } from "react"
-import {
-  Container,
-  CssBaseline,
-  createMuiTheme,
-  ThemeProvider,
-  useMediaQuery,
-} from "@material-ui/core"
+import React from "react"
+import { Container } from "@material-ui/core"
 import Header from "./organisms/header"
 import FAB from "./molecules/fab"
 import Footer from "./molecules/footer"
-import MaterialProvider, { dark, darkToggle } from "./material-provider"
+import MaterialProvider from "./material-provider"
 
 const Layout = ({ location, title, children }) => {
   // 다크모드 기본은 밝은화면
@@ -74,12 +68,7 @@ const Layout = ({ location, title, children }) => {
   return (
     <MaterialProvider>
       <Container maxWidth="lg">
-        <Header
-          location={location}
-          title={title}
-          dark={dark}
-          darkToggle={darkToggle}
-        />
+        <Header location={location} title={title} />
         <main>{children}</main>
       </Container>
       <FAB />

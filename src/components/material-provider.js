@@ -1,34 +1,12 @@
-import React, { useEffect, useState, useMemo } from "react"
-import {
-  CssBaseline,
-  createMuiTheme,
-  useMediaQuery,
-  ThemeProvider,
-} from "@material-ui/core"
-import { useSelector } from "react-redux"
+import React, { useContext, useMemo } from "react"
+import PropTypes from "prop-types"
+import { CssBaseline, createMuiTheme, ThemeProvider } from "@material-ui/core"
+import ThemeContext from "../components/atoms/theme-context"
 
 const MaterialProvider = ({ children }) => {
-  // 다크모드 기본은 밝은화면
-  const dark = useSelector(state => state.value)
-  // 기본 다크모드 설정값
-  const mql = useMediaQuery("(prefers-color-scheme: dark)")
-  const getDarkMode = () => {
-    // 저장된 스위치 값
-    const storageDarkMode = localStorage.getItem("dark")
-    const hasPersistedPreference = typeof storageDarkMode === "string"
-    // 다크모드값
-    if (hasPersistedPreference) return storageDarkMode === "true"
+  const { dark } = useContext(ThemeContext)
 
-    const hasMediaQueryPreference = typeof prefersDarkMode === "boolean"
-    // 기본 다크모드값
-    if (hasMediaQueryPreference) {
-      return mql.matches ? true : false
-    }
-    // 밝은화면
-    return false
-  }
-
-  const theme = useMemo(
+  const materialTheme = useMemo(
     () =>
       createMuiTheme({
         palette: {
@@ -37,13 +15,17 @@ const MaterialProvider = ({ children }) => {
       }),
     [dark]
   )
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={materialTheme}>
       <CssBaseline />
       {children}
     </ThemeProvider>
   )
 }
 
-export const { dark, darkToggle } = MaterialProvider
+MaterialProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+}
+
 export default MaterialProvider

@@ -236,5 +236,7 @@ module.exports = {
         pathToConfigModule: `src/utils/typography`,
       },
     },
+    `gatsby-plugin-robots-txt`,
+    `gatsby-plugin-sitemap`,
   ],
 }

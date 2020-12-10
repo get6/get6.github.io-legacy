@@ -5,7 +5,11 @@ import "typeface-merriweather"
 import "./src/styles/global.css"
 // Highlighting for code blocks
 import "prismjs/themes/prism-coy.css"
-import wrapWithProvider from "./src/components/atoms/wrap-with-provider"
 
-// export const { dark, darkToggle } = wrapRootElement
-export const wrapRootElement = wrapWithProvider
+import React from "react"
+
+import { ThemeProvider } from "./src/components/atoms/theme-context"
+
+export const wrapRootElement = ({ element }) => (
+  <ThemeProvider>{element}</ThemeProvider>
+)

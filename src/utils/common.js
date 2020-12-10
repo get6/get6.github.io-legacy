@@ -23,3 +23,23 @@ export const shuffle = array => {
     .sort((a, b) => a[0] - b[0])
     .map(a => a[1])
 }
+
+// Key로 LocalStorage에서 찾기
+export const getInLocal = key => {
+  try {
+    const data = localStorage.getItem(key)
+    return JSON.parse(data || {})
+  } catch (error) {
+    return {}
+  }
+}
+
+// Key로 LocalStorage에 데이터 저장
+export const setInLocal = (key, data) => {
+  try {
+    localStorage.setItem(key, JSON.stringify(data))
+    return true
+  } catch (error) {
+    return false
+  }
+}
