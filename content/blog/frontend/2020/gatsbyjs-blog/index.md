@@ -21,9 +21,9 @@ Junboton border를 랜덤함수로 게시글 마다 색깔을 다양하게 적�
 
 Material은 Flutter를 만지면서 Google의 디자인 철학으로 여러 언어에서 지원해줬기 때문에 이번에 알아두면 두고두고 써먹을 것 같아서 좋을 것 같았다.
 
-Material-UI로 바꾸면서 나타났던 문제점은 gatsby-plugin-typography를 사용하니 background-image가 margin이 적용되는 것이었다.
+Material-UI로 바꾸면서 Card의 사요이 생각보다 많고 Typography도 자주 사용하게 되는 걸 알게되었다.
 
-그래서 나는 background-image css에 아래처럼 지정해서 해결했다.
+또 gatsby-plugin-typography를 사용하니 background-image가 margin이 적용되어 하단에 붙질 않아 background-image css에 아래처럼 지정해서 해결했다.
 
 ```react
 marginBottom: 0,
