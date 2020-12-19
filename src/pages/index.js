@@ -96,10 +96,11 @@ const BlogIndex = ({ data, location }) => {
         )}
         <Grid container>
           <ProTip>Click the below one of buttons to open.</ProTip>
-        </Grid>
+        
         {postsPerCategories.map(postsPerCategory => {
           return postsPerCategory
         })}
+        </Grid>
       </Paper>
     </Layout>
   )
