@@ -2,7 +2,7 @@
 title: React Native 설치하기
 date: "2020-12-19"
 description: "2016년 출판된 React Native 책을 보며 진행하다가 내용과 달라 설치가 안되는 부분을 적어본다."
-tags: ["frontend, "react-native"]
+tags: ["frontend", "react-native"]
 ---
 
 나는 React Native보다 Flutter를 더 좋아한다.
