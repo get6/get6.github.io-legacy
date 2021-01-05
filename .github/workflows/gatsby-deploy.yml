@@ -1,0 +1,25 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: GatsbyJS Deploy
+
+on:
+  push:
+    branches: [ source ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Gatsby Publish
+
+      uses: enriikke/gatsby-gh-pages-action@v2.1.1
+      with:
+        # A personal access token needed to push your site after it has been built.
+        access-token: ${{ secrets.ACCESS_TOKEN }}
+        # The branch expected by GitHub to have the static files needed for your site.
+        deploy-branch: master # optional, default is master
+        # Additional arguments that get passed to `gatsby build`.
+        gatsby-args: gh-pages -d public # optional, default i
