@@ -116,8 +116,7 @@ const About = ({ data, location }) => {
               <Grid
                 item
                 container
-                xs={6}
-                sm
+                xs={7}
                 direction="row"
                 className={classes.sns}
               >
