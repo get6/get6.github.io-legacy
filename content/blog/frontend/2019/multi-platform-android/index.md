@@ -10,7 +10,7 @@ tags: ["frontend", "kotlin", "andorid", "ios"]
 나는 이 글을 보고 따라하는데 최신 버전과
 [이 예제](<[https://link](https://medium.com/@cafonsomota/set-up-your-first-kotlin-multiplatform-project-for-android-and-ios-e54c2b6574e7)>)와 조금 다른게 있어서 헷갈렸다.
 
-```gradle
+```grooby
 1. Select “Use auto-import”은 꼭 해줘야 나처럼 고생은 안할것같다.
 현재 Automatically import this project on changes in build script files와 같아보인다.
 ```
@@ -24,12 +24,12 @@ sdk는 intelliJ에서도 다운로드 할 수 있는것 같았는데 구글링�
 기존에 익숙했던 **java + maven + eclipse**가 아닌 **intelliJ + kotlin + gradle**이여서 당황했었다.  
 새벽 한 시가 넘어가서 생성만 해놓고 찝찝한 마음으로 지내다 이틀 뒤인 오늘 다시 한번 도전했다.
 
-```gradle
+```grooby
 intelliJ는 역시 짱이었다.
 오른쪽 하단에 뜨던 알람 중에 gradle enable auto import를 승락하니 에러가 사라졌다.
 ```
 
-```gradle
+```grooby
 차근차근 진행하는 와중에 Compile target: android 라는 단계를 하고있었는데
 Going to "Add Configuration..." 이라는 곳은 현재 버전엔 없었다.
 ```

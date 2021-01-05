@@ -94,12 +94,13 @@ const BlogIndex = ({ data, location }) => {
             </Grid>
           </Grid>
         )}
-        <Grid container>
+        <Grid item container>
           <ProTip>Click the below one of buttons to open.</ProTip>
-        
-        {postsPerCategories.map(postsPerCategory => {
-          return postsPerCategory
-        })}
+        </Grid>
+        <Grid item>
+          {postsPerCategories.map(postsPerCategory => {
+            return postsPerCategory
+          })}
         </Grid>
       </Paper>
     </Layout>

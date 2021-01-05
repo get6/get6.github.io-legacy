@@ -71,70 +71,57 @@ const TagsPage = ({
         className={classes.root}
         justify="center"
         alignItems="center"
-        spacing={4}
       >
-        <Grid item xs={12}>
-          <Grid container spacing={4}>
-            <Grid item>
-              {alphabet.map((tag, i) => (
-                <Button
-                  {...(tag === selectedButton
-                    ? { variant: "outlined", color: "primary" }
-                    : {})}
-                  key={i}
-                  onClick={e => clickTagButton(e)}
-                >
-                  {tag}
-                </Button>
-              ))}
+        <Grid item container style={{ margin: "auto" }}>
+          {alphabet.map((tag, i) => (
+            <Button
+              {...(tag === selectedButton
+                ? { variant: "outlined", color: "primary" }
+                : {})}
+              key={i}
+              onClick={e => clickTagButton(e)}
+            >
+              {tag}
+            </Button>
+          ))}
+        </Grid>
+        <Divider />
+
+        <Grid item container justify="center" spacing={1}>
+          {selectedTags.map((tag, i) => (
+            <Grid item key={i}>
+              <Link
+                to={"/tags/" + _.kebabCase(tag.fieldValue)}
+                style={{ textDecoration: "none" }}
+              >
+                <Chip
+                  size="small"
+                  clickable
+                  label={tag.fieldValue + " " + tag.totalCount}
+                />
+              </Link>
             </Grid>
-          </Grid>
+          ))}
         </Grid>
+
         <Divider />
-        <Grid item xs={12}>
-          <Grid container justify="center" spacing={1}>
-            {selectedTags.map((tag, i) => (
-              <Grid item key={i}>
-                <Link
-                  to={"/tags/" + _.kebabCase(tag.fieldValue)}
-                  style={{ textDecoration: "none" }}
-                >
-                  <Chip
-                    size="small"
-                    clickable
-                    label={tag.fieldValue + " " + tag.totalCount}
-                  />
-                </Link>
-              </Grid>
-            ))}
-          </Grid>
-        </Grid>
-        <Divider />
-        <Box component="h1" mb={0}>
-          All Tags
-        </Box>
-        <Grid item xs={12}>
-          <Grid container spacing={1}>
-            {tags.map((tag, i) => (
-              // <ListGroupItem
-              //   key={tag.fieldValue}
-              //   tag="a"
-              //   href={"/tags/" + kebabCase(tag.fieldValue)}
-              // >
-              <Grid item key={i}>
-                <Link
-                  to={"/tags/" + _.kebabCase(tag.fieldValue)}
-                  style={{ textDecoration: "none" }}
-                >
-                  <Chip
-                    size="small"
-                    clickable
-                    label={tag.fieldValue + " " + tag.totalCount}
-                  />
-                </Link>
-              </Grid>
-            ))}
-          </Grid>
+        <Box component="h1">All Tags</Box>
+
+        <Grid item container spacing={1}>
+          {tags.map((tag, i) => (
+            <Grid item key={i}>
+              <Link
+                to={"/tags/" + _.kebabCase(tag.fieldValue)}
+                style={{ textDecoration: "none" }}
+              >
+                <Chip
+                  size="small"
+                  clickable
+                  label={tag.fieldValue + " " + tag.totalCount}
+                />
+              </Link>
+            </Grid>
+          ))}
         </Grid>
       </Grid>
     </Layout>
