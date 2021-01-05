@@ -65,8 +65,8 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
     ? post.frontmatter.image.childImageSharp.resize
     : null
   const { previous, next } = pageContext
+  // TODO: TOC 만들기
   const tableOfContents = post.tableOfContents
-  console.log(tableOfContents)
 
   const relativePosts = shuffle(data.allMarkdownRemark.edges).slice(0, 4)
   return (
