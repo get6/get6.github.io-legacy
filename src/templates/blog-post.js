@@ -65,6 +65,8 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
     ? post.frontmatter.image.childImageSharp.resize
     : null
   const { previous, next } = pageContext
+  const tableOfContents = post.tableOfContents
+  console.log(tableOfContents)
 
   const relativePosts = shuffle(data.allMarkdownRemark.edges).slice(0, 4)
   return (
@@ -159,6 +161,7 @@ export const pageQuery = graphql`
       id
       excerpt(pruneLength: 160)
       html
+      tableOfContents
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
