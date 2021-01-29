@@ -10,10 +10,6 @@ const useStyles = makeStyles(_ => ({
     position: "absolute",
     zIndex: -1,
   },
-  post: {
-    background: `rgb(238,174,202)`,
-    background: `radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)`,
-  },
 }))
 
 const Footer = () => {

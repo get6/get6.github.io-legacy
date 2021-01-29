@@ -7,7 +7,7 @@ tags: ["frontend", "javascript", "vue"]
 
 아래와 같은 에러가 발생한다면
 
-```vue
+```javascript
 configuration.entry[2] should be a string. -> a non-empty string
 ```
 

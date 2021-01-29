@@ -15,7 +15,7 @@ serve 중에 에러가 나면 어디인지 알려주지 않을때도 있어서 �
 
 vscode로 spring boot + vue.js를 돌리고있는데 해당 에러는 html에 Formatting적용이 되어 저장할 때 형식이 적용되어
 
-```vue
+```javascript
 <%= '
 <input type="hidden" id="testNo" name="testNo" th:value="${testNo}" />
 ' %>
@@ -23,7 +23,7 @@ vscode로 spring boot + vue.js를 돌리고있는데 해당 에러는 html에 Fo
 
 이런 부분이 에러를 발생시켰다.
 
-```vue
+```javascript
 <body>
     <div id="app"></div>
     <%= '<input type="hidden" id="testNo" name="testNo" th:value="${testNo}" />' %>

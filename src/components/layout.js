@@ -17,7 +17,7 @@ const Layout = ({ location, title, children }) => {
       </MaterialProvider>
       <FAB />
       <Footer />
-      {[0, 1, 2, 11].indexOf(new Date().getMonth()) != -1 && <Snow />}
+      {[0, 1, 2, 11].indexOf(new Date().getMonth()) !== -1 && <Snow />}
     </>
   )
 }
