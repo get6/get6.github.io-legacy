@@ -25,7 +25,7 @@ Material-UI로 바꾸면서 Card의 사요이 생각보다 많고 Typography도 
 
 또 gatsby-plugin-typography를 사용하니 background-image가 margin이 적용되어 하단에 붙질 않아 background-image css에 아래처럼 지정해서 해결했다.
 
-```react
+```css
 marginBottom: 0,
 ```
 

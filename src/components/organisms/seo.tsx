@@ -6,21 +6,34 @@
  */
 
 import React from "react"
-import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-const SEO = ({
-  description,
-  lang,
-  meta,
-  image: metaImage,
+interface DataProps {
+  title: string
+  description?: string
+  lang?: string
+  meta?: []
+  image?: {
+    src: string
+    height: number
+    width: number
+  }
+  pathname?: string
+}
+
+type SEOPageProps = PageProps<SEOPageQuery>
+const SEO: React.FC<SEOPageProps> = ({
   title,
+  description = ``,
+  lang = "ko",
+  meta = [],
+  image: metaImage,
   pathname,
 }) => {
-  const { site } = useStaticQuery(
+  const { site } = useStaticQuery<SEOPageQuery>(
     graphql`
-      query {
+      query SEOPageQuery {
         site {
           siteMetadata {
             title
@@ -132,25 +145,6 @@ const SEO = ({
         .concat(meta)}
     />
   )
-}
-
-SEO.defaultProps = {
-  lang: `ko`,
-  meta: [],
-  description: ``,
-}
-
-SEO.propTypes = {
-  description: PropTypes.string,
-  lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
-  image: PropTypes.shape({
-    src: PropTypes.string.isRequired,
-    height: PropTypes.number.isRequired,
-    width: PropTypes.number.isRequired,
-  }),
-  pathname: PropTypes.string,
 }
 
 export default SEO

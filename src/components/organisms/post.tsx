@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core"
 import FiberNewIcon from "@material-ui/icons/FiberNew"
 import { isNewPost } from "../../utils/common"
+import { Link } from "gatsby"
 
 const useStyles = makeStyles(_ => ({
   card: {
@@ -18,9 +19,12 @@ const useStyles = makeStyles(_ => ({
   actions: {
     float: "right",
   },
+  link: {
+    color: "inherit",
+  },
 }))
 
-const Post = ({ node }) => {
+const Post: React.FC = ({ node }) => {
   const classes = useStyles()
   const title = node.frontmatter.title || node.fields.slug
   const date = node.frontmatter.date
@@ -69,7 +73,9 @@ const Post = ({ node }) => {
       <Card className={classes.card} style={style}>
         <CardContent>
           <Typography variant="h5" component="h2">
-            {title}
+            <Link to={href} className={classes.link}>
+              {title}
+            </Link>
           </Typography>
           <Typography color="textSecondary">{date}</Typography>
           <Typography
@@ -83,9 +89,6 @@ const Post = ({ node }) => {
         </CardContent>
         <CardActions className={classes.actions}>
           {isNewPost(date) && <FiberNewIcon />}
-          <Button size="small" href={href}>
-            More
-          </Button>
         </CardActions>
       </Card>
     </Grid>

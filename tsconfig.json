@@ -1,0 +1,23 @@
+{
+    "include": ["./src/**/*"],
+    "exclude": ["./content/**/*", "node_modeuls", "public", ".cache"],
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "ESNext",
+      "lib": ["dom"],
+      "jsx": "preserve",
+      "moduleResolution": "Node",
+      // "allowJs": true,
+      // "checkJs": true,
+      "strict": true,
+      "esModuleInterop": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "noEmit": true,
+      "skipLibCheck": true,
+      "noImplicitAny": true,
+      "noImplicitThis": true,
+      "strictNullChecks": true,
+      
+    }
+}

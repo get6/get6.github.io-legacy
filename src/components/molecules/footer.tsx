@@ -1,6 +1,5 @@
 import React from "react"
 import { Box, makeStyles } from "@material-ui/core"
-import FooterBackground from "../../../content/assets/footer-background.png"
 
 const useStyles = makeStyles(_ => ({
   root: {
@@ -9,20 +8,15 @@ const useStyles = makeStyles(_ => ({
     marginBottom: 0,
     position: "absolute",
     zIndex: -1,
+    backgroundImage: `url("../../../content/assets/footer-background.png")`,
   },
 }))
 
-const Footer = () => {
+const Footer: React.FC = () => {
   const classes = useStyles()
   return (
     <footer>
-      <Box
-        width={1}
-        component="img"
-        className={classes.root}
-        src={FooterBackground}
-        alt="footer-image"
-      />
+      <Box width={1} component="img" className={classes.root} />
     </footer>
   )
 }

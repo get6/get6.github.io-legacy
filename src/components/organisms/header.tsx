@@ -1,5 +1,4 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import { Toolbar, Typography, makeStyles } from "@material-ui/core"
 import { AboutDotMe } from "@icons-pack/react-simple-icons"
@@ -23,10 +22,10 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const Header = ({ title }) => {
+const Header: React.FC = ({ title }) => {
   const classes = useStyles()
-  const data = useStaticQuery(graphql`
-    query {
+  const data = useStaticQuery<HeaderQuery>(graphql`
+    query HeaderQuery {
       site {
         siteMetadata {
           title
@@ -49,8 +48,8 @@ const Header = ({ title }) => {
     }
   `)
 
-  const categories = data.site.siteMetadata.categories
-  const tags = data.allMarkdownRemark.group
+  const categories: Category[] = data.site.siteMetadata.categories
+  const tags: Tag[] = data.allMarkdownRemark.group
 
   const sections = [
     {
@@ -66,10 +65,10 @@ const Header = ({ title }) => {
   ]
 
   // Tag있는 게시글만 찾음
-  const filterdCategories = categories.filter(category => {
+  const filterdCategories = categories.filter((category: Category) => {
     // Find index in tags
     const i = tags.findIndex(
-      tag => tag.fieldValue.toLowerCase() === category.name.toLowerCase()
+      (tag: Tag) => tag.fieldValue.toLowerCase() === category.name.toLowerCase()
     )
     const tag = tags[i]
     return tag ? 0 < tag.totalCount : false
@@ -98,23 +97,19 @@ const Header = ({ title }) => {
         variant="dense"
         className={classes.toolbarSecondary}
       >
-        {filterdCategories.map((category, i) => (
+        {filterdCategories.map((category: Category, i: number) => (
           <InheritLink
             key={i}
             to={"/tags" + category.link}
             className={classes.toolbarLink}
           >
-            {category.icon}
+            {/* {category.icon} */}
             {category.name}
           </InheritLink>
         ))}
       </Toolbar>
     </header>
   )
-}
-
-Header.propTypes = {
-  title: PropTypes.string.isRequired,
 }
 
 export default Header

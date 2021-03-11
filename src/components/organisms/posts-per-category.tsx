@@ -11,6 +11,10 @@ import {
 } from "@material-ui/core"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import Post from "./post"
+import {
+  IndexPageQuery_allMarkdownRemark_edges,
+  IndexPageQuery_site_siteMetadata_categories,
+} from "../../pages/__generated__/IndexPageQuery"
 
 const useStyles = makeStyles(theme => ({
   heading: {
@@ -21,13 +25,18 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.secondary,
   },
 }))
-
+type DataProps = {
+  // 메뉴 카테고리
+  category: IndexPageQuery_site_siteMetadata_categories
+  // 게시글들
+  posts: IndexPageQuery_allMarkdownRemark_edges[]
+}
 // 카테고리 별 게시글 목록
-const PostsPerCategory = ({ category, posts }) => {
+const PostsPerCategory: React.FC<DataProps> = ({ category, posts }) => {
   const classes = useStyles()
 
   // Category명 구하기
-  const displayCategoryName = name => {
+  const displayCategoryName = (name: string) => {
     let displatName = name
     switch (name.toLowerCase()) {
       case "frontend":
@@ -62,7 +71,7 @@ const PostsPerCategory = ({ category, posts }) => {
       >
         <Box flexGrow={1}>
           <Typography className={classes.heading}>
-            {displayCategoryName(category.name)}
+            {displayCategoryName(category.name!)}
           </Typography>
         </Box>
         {/* Category child가 많아지면 xsDown -> smDown으로 변경 */}

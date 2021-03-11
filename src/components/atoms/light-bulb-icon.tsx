@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function LightBulbIcon() {
+const LightBulbIcon: React.FC = () => {
   const classes = useStyles()
   return (
     <SvgIcon className={classes.root}>
@@ -16,3 +16,5 @@ export default function LightBulbIcon() {
     </SvgIcon>
   )
 }
+
+export default LightBulbIcon

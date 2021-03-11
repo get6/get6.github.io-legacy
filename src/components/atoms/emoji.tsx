@@ -1,6 +1,11 @@
 import React from "react"
 
-const Emoji = ({ label, emoji }) => {
+interface DataProps {
+  label: string
+  emoji: string
+}
+
+const Emoji: React.FC<DataProps> = ({ label, emoji }) => {
   return (
     <span role="img" aria-label={label}>
       {emoji}

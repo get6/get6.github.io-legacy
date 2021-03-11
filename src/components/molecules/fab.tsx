@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const FloatingActionButton = () => {
+const FloatingActionButton: React.FC = () => {
   const classes = useStyles()
 
   const trigger = useScrollTrigger({

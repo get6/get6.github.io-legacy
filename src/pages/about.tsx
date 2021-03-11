@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, PageProps } from "gatsby"
 import Image from "gatsby-image"
 import {
   Box,
@@ -18,6 +18,8 @@ import TwitterIcon from "@material-ui/icons/Twitter"
 import SEO from "../components/organisms/seo"
 import Layout from "../components/layout"
 import Emoji from "../components/atoms/emoji"
+import SNSIcon from "../components/atoms/sns-icon"
+import { AboutPageQuery } from "./__generated__/AboutPageQuery"
 
 /**
  * 나의 대한 이력
@@ -25,19 +27,6 @@ import Emoji from "../components/atoms/emoji"
  * 이메일
  *
  */
-
-// SNS url component
-const SNSIcon = ({ href, icon, iconName }) => {
-  return (
-    <Link href={href} target="_blank" color="inherit">
-      <Grid item container spacing={1} alignItems="center">
-        <Grid item>{icon}</Grid>
-        <Grid item>{iconName}</Grid>
-      </Grid>
-    </Link>
-  )
-}
-
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(2),
@@ -54,7 +43,8 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const About = ({ data, location }) => {
+type AboutPageProps = PageProps<AboutPageQuery>
+const About: React.FC<AboutPageProps> = ({ data, location }) => {
   const classes = useStyles()
   const { author } = data.site.siteMetadata
   const siteTitle = data.site.siteMetadata.title
@@ -179,7 +169,7 @@ const About = ({ data, location }) => {
 export default About
 
 export const pageQuery = graphql`
-  query {
+  query AboutPageQuery {
     avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
       childImageSharp {
         fixed(width: 250, height: 250) {

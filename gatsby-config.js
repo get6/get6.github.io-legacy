@@ -250,5 +250,17 @@ module.exports = {
     },
     `gatsby-plugin-robots-txt`,
     `gatsby-plugin-sitemap`,
+    {
+      resolve: `gatsby-plugin-typescript`,
+      options: {
+        isTSX: true,
+        jsxPragma: `jsx`,
+        allExtensions: true,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-codegen`,
+      options: {},
+    },
   ],
 }

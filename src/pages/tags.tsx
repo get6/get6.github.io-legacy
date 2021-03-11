@@ -1,12 +1,12 @@
 import React, { useState } from "react"
-import PropTypes from "prop-types"
-import { graphql, Link } from "gatsby"
+import { graphql, Link, PageProps } from "gatsby"
 import _ from "lodash"
 import { Box, Button, Chip, Divider, Grid, makeStyles } from "@material-ui/core"
 import Layout from "../components/layout"
 import ProTip from "../components/molecules/pro-tip"
 import Emoji from "../components/atoms/emoji"
 import SEO from "../components/organisms/seo"
+import { TagsPageQuery } from "./__generated__/TagsPageQuery"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,7 +20,8 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const TagsPage = ({
+type TagsPageProps = PageProps<TagsPageQuery>
+const TagsPage: React.FC<TagsPageProps> = ({
   data: {
     allMarkdownRemark: { group },
     site: {
@@ -37,11 +38,12 @@ const TagsPage = ({
   // 선택한 버튼 값
   const [selectedButton, setSelectedButton] = useState("")
   // 선택한 필터 목록
-  const [selectedTags, setSelectedTags] = useState([])
+  const [selectedTags, setSelectedTags] = useState<Tag[]>([])
   // 선택한 버튼 효과
-
+  // GIFTCARD2021
+  //https://www.amazon.com/gp/cobrandcard/marketing.html?pr=conplcc&inc=a7e7ebeb-a30a-4026-96ee-68792eef79d6&ts=edbo9fh2pahictb7j1x5ye2bhniqp93&dasin=B084TFH4BN&plattr=math&place=priceblock&imp=8aba762a-5e5d-4ca7-a625-b8202564838f
   // 버튼 클릭시 발생할 이벤트 (필터 목록 반환)
-  const clickTagButton = e => {
+  const clickTagButton = (e: any) => {
     const targetValue = e.target.textContent
     if (selectedButton === targetValue) {
       setSelectedTags([])
@@ -79,7 +81,9 @@ const TagsPage = ({
                 ? { variant: "outlined", color: "primary" }
                 : {})}
               key={i}
-              onClick={e => clickTagButton(e)}
+              onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+                clickTagButton(e)
+              }
             >
               {tag}
             </Button>
@@ -128,28 +132,10 @@ const TagsPage = ({
   )
 }
 
-TagsPage.propTypes = {
-  data: PropTypes.shape({
-    allMarkdownRemark: PropTypes.shape({
-      group: PropTypes.arrayOf(
-        PropTypes.shape({
-          fieldValue: PropTypes.string.isRequired,
-          totalCount: PropTypes.number.isRequired,
-        }).isRequired
-      ),
-    }),
-    site: PropTypes.shape({
-      siteMetadata: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-      }),
-    }),
-  }),
-}
-
 export default TagsPage
 
 export const pageQuery = graphql`
-  query {
+  query TagsPageQuery {
     site {
       siteMetadata {
         title

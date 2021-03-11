@@ -7,9 +7,10 @@ import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 import Image from "gatsby-image"
 import { Grid, Typography } from "@material-ui/core"
+import { BioQuery } from "./__generated__/BioQuery"
 
-const Bio = () => {
-  const data = useStaticQuery(graphql`
+const Bio: React.FC = () => {
+  const data = useStaticQuery<BioQuery>(graphql`
     query BioQuery {
       avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
         childImageSharp {

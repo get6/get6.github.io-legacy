@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, PageProps } from "gatsby"
 import { Box, Grid, makeStyles, Paper } from "@material-ui/core"
 import SEO from "../components/organisms/seo"
 import Layout from "../components/layout"
@@ -8,6 +8,7 @@ import PostsPerCategory from "../components/organisms/posts-per-category"
 import ProTip from "../components/molecules/pro-tip"
 import Emoji from "../components/atoms/emoji"
 import { isNewPost } from "../utils/common"
+import { IndexPageQuery } from "./__generated__/IndexPageQuery"
 
 const useStyles = makeStyles(theme => ({
   postList: {
@@ -15,7 +16,8 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const BlogIndex = ({ data, location }) => {
+type IndexPageProps = PageProps<IndexPageQuery>
+const BlogIndex: React.FC<IndexPageProps> = ({ data, location }) => {
   const classes = useStyles()
 
   // 페이지 제목
@@ -29,7 +31,7 @@ const BlogIndex = ({ data, location }) => {
 
   // Rendering Target List
   let postsPerCategories = []
-  let exceptList = []
+  let exceptList: Category[] = []
 
   for (let i = 0; i < categories.length; i++) {
     const category = categories[i]
@@ -79,7 +81,7 @@ const BlogIndex = ({ data, location }) => {
         <Emoji label="postit" emoji={"🗒"} /> Posts
       </Box>
       {/* <Category categories={categories} getAlertName={getAlertName} /> */}
-      <Paper elevation={20} className={classes.root}>
+      <Paper elevation={20}>
         {0 < newPosts.length && (
           <Grid container className={classes.postList}>
             <Grid item xs={12}>
@@ -110,7 +112,7 @@ const BlogIndex = ({ data, location }) => {
 export default BlogIndex
 
 export const pageQuery = graphql`
-  query {
+  query IndexPageQuery {
     site {
       siteMetadata {
         title

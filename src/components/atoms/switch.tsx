@@ -1,6 +1,6 @@
 import React from "react"
 import { makeStyles } from "@material-ui/core"
-import ThemeContext from "../atoms/theme-context"
+import ThemeContext from "./theme-context"
 
 const switchCSS = {
   toggleSize: "1rem",
@@ -58,7 +58,7 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-const Switch = () => {
+const Switch: React.FC = () => {
   const classes = useStyles()
 
   return (

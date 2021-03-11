@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function ProTip({ children }) {
+const ProTip: React.FC = ({ children }) => {
   const classes = useStyles()
   return (
     <Typography className={classes.root} color="textSecondary">
@@ -17,3 +17,5 @@ export default function ProTip({ children }) {
     </Typography>
   )
 }
+
+export default ProTip

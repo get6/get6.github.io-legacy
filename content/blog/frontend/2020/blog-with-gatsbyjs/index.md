@@ -23,7 +23,7 @@ gatsby-starter-blog가 Typography를 사용하고 있어서 Theme을 바꾸러 [
 
 gihub theme을 설치합니다.
 
-```node
+```shell
 npm install --save typography typography-theme-github
 ```
 

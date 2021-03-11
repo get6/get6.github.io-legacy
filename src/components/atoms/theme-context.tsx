@@ -11,7 +11,7 @@ const ThemeContext = createContext(defaultState)
 const supportsDarkMode = () =>
   window.matchMedia("(prefers-color-scheme: dark)").matches === true
 
-const ThemeProvider = ({ children }) => {
+const ThemeProvider: React.FC = ({ children }) => {
   const [dark, setDark] = useState(false)
   const storageKey = "dark"
 

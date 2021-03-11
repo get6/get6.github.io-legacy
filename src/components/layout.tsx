@@ -5,19 +5,25 @@ import FAB from "./molecules/fab"
 import Footer from "./molecules/footer"
 import MaterialProvider from "./material-provider"
 import Snow from "./atoms/snow"
+import { WindowLocation } from "@reach/router"
 
-const Layout = ({ location, title, children }) => {
+interface DataProps {
+  location: WindowLocation
+  title: string
+  children: React.ReactNode
+}
+
+const Layout = ({ location, title, children }: DataProps) => {
   return (
     <>
       <MaterialProvider>
         <Container maxWidth="lg">
-          <Header location={location} title={title} />
+          <Header title={title} />
           <main>{children}</main>
         </Container>
       </MaterialProvider>
       <FAB />
       <Footer />
-      {[0, 1, 2, 11].indexOf(new Date().getMonth()) !== -1 && <Snow />}
     </>
   )
 }

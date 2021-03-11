@@ -1,9 +1,9 @@
 import React, { useRef, useLayoutEffect } from "react"
 
-const Utterances = () => {
+const Utterances: React.FC = () => {
   const src = "https://utteranc.es/client.js"
   const repo = "get6/get6.github.io"
-  const commentBox = useRef(null)
+  const commentBox = useRef<HTMLDivElement>(null)
 
   // after rendering component
   useLayoutEffect(() => {
@@ -20,7 +20,9 @@ const Utterances = () => {
     Object.entries(attributes).forEach(([key, value]) => {
       utterances.setAttribute(key, value)
     })
-    commentBox.current.appendChild(utterances)
+    if (commentBox.current) {
+      commentBox.current.appendChild(utterances)
+    }
   }, [])
 
   return <div ref={commentBox} />

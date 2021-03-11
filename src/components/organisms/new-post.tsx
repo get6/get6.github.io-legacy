@@ -1,5 +1,4 @@
 import React from "react"
-import PropTypes from "prop-types"
 import {
   Box,
   Card,
@@ -19,7 +18,24 @@ const useStyles = makeStyles(_ => ({
   },
 }))
 
-const NewPost = post => {
+type DataProps = {
+  post: {
+    node: {
+      frontmatter: {
+        title: string
+        date: string
+        description: string
+      }
+      excerpt: string
+      fields: {
+        slug: string
+      }
+    }
+  }
+}
+
+const NewPost = (props: DataProps) => {
+  const { post } = props
   const classes = useStyles()
   return (
     <Grid item xs={12} sm={6}>
@@ -43,18 +59,6 @@ const NewPost = post => {
       </Card>
     </Grid>
   )
-}
-
-NewPost.propTypes = {
-  post: PropTypes.shape({
-    node: PropTypes.shape({
-      frontmatter: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-        description: PropTypes.string,
-      }),
-    }),
-  }),
 }
 
 export default NewPost
