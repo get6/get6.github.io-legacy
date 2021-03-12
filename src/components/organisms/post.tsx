@@ -1,6 +1,5 @@
 import React from "react"
 import {
-  Button,
   Card,
   CardActions,
   CardContent,
@@ -11,6 +10,7 @@ import {
 import FiberNewIcon from "@material-ui/icons/FiberNew"
 import { isNewPost } from "../../utils/common"
 import { Link } from "gatsby"
+import { IndexPageQuery_allMarkdownRemark_edges_node } from "../../pages/__generated__/IndexPageQuery"
 
 const useStyles = makeStyles(_ => ({
   card: {
@@ -24,15 +24,24 @@ const useStyles = makeStyles(_ => ({
   },
 }))
 
-const Post: React.FC = ({ node }) => {
+interface ChildProps {
+  node: IndexPageQuery_allMarkdownRemark_edges_node
+}
+
+const Post: React.FC<ChildProps> = ({ node }) => {
   const classes = useStyles()
-  const title = node.frontmatter.title || node.fields.slug
-  const date = node.frontmatter.date
-  const description = node.frontmatter.description || node.excerpt
-  const href = node.fields.slug
+  const { frontmatter, fields } = node
+  let { title, date, description } = frontmatter!
+  if (!title) {
+    title = fields!.slug
+  }
+  if (!description) {
+    description = node.excerpt!
+  }
+  const href = fields!.slug
   const random = Math.random()
   const isInverse = random <= 0.6
-  let style = {}
+  let style: React.CSSProperties = {}
   if (isInverse) {
     switch (Math.ceil(random * 10)) {
       case 1:
@@ -73,7 +82,7 @@ const Post: React.FC = ({ node }) => {
       <Card className={classes.card} style={style}>
         <CardContent>
           <Typography variant="h5" component="h2">
-            <Link to={href} className={classes.link}>
+            <Link to={href!} className={classes.link}>
               {title}
             </Link>
           </Typography>

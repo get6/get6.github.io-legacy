@@ -46,9 +46,11 @@ const useStyles = makeStyles(theme => ({
 type AboutPageProps = PageProps<AboutPageQuery>
 const About: React.FC<AboutPageProps> = ({ data, location }) => {
   const classes = useStyles()
-  const { author } = data.site.siteMetadata
-  const siteTitle = data.site.siteMetadata.title
-  const sns = data.site.siteMetadata.social
+  const { author } = data.site!.siteMetadata!
+  const siteTitle = data.site!.siteMetadata
+    ? data.site!.siteMetadata.title!
+    : "Home"
+  const sns = data.site!.siteMetadata!.social!
 
   const today = new Date()
   const birthDate = new Date("1993-06-22")
@@ -64,8 +66,8 @@ const About: React.FC<AboutPageProps> = ({ data, location }) => {
           <Grid item>
             {/* TODO SVG Hello World!가 이미지 위를 둥글게 감싸게 */}
             <Image
-              fixed={data.avatar.childImageSharp.fixed}
-              alt={author.name}
+              fixed={data.avatar!.childImageSharp!.fixed}
+              alt={author!.name}
               style={{
                 marginBottom: 0,
                 borderRadius: `100%`,

@@ -8,7 +8,10 @@ import PostsPerCategory from "../components/organisms/posts-per-category"
 import ProTip from "../components/molecules/pro-tip"
 import Emoji from "../components/atoms/emoji"
 import { isNewPost } from "../utils/common"
-import { IndexPageQuery } from "./__generated__/IndexPageQuery"
+import {
+  IndexPageQuery,
+  IndexPageQuery_site_siteMetadata_categories,
+} from "./__generated__/IndexPageQuery"
 
 const useStyles = makeStyles(theme => ({
   postList: {
@@ -20,26 +23,30 @@ type IndexPageProps = PageProps<IndexPageQuery>
 const BlogIndex: React.FC<IndexPageProps> = ({ data, location }) => {
   const classes = useStyles()
 
+  const siteMetadata = data.site!.siteMetadata!
   // 페이지 제목
-  const siteTitle = data.site.siteMetadata.title
+  const siteTitle = siteMetadata.title
   // 메뉴 카테고리
-  let categories = data.site.siteMetadata.categories
+  let categories = siteMetadata.categories!
   // 게시글들
   const posts = data.allMarkdownRemark.edges
   // 최신 게시글 목록
-  const newPosts = posts.filter(post => isNewPost(post.node.frontmatter.date))
+  const newPosts = posts.filter(post => isNewPost(post.node.frontmatter!.date))
 
   // Rendering Target List
   let postsPerCategories = []
-  let exceptList: Category[] = []
+  let exceptList: IndexPageQuery_site_siteMetadata_categories[] = []
 
   for (let i = 0; i < categories.length; i++) {
-    const category = categories[i]
-    const tagName = category.name.toLowerCase()
+    const category = categories[i]!
+    if (!category) {
+      continue
+    }
+    const tagName = category.name!.toLowerCase()
 
     let filteredIndex = []
     let filteredPosts = posts.filter((post, j) => {
-      const lowerTags = post.node.frontmatter.tags.map(v => v.toLowerCase())
+      const lowerTags = post.node.frontmatter!.tags!.map(v => v!.toLowerCase())
       if (-1 < lowerTags.indexOf(tagName)) {
         filteredIndex.push(j)
         return true
@@ -61,21 +68,23 @@ const BlogIndex: React.FC<IndexPageProps> = ({ data, location }) => {
   postsPerCategories.push(
     <PostsPerCategory
       key={categories.length}
-      category={{
-        link: "/all",
-        name: "All Posts",
-      }}
+      category={
+        {
+          link: "/all",
+          name: "All Posts",
+        } as IndexPageQuery_site_siteMetadata_categories
+      }
       posts={posts}
     />
   )
 
   // 게시글이 없는 메뉴를 제외한 목록 반환
   categories = categories.filter(category => {
-    return !(-1 < exceptList.indexOf(category))
+    return !(-1 < exceptList.indexOf(category!))
   })
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout location={location} title={siteTitle!}>
       <SEO title="All Posts" />
       <Box component="h1" mb={0}>
         <Emoji label="postit" emoji={"🗒"} /> Posts

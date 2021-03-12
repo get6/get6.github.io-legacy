@@ -5,9 +5,9 @@
  */
 import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
-import Image from "gatsby-image"
+import Image, { FixedObject } from "gatsby-image"
 import { Grid, Typography } from "@material-ui/core"
-import { BioQuery } from "./__generated__/BioQuery"
+import { BioQuery, BioQuery_site_siteMetadata } from "./__generated__/BioQuery"
 
 const Bio: React.FC = () => {
   const data = useStaticQuery<BioQuery>(graphql`
@@ -30,14 +30,16 @@ const Bio: React.FC = () => {
     }
   `)
 
-  const { author } = data.site.siteMetadata
+  const { author }: BioQuery_site_siteMetadata = data.site!.siteMetadata!
+  const { name, summary } = author!
+  const fixed = data.avatar!.childImageSharp!.fixed! as FixedObject
   return (
     <Grid container spacing={1} alignItems="center">
       <Grid item>
         <Link to={"/about"}>
           <Image
-            fixed={data.avatar.childImageSharp.fixed}
-            alt={author.name}
+            fixed={fixed}
+            alt={name!}
             style={{
               marginBottom: 0,
               minWidth: 50,
@@ -51,7 +53,7 @@ const Bio: React.FC = () => {
       </Grid>
       <Grid item>
         <Typography variant="subtitle2">
-          Written by <strong>{author.name}</strong>. {author.summary}
+          Written by <strong>{name}</strong>. {summary}
         </Typography>
       </Grid>
     </Grid>

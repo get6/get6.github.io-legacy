@@ -14,6 +14,7 @@ import Post from "./post"
 import {
   IndexPageQuery_allMarkdownRemark_edges,
   IndexPageQuery_site_siteMetadata_categories,
+  IndexPageQuery_site_siteMetadata_categories_children,
 } from "../../pages/__generated__/IndexPageQuery"
 
 const useStyles = makeStyles(theme => ({
@@ -25,14 +26,14 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.secondary,
   },
 }))
-type DataProps = {
+type ChildProps = {
   // 메뉴 카테고리
   category: IndexPageQuery_site_siteMetadata_categories
   // 게시글들
   posts: IndexPageQuery_allMarkdownRemark_edges[]
 }
 // 카테고리 별 게시글 목록
-const PostsPerCategory: React.FC<DataProps> = ({ category, posts }) => {
+const PostsPerCategory: React.FC<ChildProps> = ({ category, posts }) => {
   const classes = useStyles()
 
   // Category명 구하기
@@ -78,8 +79,9 @@ const PostsPerCategory: React.FC<DataProps> = ({ category, posts }) => {
         <Hidden xsDown>
           <Typography className={classes.secondaryHeading}>
             {category.children &&
-              category.children.map(({ name }) => {
-                const upperName = name.charAt(0).toUpperCase() + name.slice(1)
+              category.children.map(child => {
+                const { name } = child!
+                const upperName = name!.charAt(0).toUpperCase() + name!.slice(1)
                 return upperName + " / "
               })}
             {" " + posts.length} posts

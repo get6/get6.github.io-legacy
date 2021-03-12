@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@material-ui/core"
 import InheritLink from "../atoms/inherit-link"
+import { IndexPageQuery_allMarkdownRemark_edges } from "../../pages/__generated__/IndexPageQuery"
 
 const useStyles = makeStyles(_ => ({
   card: {
@@ -18,24 +19,14 @@ const useStyles = makeStyles(_ => ({
   },
 }))
 
-type DataProps = {
-  post: {
-    node: {
-      frontmatter: {
-        title: string
-        date: string
-        description: string
-      }
-      excerpt: string
-      fields: {
-        slug: string
-      }
-    }
-  }
+interface ChildProps {
+  post: IndexPageQuery_allMarkdownRemark_edges
 }
 
-const NewPost = (props: DataProps) => {
+const NewPost: React.FC<ChildProps> = props => {
   const { post } = props
+  const { frontmatter } = post.node
+  const { fields } = post.node
   const classes = useStyles()
   return (
     <Grid item xs={12} sm={6}>
@@ -43,17 +34,15 @@ const NewPost = (props: DataProps) => {
         <Box className={classes.cardDetails}>
           <CardContent>
             <Typography variant="h5" gutterBottom>
-              {post.node.frontmatter.title}
+              {frontmatter!.title}
             </Typography>
             <Typography variant="subtitle2" color="textSecondary" gutterBottom>
-              {post.node.frontmatter.date}
+              {frontmatter!.date}
             </Typography>
             <Typography variant="body1" paragraph>
-              {post.node.frontmatter.description || post.node.excerpt}
+              {frontmatter?.description || post.node.excerpt}
             </Typography>
-            <InheritLink to={post.node.fields.slug}>
-              Continue reading...
-            </InheritLink>
+            <InheritLink to={fields!.slug!}>Continue reading...</InheritLink>
           </CardContent>
         </Box>
       </Card>

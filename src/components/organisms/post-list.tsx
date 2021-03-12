@@ -3,12 +3,11 @@ import {
   Box,
   Hidden,
   List,
-  ListItem,
   ListItemSecondaryAction,
   ListItemText,
   makeStyles,
 } from "@material-ui/core"
-import InheritLink from "../atoms/inherit-link"
+import ListItemLink from "../molecules/list-item-link"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,19 +20,16 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const ListItemLink = props => {
-  return (
-    <InheritLink to={props.href}>
-      <ListItem button {...props}></ListItem>
-    </InheritLink>
-  )
+interface ChildProps {
+  items: any
+  border: string
 }
 
-const PostList = ({ items, border }) => {
+const PostList: React.FC<ChildProps> = ({ items, border }) => {
   const classes = useStyles()
   return (
     <List component="nav" aria-label="tag list">
-      {items.map(({ node }, i) => {
+      {items.map(({ node }, i: number) => {
         const { slug } = node.fields
         const { title, date } = node.frontmatter
         return (

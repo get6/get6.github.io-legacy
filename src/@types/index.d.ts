@@ -1,17 +1,3 @@
-type Category = {
-  name: string
-  link: string
-  children: {
-    name: string
-    link: string
-  }
-}
-
-type Tag = {
-  fieldValue: string
-  totalCount: number
-}
-
 type Post = {
   node: {
     fields: {

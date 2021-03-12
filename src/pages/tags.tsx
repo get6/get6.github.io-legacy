@@ -6,7 +6,10 @@ import Layout from "../components/layout"
 import ProTip from "../components/molecules/pro-tip"
 import Emoji from "../components/atoms/emoji"
 import SEO from "../components/organisms/seo"
-import { TagsPageQuery } from "./__generated__/TagsPageQuery"
+import {
+  TagsPageQuery,
+  TagsPageQuery_allMarkdownRemark_group,
+} from "./__generated__/TagsPageQuery"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,15 +24,11 @@ const useStyles = makeStyles(theme => ({
 }))
 
 type TagsPageProps = PageProps<TagsPageQuery>
-const TagsPage: React.FC<TagsPageProps> = ({
-  data: {
-    allMarkdownRemark: { group },
-    site: {
-      siteMetadata: { title },
-    },
-  },
-  location,
-}) => {
+const TagsPage: React.FC<TagsPageProps> = ({ data, location }) => {
+  const { siteMetadata } = data.site!
+  const title = siteMetadata!.title!
+  const { group } = data.allMarkdownRemark!
+
   const classes = useStyles()
   // 알파벳 버튼 목록
   const alphabet = [..."abcdefghijklmnopqrstuvwxyz"]
@@ -38,7 +37,9 @@ const TagsPage: React.FC<TagsPageProps> = ({
   // 선택한 버튼 값
   const [selectedButton, setSelectedButton] = useState("")
   // 선택한 필터 목록
-  const [selectedTags, setSelectedTags] = useState<Tag[]>([])
+  const [selectedTags, setSelectedTags] = useState<
+    TagsPageQuery_allMarkdownRemark_group[]
+  >([])
   // 선택한 버튼 효과
   // GIFTCARD2021
   //https://www.amazon.com/gp/cobrandcard/marketing.html?pr=conplcc&inc=a7e7ebeb-a30a-4026-96ee-68792eef79d6&ts=edbo9fh2pahictb7j1x5ye2bhniqp93&dasin=B084TFH4BN&plattr=math&place=priceblock&imp=8aba762a-5e5d-4ca7-a625-b8202564838f
@@ -53,7 +54,7 @@ const TagsPage: React.FC<TagsPageProps> = ({
     const filterdTags = tags.filter(tag => {
       return (
         targetValue.toLocaleLowerCase() ===
-        tag.fieldValue.charAt(0).toLocaleLowerCase()
+        tag.fieldValue!.charAt(0).toLocaleLowerCase()
       )
     })
     setSelectedTags(filterdTags)
@@ -95,7 +96,7 @@ const TagsPage: React.FC<TagsPageProps> = ({
           {selectedTags.map((tag, i) => (
             <Grid item key={i}>
               <Link
-                to={"/tags/" + _.kebabCase(tag.fieldValue)}
+                to={"/tags/" + _.kebabCase(tag.fieldValue!)}
                 style={{ textDecoration: "none" }}
               >
                 <Chip
@@ -115,7 +116,7 @@ const TagsPage: React.FC<TagsPageProps> = ({
           {tags.map((tag, i) => (
             <Grid item key={i}>
               <Link
-                to={"/tags/" + _.kebabCase(tag.fieldValue)}
+                to={"/tags/" + _.kebabCase(tag.fieldValue!)}
                 style={{ textDecoration: "none" }}
               >
                 <Chip

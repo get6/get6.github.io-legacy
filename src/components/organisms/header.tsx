@@ -4,6 +4,11 @@ import { Toolbar, Typography, makeStyles } from "@material-ui/core"
 import { AboutDotMe } from "@icons-pack/react-simple-icons"
 import Switch from "../atoms/switch"
 import InheritLink from "../atoms/inherit-link"
+import { HeaderQuery } from "./__generated__/HeaderQuery"
+import {
+  HeaderPageQuery,
+  HeaderPageQuery_allMarkdownRemark_group,
+} from "./__generated__/HeaderPageQuery"
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -22,7 +27,8 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const Header: React.FC = ({ title }) => {
+type HeaderPageProps = PageProps<HeaderPageQuery>
+const Header: React.FC<HeaderPageProps> = ({ title }) => {
   const classes = useStyles()
   const data = useStaticQuery<HeaderQuery>(graphql`
     query HeaderQuery {
@@ -48,8 +54,11 @@ const Header: React.FC = ({ title }) => {
     }
   `)
 
-  const categories: Category[] = data.site.siteMetadata.categories
-  const tags: Tag[] = data.allMarkdownRemark.group
+  const siteMetadata = data.site!.siteMetadata!
+  const categories = siteMetadata.categories!
+
+  const tags: HeaderPageQuery_allMarkdownRemark_group[] =
+    data.allMarkdownRemark.group
 
   const sections = [
     {
@@ -65,10 +74,10 @@ const Header: React.FC = ({ title }) => {
   ]
 
   // Tag있는 게시글만 찾음
-  const filterdCategories = categories.filter((category: Category) => {
+  const filterdCategories = categories.filter(category => {
     // Find index in tags
     const i = tags.findIndex(
-      (tag: Tag) => tag.fieldValue.toLowerCase() === category.name.toLowerCase()
+      tag => tag.fieldValue!.toLowerCase() === category!.name!.toLowerCase()
     )
     const tag = tags[i]
     return tag ? 0 < tag.totalCount : false
@@ -97,14 +106,14 @@ const Header: React.FC = ({ title }) => {
         variant="dense"
         className={classes.toolbarSecondary}
       >
-        {filterdCategories.map((category: Category, i: number) => (
+        {filterdCategories.map((category, i: number) => (
           <InheritLink
             key={i}
-            to={"/tags" + category.link}
+            to={"/tags" + category!.link}
             className={classes.toolbarLink}
           >
             {/* {category.icon} */}
-            {category.name}
+            {category!.name}
           </InheritLink>
         ))}
       </Toolbar>

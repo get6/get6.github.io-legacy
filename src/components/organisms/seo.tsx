@@ -8,24 +8,10 @@
 import React from "react"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
-
-interface DataProps {
-  title: string
-  description?: string
-  lang?: string
-  meta?: []
-  image?: {
-    src: string
-    height: number
-    width: number
-  }
-  pathname?: string
-}
+import { SEOPageQuery } from "./__generated__/SEOPageQuery"
 
 type SEOPageProps = PageProps<SEOPageQuery>
 const SEO: React.FC<SEOPageProps> = ({
-  title,
-  description = ``,
   lang = "ko",
   meta = [],
   image: metaImage,
@@ -56,13 +42,12 @@ const SEO: React.FC<SEOPageProps> = ({
       }
     `
   )
-
-  const metaDescription = description || site.siteMetadata.description
-  const image =
-    metaImage && metaImage.src
-      ? `${site.siteMetadata.siteUrl}${metaImage.src}`
-      : null
-  const canonical = pathname ? `${site.siteMetadata.siteUrl}${pathname}` : null
+  const { siteMetadata } = site!
+  const { description, siteUrl, keywords, social } = siteMetadata!
+  const title = siteMetadata!.title!
+  const metaDescription = description || ""
+  const image = metaImage && metaImage.src ? `${siteUrl}${metaImage.src}` : null
+  const canonical = pathname ? `${siteUrl}${pathname}` : null
 
   return (
     <Helmet
@@ -70,7 +55,7 @@ const SEO: React.FC<SEOPageProps> = ({
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      titleTemplate={`%s | ${title}`}
       link={
         canonical
           ? [
@@ -88,7 +73,7 @@ const SEO: React.FC<SEOPageProps> = ({
         },
         {
           name: `keywords`,
-          content: site.siteMetadata.keywords.join(","),
+          content: keywords!.join(","),
         },
         {
           property: `og:title`,
@@ -104,7 +89,7 @@ const SEO: React.FC<SEOPageProps> = ({
         },
         {
           name: `twitter:creator`,
-          content: site.siteMetadata.social.twitter,
+          content: social!.twitter!,
         },
         {
           name: `twitter:title`,
