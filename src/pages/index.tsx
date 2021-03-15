@@ -31,7 +31,9 @@ const BlogIndex: React.FC<IndexPageProps> = ({ data, location }) => {
   // 게시글들
   const posts = data.allMarkdownRemark.edges
   // 최신 게시글 목록
-  const newPosts = posts.filter(post => isNewPost(post.node.frontmatter!.date))
+  // const newPosts = posts.filter(post => isNewPost(post.node.frontmatter!.date))
+  // 최신 글은 최근 4개꺼까지만
+  const newPosts = posts.slice(0, 4)
 
   // Rendering Target List
   let postsPerCategories = []
@@ -95,7 +97,7 @@ const BlogIndex: React.FC<IndexPageProps> = ({ data, location }) => {
           <Grid container className={classes.postList}>
             <Grid item xs={12}>
               <Box component="h2" mt={0}>
-                <Emoji label="shining" emoji={"✨"} /> New Post
+                <Emoji label="shining" emoji={"✨"} /> New Posts
               </Box>
             </Grid>
             <Grid item container spacing={2}>

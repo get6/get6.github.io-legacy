@@ -1,10 +1,8 @@
 import React from "react"
-import { Container } from "@material-ui/core"
+import { Container, makeStyles } from "@material-ui/core"
 import Header from "./organisms/header"
 import FAB from "./molecules/fab"
-import Footer from "./molecules/footer"
 import MaterialProvider from "./material-provider"
-import Snow from "./atoms/snow"
 import { WindowLocation } from "@reach/router"
 
 interface DataProps {
@@ -13,18 +11,22 @@ interface DataProps {
   children: React.ReactNode
 }
 
-const Layout = ({ location, title, children }: DataProps) => {
+const useStyles = makeStyles(theme => ({
+  root: {
+    marginBottom: theme.spacing(10),
+  },
+}))
+
+const Layout: React.FC<DataProps> = ({ location, title, children }) => {
+  const classes = useStyles()
   return (
-    <>
-      <MaterialProvider>
-        <Container maxWidth="lg">
-          <Header title={title} />
-          <main>{children}</main>
-        </Container>
-      </MaterialProvider>
+    <MaterialProvider>
+      <Container className={classes.root}>
+        <Header title={title} />
+        <main>{children}</main>
+      </Container>
       <FAB />
-      <Footer />
-    </>
+    </MaterialProvider>
   )
 }
 

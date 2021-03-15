@@ -23,10 +23,9 @@ const useStyles = makeStyles(theme => ({
 
 interface ChildProps {
   items: BlogPostTemplateQuery_allMarkdownRemark_edges[]
-  border?: boolean
 }
 
-const PostList: React.FC<ChildProps> = ({ items, border = false }) => {
+const PostList: React.FC<ChildProps> = ({ items }) => {
   const classes = useStyles()
   return (
     <List component="nav" aria-label="tag list">
@@ -35,7 +34,7 @@ const PostList: React.FC<ChildProps> = ({ items, border = false }) => {
         const { title, date } = node!.frontmatter!
         return (
           <React.Fragment key={i}>
-            <ListItemLink href={slug!} border={border}>
+            <ListItemLink href={slug!}>
               <ListItemText primary={title} className={classes.text} />
               <Hidden xsDown>
                 <ListItemSecondaryAction>

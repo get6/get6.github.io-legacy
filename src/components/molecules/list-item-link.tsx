@@ -4,7 +4,6 @@ import InheritLink from "../atoms/inherit-link"
 
 interface ChildProps {
   href: string
-  border: boolean
 }
 
 const useStyles = makeStyles(theme => ({

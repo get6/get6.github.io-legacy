@@ -4,7 +4,6 @@ import ThemeContext from "./atoms/theme-context"
 
 const MaterialProvider: React.FC = ({ children }) => {
   const { dark } = useContext(ThemeContext)
-
   const materialTheme = useMemo(
     () =>
       createMuiTheme({

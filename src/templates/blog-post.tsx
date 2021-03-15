@@ -109,7 +109,7 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
               <Emoji label="smile" emoji={"🖥"} /> 연관 글
             </Box>
             <Grid item>
-              <PostList items={relativePosts} border />
+              <PostList items={relativePosts} />
             </Grid>
           </Grid>
         )}

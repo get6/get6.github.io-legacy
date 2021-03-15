@@ -31,3 +31,5 @@ class SnowSpan extends HTMLSpanElement {
 }
 
 customElements.define("snow-span", SnowSpan, { extends: "span" })
+
+declare module "*.png"
