@@ -14,7 +14,6 @@ import Post from "./post"
 import {
   IndexPageQuery_allMarkdownRemark_edges,
   IndexPageQuery_site_siteMetadata_categories,
-  IndexPageQuery_site_siteMetadata_categories_children,
 } from "../../pages/__generated__/IndexPageQuery"
 
 const useStyles = makeStyles(theme => ({
@@ -26,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.secondary,
   },
 }))
-type ChildProps = {
+interface ChildProps {
   // 메뉴 카테고리
   category: IndexPageQuery_site_siteMetadata_categories
   // 게시글들

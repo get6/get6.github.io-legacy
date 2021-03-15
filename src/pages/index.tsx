@@ -100,7 +100,7 @@ const BlogIndex: React.FC<IndexPageProps> = ({ data, location }) => {
             </Grid>
             <Grid item container spacing={2}>
               {newPosts.map((post, i) => (
-                <NewPost key={i} {...post} />
+                <NewPost key={i} post={post} />
               ))}
             </Grid>
           </Grid>

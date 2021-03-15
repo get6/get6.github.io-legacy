@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql, PageProps } from "gatsby"
-import Image from "gatsby-image"
+import Image, { FixedObject } from "gatsby-image"
 import {
   Box,
   makeStyles,
@@ -54,7 +54,7 @@ const About: React.FC<AboutPageProps> = ({ data, location }) => {
 
   const today = new Date()
   const birthDate = new Date("1993-06-22")
-
+  const fixed = data.avatar!.childImageSharp!.fixed! as FixedObject
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="About me" />
@@ -66,8 +66,8 @@ const About: React.FC<AboutPageProps> = ({ data, location }) => {
           <Grid item>
             {/* TODO SVG Hello World!가 이미지 위를 둥글게 감싸게 */}
             <Image
-              fixed={data.avatar!.childImageSharp!.fixed}
-              alt={author!.name}
+              fixed={fixed}
+              alt={author!.name!}
               style={{
                 marginBottom: 0,
                 borderRadius: `100%`,

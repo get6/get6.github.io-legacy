@@ -17,6 +17,7 @@ import Emoji from "../components/atoms/emoji"
 import PostList from "../components/organisms/post-list"
 import { shuffle } from "../utils/common"
 import Utterances from "../components/molecules/utterances"
+import { BlogPostTemplateQuery } from "./__generated__/BlogPostTemplateQuery"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -50,6 +51,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
 }))
+
 /**
  * 들어가야 할 것
  * 목차 목록 (클릭 시 이동)
@@ -57,7 +59,12 @@ const useStyles = makeStyles(theme => ({
  * 댓글
  * 스타일잡기
  */
-const BlogPostTemplate = ({ data, pageContext, location }) => {
+type BlogPostTemplateProps = PageProps<BlogPostTemplateQuery>
+const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
+  data,
+  pageContext,
+  location,
+}) => {
   const classes = useStyles()
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata.title
@@ -148,7 +155,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
 export default BlogPostTemplate
 
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!, $tag: String!) {
+  query BlogPostTemplateQuery($slug: String!, $tag: String!) {
     site {
       siteMetadata {
         title

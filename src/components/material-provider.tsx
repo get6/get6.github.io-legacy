@@ -16,12 +16,10 @@ const MaterialProvider: React.FC = ({ children }) => {
   )
 
   return (
-    <>
-      <ThemeProvider theme={materialTheme}>
-        <CssBaseline />
-        {children}
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={materialTheme}>
+      <CssBaseline />
+      {children}
+    </ThemeProvider>
   )
 }
 

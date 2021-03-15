@@ -25,8 +25,7 @@ interface ChildProps {
 
 const NewPost: React.FC<ChildProps> = props => {
   const { post } = props
-  const { frontmatter } = post.node
-  const { fields } = post.node
+  const { frontmatter, fields } = post.node
   const classes = useStyles()
   return (
     <Grid item xs={12} sm={6}>

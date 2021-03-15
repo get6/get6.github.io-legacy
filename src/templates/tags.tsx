@@ -1,13 +1,18 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 import { Box, Paper } from "@material-ui/core"
 import SEO from "../components/organisms/seo"
 import Layout from "../components/layout"
 import Emoji from "../components/atoms/emoji"
 import PostList from "../components/organisms/post-list"
+import { TagsTemplateQuery } from "./__generated__/TagsTemplateQuery"
 
-const Tags = ({ pageContext, data, location }) => {
+type TagsTemplateProps = PageProps<TagsTemplateQuery>
+const TagsTemplate: React.FC<TagsTemplateProps> = ({
+  pageContext,
+  data,
+  location,
+}) => {
   const { tag } = pageContext
   const { edges, totalCount } = data.allMarkdownRemark
   const upperTag = tag.charAt(0).toUpperCase() + tag.slice(1)
@@ -29,30 +34,7 @@ const Tags = ({ pageContext, data, location }) => {
   )
 }
 
-Tags.protoTypes = {
-  pageContext: PropTypes.shape({
-    tag: PropTypes.string.isRequired,
-  }),
-  data: PropTypes.shape({
-    allMarkdownRemark: PropTypes.shape({
-      totalCount: PropTypes.number.isRequired,
-      edges: PropTypes.arrayOf(
-        PropTypes.shape({
-          node: PropTypes.shape({
-            frontmatter: PropTypes.shape({
-              title: PropTypes.string.isRequired,
-            }),
-            fields: PropTypes.shape({
-              slug: PropTypes.string.isRequired,
-            }),
-          }),
-        }).isRequired
-      ),
-    }),
-  }),
-}
-
-export default Tags
+export default TagsTemplate
 
 // TODO 전체 태그 목록 보여주는 방법 생각하기
 // const query =
@@ -112,7 +94,7 @@ export default Tags
 //       `
 
 export const pageQuery = graphql`
-  query($tag: String) {
+  query TagsTemplateQuery($tag: String) {
     allMarkdownRemark(
       limit: 2000
       sort: { fields: [frontmatter___date], order: DESC }
