@@ -5,21 +5,18 @@ name: GatsbyJS Deploy
 
 on:
   push:
-    branches: [ source ]
+    branches:
+      - source
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    
     steps:
-    - name: Gatsby Publish
-
-      uses: enriikke/gatsby-gh-pages-action@v2.1.1
-      with:
-        # A personal access token needed to push your site after it has been built.
-        access-token: 1a55b1248b662bcec07a0c26905f05734af2200a
-        # The branch expected by GitHub to have the static files needed for your site.
-        deploy-branch: master # optional, default is master
-        # Additional arguments that get passed to `gatsby build`.
-        gatsby-args: gh-pages -d public # optional, default i
+      - uses: actions/checkout@v2
+      - name: Gatsby Publish
+        uses: enriikke/gatsby-gh-pages-action@v2.1.1
+        with:
+          # A personal access token needed to push your site after it has been built.
+          access-token: ${{ secrets.GATSBY_PUBLISH_ACCESS_TOKEN }}
+          gatsby-args: --verbose
+          
