@@ -2721,16 +2721,6 @@
                 "ofType": null
               },
               "defaultValue": null
-            },
-            {
-              "name": "front_matter_title",
-              "description": "",
-              "type": {
-                "kind": "INPUT_OBJECT",
-                "name": "StringQueryOperatorInput",
-                "ofType": null
-              },
-              "defaultValue": null
             }
           ],
           "interfaces": null,
@@ -5998,18 +5988,6 @@
               "type": {
                 "kind": "OBJECT",
                 "name": "File",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "front_matter_title",
-              "description": null,
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -9533,12 +9511,6 @@
               "deprecationReason": null
             },
             {
-              "name": "childrenMarkdownRemark___frontmatter___front_matter_title",
-              "description": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "childrenMarkdownRemark___fields___slug",
               "description": null,
               "isDeprecated": false,
@@ -10110,12 +10082,6 @@
             },
             {
               "name": "childMarkdownRemark___frontmatter___featured___children",
-              "description": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "childMarkdownRemark___frontmatter___front_matter_title",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null
@@ -22449,12 +22415,6 @@
             },
             {
               "name": "frontmatter___featured___internal___type",
-              "description": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "frontmatter___front_matter_title",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null

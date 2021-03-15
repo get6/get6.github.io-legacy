@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
   const classes = useStyles()
   return (
     <footer>
-      <img src={FooterBackground} className={classes.root} />
+      {/* <img src={FooterBackground} className={classes.root} /> */}
     </footer>
   )
 }

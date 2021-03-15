@@ -87,7 +87,7 @@ const BlogIndex: React.FC<IndexPageProps> = ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle!}>
-      <SEO title="All Posts" />
+      <SEO title="Home" />
       <Box component="h1" mb={0}>
         <Emoji label="postit" emoji={"🗒"} /> Posts
       </Box>

@@ -12,6 +12,7 @@ import { SEOPageQuery } from "./__generated__/SEOPageQuery"
 
 type SEOPageProps = PageProps<SEOPageQuery>
 const SEO: React.FC<SEOPageProps> = ({
+  title,
   lang = "ko",
   meta = [],
   image: metaImage,
@@ -44,7 +45,6 @@ const SEO: React.FC<SEOPageProps> = ({
   )
   const { siteMetadata } = site!
   const { description, siteUrl, keywords, social } = siteMetadata!
-  const title = siteMetadata!.title!
   const metaDescription = description || ""
   const image = metaImage && metaImage.src ? `${siteUrl}${metaImage.src}` : null
   const canonical = pathname ? `${siteUrl}${pathname}` : null
@@ -55,7 +55,7 @@ const SEO: React.FC<SEOPageProps> = ({
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${title}`}
+      titleTemplate={`%s | ${siteMetadata!.title!}`}
       link={
         canonical
           ? [
