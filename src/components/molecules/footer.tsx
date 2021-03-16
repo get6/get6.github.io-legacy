@@ -9,6 +9,7 @@ const useStyles = makeStyles(_ => ({
     marginBottom: 0,
     position: "absolute",
     zIndex: -1,
+    width: "100%",
   },
 }))
 
@@ -16,7 +17,7 @@ const Footer: React.FC = () => {
   const classes = useStyles()
   return (
     <footer>
-      {/* <img src={FooterBackground} className={classes.root} /> */}
+      <img src={FooterBackground} className={classes.root} />
     </footer>
   )
 }

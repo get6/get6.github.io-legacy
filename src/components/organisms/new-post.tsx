@@ -33,7 +33,7 @@ const NewPost: React.FC<ChildProps> = props => {
         <Box className={classes.cardDetails}>
           <CardContent>
             <Typography variant="h5" gutterBottom>
-              {frontmatter!.title}
+              <InheritLink to={fields!.slug!}>{frontmatter!.title}</InheritLink>
             </Typography>
             <Typography variant="subtitle2" color="textSecondary" gutterBottom>
               {frontmatter!.date}
@@ -41,7 +41,6 @@ const NewPost: React.FC<ChildProps> = props => {
             <Typography variant="body1" paragraph>
               {frontmatter?.description || post.node.excerpt}
             </Typography>
-            <InheritLink to={fields!.slug!}>Continue reading...</InheritLink>
           </CardContent>
         </Box>
       </Card>
