@@ -418,7 +418,49 @@ void main() {
 
 ### Adapter
 
+- USB 장치, HDMI처럼 호환되지 않는 두 인터페이스를 이어주는 역할
+
+```dart
+const adapteeMessage = 'Adaptee#method was called';
+
+class Adaptee {
+  String method() {
+    print('Adaptee#method is being called');
+
+    return adapteeMessage;
+  }
+}
+
+// 추상 클래스
+abstract class Target {
+  String call();
+}
+
+class Adapter implements Target {
+  @override
+  String call() {
+    // Adapter 함수 안에서 Adaptee 클래스 인스턴스 생성
+    var adaptee = Adaptee();
+    print('Adapter#call is being called');
+    return adaptee.method();
+  }
+}
+
+void main(List<String> arguments) {
+  // Adapter 클래스 인스턴스 생성
+  var adapter = Adapter();
+  // call 함수 결과 반환
+  var result = adapter.call();
+  // 결과와 메세지가 같은지 비교
+  assert(result == adapteeMessage);
+}
+```
+
 ### Bridge
+
+- 두 개가 독립적으로 다를 수 있도록 구현에서 추상화를 분리하는 것.
+- 브릿지 패턴은 캡슐화, aggregation을 사용하고 책임을 다른 클래스로 구분하기 위해 상속을 사용할 수 있습니다.
+- 브릿지는 어댑터와 자주 혼동됩니다.
 
 ### Composite
 
