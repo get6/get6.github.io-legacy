@@ -648,13 +648,13 @@ cat calculator.py
 
 # 기본 계산기
 def add(a, b):
-	return a+b
+  return a+b
 
 def subtract(a, b):
-	return a-b
+  return a-b
 
 def multifply(a, b):
-	return a*b
+  return a*b
 ```
 
 STEP 2
@@ -685,3 +685,402 @@ def
 ```
 
 ---
+
+### 18화 같은 내용의 줄을 세어보고 싶어(sort와 uniq)
+
+> 페이지 순위를 만드는 방법
+
+- 적절하지 않은 줄은 제외하고 필요한 줄만 집계대상으로 삼음
+- 로그 각 줄에서 접속한 페이지 경로를 추출
+- 경로 등장 횟수를 카운트
+- 등장 횟수로 경로를 재정렬
+- 상위와 하위 항목을 추출
+
+`sort` - 입력된 내용을 알파벳 순서로 재정렬하는 명령어
+
+```bash
+# 알파벳순
+cat input.txt | sort
+```
+
+**sort 옵션**
+
+--reverse, -r : 내림차순 정렬 (sort는 기본 오름차순 정렬) 
+
+`uniq` - IT 용어에서는 '같은 것이 없음'이라는 의미 사용할 때가 많다.
+
+```bash
+# 같은 내용의 중복은 제거됨
+cat input.txt | uniq
+```
+
+**uniq 옵션**
+
+--count, -c : 각각 내용이 몇 번 등장했는가 출력
+
+**함께 사용한다면 이렇게 사용**
+
+```bash
+# 결과를 less에 넘겨서 간단히 확인 가능
+cat /var/log/apache2/access.log | grep -v "/live" | cut -d " " -f 7 | sort | uniq -c | less
+```
+
+```bash
+# 결과를 less에 넘겨서 간단히 확인 가능
+cat /var/log/apache2/access.log | grep -v "/live" | cut -d " " -f 7 | sort | uniq -c | less
+```
+
+> 요코의 정리
+
+```bash
+#!/bin/bash
+
+# 집계 대상 로그 위치를 변경하기 쉽도록 변수로 정의
+log=/var/log/apache2/access.log
+# 출력할 건수를 변경하기 쉽도록 변수로 정의
+count=10
+
+# 결과 이전에 echo로 설명 텍스트를 출력
+echo "접속수가 많은 ${count}개 페이지:"
+# 상위 10건 출력
+cat $log | grep -v "/live" | cut -d " " -f 7 | sort | uniq -c | sort -r | head -n $count
+
+echo "접속수가 적은 ${count}개 페이지:"
+# 상위 10건 출력
+cat $log | grep -v "/live" | cut -d " " -f 7 | sort | uniq -c | sort -r | tail -n $count
+
+# cut -d " " -f 7 | sort | uniq -c : 페이지별 접속수 집계
+# sort -r : 접속수가 많은 순서로 정렬
+```
+
+> 첫 N줄, 마지막 N줄을 제외하기
+
+```bash
+# 앞에서 5줄째
+head -n 5
+# 앞에서 5줄째
+head -n +5
+# 마지막 5줄을 제외한 나머지 모든 줄을 출력
+head -n -5
+
+# 뒤에서 5줄째
+tail -n 5
+# 앞에 5줄을 제외한 나머지 모든 줄을 출력
+tail -n +5
+# 뒤에서 5줄째
+tail -n -5
+```
+
+MacOS에서 `head -n -5`를 하면 `head: illegal line count -- -5` 에러가 뜸
+
+---
+
+### CSV 파일을 열의 내용에 따라 정렬하고 싶어(sort와 리다이렉트)
+
+> 작업 순서
+
+- 불필요한 열을 삭제하기
+- 줄을 재고수 크기로 재정렬
+- 결과를 파일로 출력하기
+
+```bash
+# 저는 liverpool.csv가 있습니다.
+cat liverpool.csv
+# 결과
+Name,Position,Born,Number,Nationality
+Roberto Firmino,FW,1991,no. 9,Brazil
+Sadio Mane,FW,1992,no. 10,Senegal
+Mohamed Salah,FW,1992,no. 11,Egypt
+Joe Gomez,DF,1997,no. 12,England
+Alisson Becker,GK,1992,no. 13,Brazil
+
+# cut을 써서 간단히 열 단위로 정보를 추출 (시작 번호 1)
+cat liverpool.csv | cut -d "," -f 3
+
+Born
+1991
+1992
+1992
+1997
+1992
+
+# 여러 숫자를 지정하거나 열 범위를 지정할 수 있다. (, 사이에 공백이 들어가면 cut: [-cf] list: values may not include zero 에러 발생)
+cat liverpool.csv | cut -d "," -f 1,3
+Name,Born
+Roberto Firmino,1991
+Sadio Mane,1992
+Mohamed Salah,1992
+Joe Gomez,1997
+Alisson Becker,1992
+```
+
+cut 명령어
+
+- 사용법 cut -d "," -f 1,3
+- -d는 --delimiter와 같다. (구분자를 지정하지 않으면 탭문자를 사용)
+- -f는 --fields와 같다.
+
+sort 명령어
+
+- 사용법 sort -t "," -k 2 -n -b
+- -t는 --field-separator와 같다.
+- -k는 --key와 같다.
+- 숫자 정렬을 위해 --number 또는 -n 옵션을 지정한다.
+- -b는 --ignore-leading-blanks로 오른쪽 줄맞춤을 위해서 넣은 스페이스를 무시하고 문자열을 정렬할 수 있게 해줌
+
+```bash
+cat liverpool.csv | cut -d "," -f 1,3 | sort -t "," -k 2 -n -b
+Name,Born
+Roberto Firmino,1991
+Alisson Becker,1992
+Mohamed Salah,1992
+Sadio Mane,1992
+Joe Gomez,1997
+```
+
+> 리다이렉트를 사용해 파일 만들기
+
+\> 를 사용해 텍스트 파일로 만들 수 있다.\
+\>\> 두번 이어서 쓴다면 기존 파일에 추가된다. (덧붙여짐)
+
+```bash
+cat liverpool.csv | cut -d "," -f 1,3 | sort -t "," -k 2 -n -b > test.csv
+```
+
+---
+
+### 20화 명령줄 지정으로 작업 내용을 바꾸고 싶어(명령줄 인수)
+
+명령어명 뒤에 스페이스를 입력하고 대상을 적는 것 예) cat /var/log.apache2/access.log\
+명령어에 대해 추가 지시를 내리는 게 명령어 라인 인수\
+
+**옵션은 인수의 한 종류**\
+생략 가능(지정하면 행동이 변하는)한 인수를 옵션 인수
+
+셸 스크립트 내부에서는 실행 시 지정한 인수 값을 $1, $2 같은 변수로 참조할 수 있다.\
+예) ./some_script.sh first second
+
+일반 명령어도 인수가 3개 이상이면 옵션으로 각각 의미가 있는 이름을 붙인다.
+
+```bash
+# -b 옵션값을 base라는 변수로도 참조할 수 있다. 나머지도 동일.
+while getopts b:n:p:o: OPT
+do
+  case $OPT in
+    b) base="$OPTARG" ;;
+    n) next="$OPTARG" ;;
+    p) previous="$OPTARG" ;;
+    o) output="$OPTARG" ;;
+  esac
+done
+```
+
+---
+
+### 21화 조건에 따라 처리 흐름을 바꾸고 싶어(조건 분기)
+
+셸 스크립트 안에 조건문을 넣어서 여러 상황을 처리할 수 있도록 한다.
+
+```bash
+# $#은 스크립트에서 지정한 인수 개수를 의미하는 특수한 변수
+if [ $# = 2]
+then # 줄바꿈 다음에 then을 써야 한다.
+  echo "Hello!" # 조건을 만족하면 실행하는 내용
+else
+  echo "Hi!" # 조건을 만족하지 않으면 실행하는 내용
+fi
+
+# 줄바꿈 대신에 ;(세미콜론)을 사용하면 여러 줄을 한 줄로 합칠 수 있음
+if [ $# = 2 ]; then echo "Hello!"; else echo "Hi!"; fi
+```
+
+> 옵션이 있는지 확인하는 조건문
+
+```bash
+while getopts f:r: OPT
+do
+  case $OPT in
+    f) filename="$OPTARG" ;;
+    r) reportname="$OPTARG" ;;
+  esac
+done
+
+# 부정 조건, 좌우 값이 다를 때를 의미
+if [ "$reportname" != "" ]
+then
+  echo "reportname O"
+else
+  echo "reportname X"
+fi
+```
+
+> 요코의 정리
+
+단순 조건 분기
+
+```bash
+if [ $a = "문자열" ]
+then
+  $a 내용이 "문자열"과 같다면 실행하는 처리
+fi
+```
+
+부정 조건으로 조건 분기
+
+```bash
+if [ $a != "문자열" ]
+then
+  $a 내용이 "문자열"과 다르면 실행하는 처리
+fi
+```
+
+조건에 해당하지 않을 때 처리
+
+```bash
+if [ 조건 ]
+then
+  조건을 만족하면 실행하는 처리
+else
+  조건을 만족하지 않으면 실행하는 처리
+fi
+```
+
+시점을 넓혀서 생각하면 새로운 스크립트를 작성하기 전에 '이건 기존에 하던 작업의 일환으로 처리하는 게 자연스럽겠네'라는 게 보이기 시작한다.
+
+> if나 [에 스페이스가 필요한 이유
+
+[도 명령어다.\
+실제 파일은 /usr/bin/[에 있다. (mac에서는 찾을 수 가 없음 ㅜㅜ)\
+[ - 명령어\
+$#, =, ] - 세 개가 다 인수
+
+---
+
+### 22화 명령어 이상 종료에 대응하고 싶어(종료 상태)
+
+`에러 핸들링` - 어떤 문제가 발생했을 때 그것에 맞게 적절하게 처리하는 것\
+`$?` - 바로 전에 실행한 명령어 종료 상태, 0은 성공, 이상 종료는 값이 0이 아니다.
+
+```bash
+# 줄바꿈 대신에 ;(세미콜론)을 사용하면 여러 줄을 한 줄로 합칠 수 있음
+# 이전 명령어 종료 상태가 0이 아니라면 스크립트 실행을 중단, 종료한다.
+# exit만 적으면 exit 0과 같다.
+if [ $? != 0 ]; then exit; fi
+
+if [ $1 = "" ]
+then
+  echo "처리할 파일을 지정해야 함"
+  # 0 이외라면 무엇을 지정해도 됨(특별히 에러 종류를 구별할 필요가 없으면 1을 지정하는 게 보통)
+  exit 1
+fi
+```
+
+> 요코의 정리
+
+- $?으로 직전에 실행한 명령어 종료 상태를 참조 가능
+- $? 값은 명령어가 정상 종료하면 0, 이상 종료하면 0 이외의 값이 됨
+- exit에 인수로 숫자를 지정하면 셸 스크립트의 종료 상태가 됨
+- if로 종료 상태를 참조하면 명령어가 정상 종료했는지에 따라 조건 분기가 가능
+
+> 종료 상태 범위
+
+0은 정상 종료\
+0 ~ 255까지 범위가 있다.
+
+---
+
+### 23화 같은 처리를 반복해서 실행하고 싶어(for)
+
+for 반복문 - 같은 처리를 조금씩 인수(처리 대상 파일명 등)를 바꿔가면서 반복 실행하는 구문
+
+```bash
+# 네개의 값을 하나의 변수명으로 순서대로 참조한다는 의미
+for filename in redmine.log kintail.log download.log notice.log
+do
+  ./create-report.sh $filename
+done
+```
+
+줄바꿈으로 표시하는 법
+
+```bash
+# for ~ in 열은 줄바꿈을 넣으면 안된다.
+# 백슬래쉬(이스케이프)를 넣으면 가능하다. 한글 폰트에서는 원화 기호로 표시되기도 함
+for filename in redmine.log \
+                kintail.log \
+                download.log \
+                notice.log
+
+# 보기 쉽게 변수로 만드는 것도 좋은 방법.
+filieList=redmine.log kintail.log download.log notice.log
+for filename in $fileList
+
+# error.log를 제외한 /var/log/apache2/ 위치에 있는 확장자가 .log인 파일 목록
+for filename in `cd /var/log/apache2; ls *.log | grep -v error.log`
+```
+
+> 요코의 정리
+
+- for 반복문을 사용하면 값 리스트에 따라 같은 처리를 인수를 바꿔가며 반복 실행 가능
+- 반복문에서 사용하는 값 리스트로 변수나 명령어 치환 결과도 사용 가능
+
+> for 반복물 한 줄로 쓰기
+
+```bash
+for file in data log scripts; do echo $file; done
+```
+
+---
+
+### 공통 처리를 계속 재사용하고 싶어(셸 함수)
+
+함수 - 프로그램에서 하나로 모아놓은 처리 단위에 이름을 붙여서 부품으로 사용하기 쉽게 만든 걸 뜻한다.
+
+```bash
+#!/bin/bash
+
+hello() {
+  echo "안녕하세요"
+  echo "$1입니다"
+  echo "잘 부탁합니다"
+}
+
+hello 황성준
+```
+
+hello.sh로 만들고 `chmod +x hello.sh`으로 실행권한 부여 그 다음 ./hello.sh 실행하면 출력됨
+
+> 함수 종료 상태
+
+```bash
+report() {
+  if [ $1 = "" ]
+  then
+    echo "인수가 필요함"
+    # 함수내에서 exit를 사용하면 함수뿐만 아니라 스크립트 자체 처리까지 도중에 중단.
+    return 1 # 함수 실행을 중단하고 종료 상태를 1로 지정함
+}
+
+today() {
+  # return date +%Y-%m-%d 으로 하면 반환되는 줄 알았지만 실행하면 아래와 같은 에러가 출력
+  # ./today.sh: line 4: return: date: numeric argument required
+
+  date +%Y-%m-%d # 함수 실행 결과는 명령어 실행 결과의 문자열이 됨
+}
+
+report marketing.log mail-$(today).csv
+```
+
+> 요코의 정리
+
+- 어떤 처리를 하나도 묶어서 함수로 정의 가능함
+- 정의한 함수는 같은 스크립트 안에서 원하는 곳에서 몇번이고 호출할 수 있음
+- 함수도 인수를 사용 가능
+- 함수 실행을 중단하고 원래 처리로 돌아갈 때는 exit가 아니라 return 사용
+
+셸 스크립트는 기본적으로 실행하고 싶은 명령어를 실행 순서대로 작성하는 거지만\
+함수를 사용한다면 실행 순서를 신경 쓰지 않고 중요한 부분부터 스크립트를 작성한다.
+
+> 섈 스크립트의 인수와 함수의 인수
+
+함수 안에서 $1이라고 하면 셸 스크립트의 인수가 아니라 함수의 인수를 참조
