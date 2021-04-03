@@ -95,10 +95,7 @@ const About: React.FC<AboutPageProps> = ({ data, location }) => {
                 Age: {today.getFullYear() - birthDate.getFullYear() + 1} in
                 Korea
                 <br />
-                Now Working as Back-End developer at{" "}
-                <Link href="https://socialbx.com" target="_blank">
-                  SocialBox
-                </Link>
+                Now I'm looking for development jobs.
               </Typography>
             </Grid>
             <Grid item sm className={classes.box}>
