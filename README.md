@@ -1,20 +1,16 @@
-## 🚀 Jun Wick's Blog
+# get6_github_io
 
-**Thank you for coming here**
+A new Flutter project.
 
-- I'm sung jun Hwang who lives in korea.
-- I'm currently working at [SocialBox](https://socialbx.com/)
-- anyone who want to send an email. please send here <ittae.com@gamil.com>
+## Getting Started
 
-## 💫 My SNS accounts
+This project is a starting point for a Flutter application.
 
-[Instagram: hwang_sung_jun93](https://www.instagram.com/hwang_sung_jun93/)
+A few resources to get you started if this is your first Flutter project:
 
-[Facebook: my profile](https://www.facebook.com/profile.php?id=100052327631371)
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-Kakaotalk QR
-
-<image src="./content/assets/kakaotalk_qr.jpeg" width="150px;" />
-
-## 🎓 I want to join flutter study group
-## 🙆‍♂️ 플러터 관련 스터디 그룹 참여하고 싶어요.
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
