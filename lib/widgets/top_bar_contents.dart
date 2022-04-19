@@ -12,7 +12,7 @@ class TopBarContents extends StatefulWidget {
 }
 
 class _TopBarContentsState extends State<TopBarContents> {
-  final List _isHovering = [false, false, false, false, false];
+  final List _isHovering = [false, false, false, false, false, false];
 
   Widget _menuInkWell(String title, int index) {
     return InkWell(
@@ -59,14 +59,20 @@ class _TopBarContentsState extends State<TopBarContents> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                widget.title,
-                style: TextStyle(
-                  color: Colors.blueGrey.shade100,
-                  fontSize: 20,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w400,
-                  letterSpacing: 3,
+              Container(
+                padding: EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.black,
+                ),
+                child: Text(
+                  widget.title,
+                  style: TextStyle(
+                    color: Colors.blueGrey.shade100,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: 3,
+                  ),
                 ),
               ),
               Expanded(
@@ -74,15 +80,20 @@ class _TopBarContentsState extends State<TopBarContents> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SizedBox(width: screenSize.width / 8),
-                    _menuInkWell('Discover', 0),
+                    _menuInkWell('Tech', 0),
                     SizedBox(width: screenSize.width / 20),
-                    _menuInkWell('Contact Us', 1),
+                    _menuInkWell('Life', 1),
+                    SizedBox(width: screenSize.width / 20),
+                    _menuInkWell('Tools', 2),
+                    SizedBox(width: screenSize.width / 20),
+                    _menuInkWell('Books', 3),
+                    SizedBox(width: screenSize.width / 20),
+                    _menuInkWell('Others', 4),
                   ],
                 ),
               ),
-              _menuInkWell('Sign Up', 2),
               SizedBox(width: screenSize.width / 50),
-              _menuInkWell('Login', 3),
+              _menuInkWell('About me', 5),
             ],
           ),
         ),
