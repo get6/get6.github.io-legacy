@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get6_github_io/models/background_image_info.dart';
+import 'package:get6_github_io/utils/common_provider.dart';
 
 import '../../widgets/responsive.dart';
 import '../../widgets/top_bar_contents.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+class HomePage extends ConsumerStatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends ConsumerState<HomePage> {
   late ScrollController _scrollController;
   double _scrollPosition = 0;
   double _opacity = 0;
@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    ref.read(titleProvider);
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
   }
@@ -49,6 +50,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final String title = ref.watch(titleProvider);
     Size screenSize = MediaQuery.of(context).size;
     _opacity = _scrollPosition < screenSize.height * 0.40
         ? _scrollPosition / (screenSize.height * 0.40)
@@ -65,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                   Theme.of(context).bottomAppBarColor.withOpacity(_opacity),
               elevation: 0,
               title: Text(
-                widget.title,
+                title,
                 style: TextStyle(
                   color: Colors.blueGrey.shade100,
                   fontSize: 20,
@@ -87,7 +89,7 @@ class _HomePageState extends State<HomePage> {
             )
           : PreferredSize(
               preferredSize: Size(screenSize.width, 1000),
-              child: TopBarContents(title: widget.title, opacity: _opacity),
+              child: TopBarContents(title: title, opacity: _opacity),
             ),
       body: SingleChildScrollView(
         controller: _scrollController,

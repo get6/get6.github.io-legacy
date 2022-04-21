@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:get6_github_io/utils/app_router.gr.dart';
 
 class TopBarContents extends StatefulWidget {
   const TopBarContents({Key? key, required this.title, required this.opacity})
@@ -14,12 +16,12 @@ class TopBarContents extends StatefulWidget {
 class _TopBarContentsState extends State<TopBarContents> {
   final List _isHovering = [false, false, false, false, false, false];
 
-  Widget _menuInkWell(String title, int index) {
+  Widget _menuInkWell(String title, int index, void Function() onTab) {
     return InkWell(
       onHover: (value) => setState(() {
         value ? _isHovering[index] = true : _isHovering[index] = false;
       }),
-      onTap: () {},
+      onTap: onTab,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -49,6 +51,7 @@ class _TopBarContentsState extends State<TopBarContents> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    final StackRouter router = AutoRouter.of(context);
 
     return PreferredSize(
       preferredSize: Size(screenSize.width, 1000),
@@ -80,20 +83,26 @@ class _TopBarContentsState extends State<TopBarContents> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SizedBox(width: screenSize.width / 8),
-                    _menuInkWell('Tech', 0),
+                    _menuInkWell(
+                        'Tech', 0, () => router.replace(const TechRoute())),
                     SizedBox(width: screenSize.width / 20),
-                    _menuInkWell('Life', 1),
+                    _menuInkWell(
+                        'Life', 1, () => router.navigate(const LifeRoute())),
                     SizedBox(width: screenSize.width / 20),
-                    _menuInkWell('Tools', 2),
+                    _menuInkWell(
+                        'Tools', 2, () => router.navigate(const ToolsRoute())),
                     SizedBox(width: screenSize.width / 20),
-                    _menuInkWell('Books', 3),
+                    _menuInkWell(
+                        'Books', 3, () => router.navigate(const BooksRoute())),
                     SizedBox(width: screenSize.width / 20),
-                    _menuInkWell('Others', 4),
+                    _menuInkWell('Others', 4,
+                        () => router.navigate(const OthersRoute())),
                   ],
                 ),
               ),
               SizedBox(width: screenSize.width / 50),
-              _menuInkWell('About me', 5),
+              _menuInkWell(
+                  'About me', 5, () => router.navigate(const AboutMeRoute())),
             ],
           ),
         ),
