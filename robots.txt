@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://get6.github.io/sitemap.xml
-Host: https://get6.github.io
