@@ -5,6 +5,7 @@ import 'package:get6_github_io/utils/common_provider.dart';
 
 import '../../widgets/responsive.dart';
 import '../../widgets/top_bar_contents.dart';
+import 'widgets/featured_heading.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -56,7 +57,7 @@ class _HomePageState extends ConsumerState<HomePage> {
         ? _scrollPosition / (screenSize.height * 0.40)
         : 1;
 
-    BackgroundImageInfo _imageInfo = _imageInfos[DateTime.now().weekday - 1];
+    BackgroundImageInfo imageInfo = _imageInfos[DateTime.now().weekday - 1];
 
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
@@ -79,11 +80,11 @@ class _HomePageState extends ConsumerState<HomePage> {
               actions: [
                 TextButton(
                   onPressed: () {},
-                  child: Text("Tags"),
+                  child: const Text("Tags"),
                 ),
                 TextButton(
                   onPressed: () {},
-                  child: Text("About me"),
+                  child: const Text("About me"),
                 ),
               ],
             )
@@ -102,13 +103,19 @@ class _HomePageState extends ConsumerState<HomePage> {
                   height: screenSize.height * .45,
                   width: screenSize.width,
                   child: Image.asset(
-                    'assets/images/cover${_imageInfo.number}.jpg',
+                    'assets/images/cover${imageInfo.number}.jpg',
                     fit: BoxFit.cover,
-                    alignment: Alignment(_imageInfo.x, _imageInfo.y),
+                    alignment: Alignment(imageInfo.x, imageInfo.y),
                   ),
-                )
+                ),
+                Column(
+                  children: [
+                    FeaturedHeading(screenSize: screenSize),
+                    // FeaturedTiles(screenSize: screenSize),
+                  ],
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),

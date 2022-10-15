@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 ThemeData lightThemeData = ThemeData(
@@ -18,6 +16,7 @@ ThemeData lightThemeData = ThemeData(
   bottomAppBarColor: Colors.blueGrey[900],
   iconTheme: const IconThemeData(color: Colors.blueGrey),
   brightness: Brightness.light,
+  useMaterial3: true,
 );
 
 ThemeData darkThemeData = ThemeData(
@@ -36,4 +35,5 @@ ThemeData darkThemeData = ThemeData(
   bottomAppBarColor: Colors.black,
   iconTheme: IconThemeData(color: Colors.blueGrey[200]),
   brightness: Brightness.dark,
+  useMaterial3: true,
 );

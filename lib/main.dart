@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get6_github_io/screens/home/home_page.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:get6_github_io/utils/app_router.gr.dart';
 import 'package:get6_github_io/utils/common_provider.dart';
 import 'package:get6_github_io/utils/theme_data.dart';
 
 void main() {
+  setUrlStrategy(PathUrlStrategy());
   runApp(ProviderScope(child: MyApp()));
 }
 
