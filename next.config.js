@@ -10,18 +10,6 @@ const withMDX = require('@next/mdx')({
   },
 })
 
-const isGithubActions = process.env.GITHUB_ACTIONS || false
-
-let assetPrefix = ''
-let basePath = '/'
-
-if (isGithubActions) {
-  const repo = process.env.GITHUB_REPOSITORY.replace(/.*?\//, '')
-
-  assetPrefix = `/${repo}/`
-  basePath = `/${repo}`
-}
-
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
@@ -29,12 +17,8 @@ const nextConfig = {
     pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   }),
   images: {
-    loader: 'imgix',
-    path: 'https://ittae.imgix.net',
     domains: ['images.unsplash.com'],
   },
-  assetPrefix: assetPrefix,
-  basePath: basePath,
 }
 
 module.exports = nextConfig
