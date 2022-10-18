@@ -9,18 +9,14 @@ jobs:
 
     runs-on: ubuntu-latest
     
-    strategy:
-      matrix:
-        node-version: [10.x, 12.x, 14.x, 15.x]
-    
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 16
         uses: actions/setup-node@v3
         with:
           # update the Node version to meet your needs
-          node-version: ${{ matrix.node-version }}
+          node-version: 16
           cache: npm
 
       - name: Install and Build 🔧
