@@ -18,7 +18,7 @@ const nextConfig = {
   ...withMDX({
     pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   }),
-  assetPrefix: isProd ? 'https://get6.github.io/' : undefined,
+  assetPrefix: './',
   images: {
     unoptimized: true,
     domains: ['images.unsplash.com'],
