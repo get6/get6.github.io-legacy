@@ -29,6 +29,8 @@ const nextConfig = {
     pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   }),
   images: {
+    loader: 'imgix',
+    path: 'https://ittae.imgix.net',
     domains: ['images.unsplash.com'],
   },
   assetPrefix: assetPrefix,
