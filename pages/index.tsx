@@ -6,65 +6,176 @@ const Home: NextPage = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
-        <title>Create Next App</title>
+        <title>sunhwang&apos;s blog</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
+        <div className="container mx-auto py-20">
+          <div className="flex items-center justify-between">
+            <h1 className="text-3xl font-semibold capitalize text-gray-800 dark:text-white lg:text-4xl">
+              recent posts{' '}
+            </h1>
 
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-            pages/index.tsx
-          </code>
-        </p>
+            <button className="focus:outline-none">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 transform text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </button>
+          </div>
 
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and its API.
-            </p>
-          </a>
+          <hr className="my-8 border-gray-200 dark:border-gray-700" />
 
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+            <div>
+              <Image
+                className="h-64 w-full rounded-lg object-cover object-center lg:h-80"
+                src="https://images.unsplash.com/photo-1624996379697-f01d168b1a52?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+                alt=""
+                width={400}
+                height={400}
+              />
 
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
+              <div className="mt-8">
+                <span className="uppercase text-blue-500">category</span>
 
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+                <h1 className="mt-4 text-xl font-semibold text-gray-800 dark:text-white">
+                  What do you want to know about UI
+                </h1>
+
+                <p className="mt-2 text-gray-500 dark:text-gray-400">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam
+                  est asperiores vel, ab animi recusandae nulla veritatis id
+                  tempore sapiente
+                </p>
+
+                <div className="mt-4 flex items-center justify-between">
+                  <div>
+                    <a
+                      href="#"
+                      className="text-lg font-medium text-gray-700 hover:text-gray-500 hover:underline dark:text-gray-300"
+                    >
+                      John snow
+                    </a>
+
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      February 1, 2022
+                    </p>
+                  </div>
+
+                  <a
+                    href="#"
+                    className="inline-block text-blue-500 underline hover:text-blue-400"
+                  >
+                    Read more
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <Image
+                className="h-64 w-full rounded-lg object-cover object-center lg:h-80"
+                src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+                alt=""
+                width={500}
+                height={500}
+              />
+
+              <div className="mt-8">
+                <span className="uppercase text-blue-500">category</span>
+
+                <h1 className="mt-4 text-xl font-semibold text-gray-800 dark:text-white">
+                  All the features you want to know
+                </h1>
+
+                <p className="mt-2 text-gray-500 dark:text-gray-400">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam
+                  est asperiores vel, ab animi recusandae nulla veritatis id
+                  tempore sapiente
+                </p>
+
+                <div className="mt-4 flex items-center justify-between">
+                  <div>
+                    <a
+                      href="#"
+                      className="text-lg font-medium text-gray-700 hover:text-gray-500 hover:underline dark:text-gray-300"
+                    >
+                      Arthur Melo
+                    </a>
+
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      February 6, 2022
+                    </p>
+                  </div>
+
+                  <a
+                    href="#"
+                    className="inline-block text-blue-500 underline hover:text-blue-400"
+                  >
+                    Read more
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <Image
+                className="h-64 w-full rounded-lg object-cover object-center lg:h-80"
+                src="https://images.unsplash.com/photo-1597534458220-9fb4969f2df5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80"
+                alt=""
+                width={400}
+                height={400}
+              />
+
+              <div className="mt-8">
+                <span className="uppercase text-blue-500">category</span>
+
+                <h1 className="mt-4 text-xl font-semibold text-gray-800 dark:text-white">
+                  Which services you get from Meraki UI
+                </h1>
+
+                <p className="mt-2 text-gray-500 dark:text-gray-400">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam
+                  est asperiores vel, ab animi recusandae nulla veritatis id
+                  tempore sapiente
+                </p>
+
+                <div className="mt-4 flex items-center justify-between">
+                  <div>
+                    <a
+                      href="#"
+                      className="text-lg font-medium text-gray-700 hover:text-gray-500 hover:underline dark:text-gray-300"
+                    >
+                      Tom Hank
+                    </a>
+
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      February 19, 2022
+                    </p>
+                  </div>
+
+                  <a
+                    href="#"
+                    className="inline-block text-blue-500 underline hover:text-blue-400"
+                  >
+                    Read more
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
 
