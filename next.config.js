@@ -10,13 +10,15 @@ const withMDX = require('@next/mdx')({
   },
 })
 
+let isProd = process.env.NODE_ENV === 'production'
+
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   ...withMDX({
     pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   }),
-  assetPrefix: './',
+  assetPrefix: isProd ? './' : undefined,
   images: {
     unoptimized: true,
     domains: ['images.unsplash.com'],
