@@ -2,8 +2,8 @@ import { NextSeo } from 'next-seo'
 import Image from 'next/image'
 import { BsGithub, BsInstagram, BsMailbox } from 'react-icons/bs'
 import Card from '../components/Card'
-import Profile from '../public/assets/my_profile.jpg'
-import Background from '../public/assets/bg_cloud1.jpg'
+import Profile from 'public/assets/my_profile.jpg'
+import Background from 'public/assets/bg_cloud1.jpg'
 
 const About = () => {
   const Links = [
