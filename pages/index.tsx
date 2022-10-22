@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import ExportedImage from 'next-image-export-optimizer'
 import Head from 'next/head'
 import Image from 'next/image'
 
@@ -39,7 +40,7 @@ const Home: NextPage = () => {
 
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
             <div>
-              <Image
+              <ExportedImage
                 className="h-64 w-full rounded-lg object-cover object-center lg:h-80"
                 src="https://images.unsplash.com/photo-1624996379697-f01d168b1a52?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
                 alt=""
@@ -85,7 +86,7 @@ const Home: NextPage = () => {
             </div>
 
             <div>
-              <Image
+              <ExportedImage
                 className="h-64 w-full rounded-lg object-cover object-center lg:h-80"
                 src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
                 alt=""
@@ -131,7 +132,7 @@ const Home: NextPage = () => {
             </div>
 
             <div>
-              <Image
+              <ExportedImage
                 className="h-64 w-full rounded-lg object-cover object-center lg:h-80"
                 src="https://images.unsplash.com/photo-1597534458220-9fb4969f2df5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80"
                 alt=""
@@ -187,7 +188,12 @@ const Home: NextPage = () => {
           rel="noopener noreferrer"
         >
           Powered by{' '}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+          <ExportedImage
+            src="/vercel.svg"
+            alt="Vercel Logo"
+            width={72}
+            height={16}
+          />
         </a>
       </footer>
     </div>

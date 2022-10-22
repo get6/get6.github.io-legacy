@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && next export",
-    "build:local": "NODE_ENV=development next build && next export",
+    "build:local": "NODE_ENV=development next build && next export && next-image-export-optimizer",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --check --ignore-path .gitignore .",
@@ -16,6 +16,7 @@
     "@mdx-js/react": "^2.1.5",
     "@next/mdx": "^12.3.1",
     "next": "12.3.1",
+    "next-image-export-optimizer": "^0.17.1",
     "next-seo": "^5.8.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
