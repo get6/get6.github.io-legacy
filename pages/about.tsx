@@ -1,8 +1,6 @@
 import { NextSeo } from 'next-seo'
 import { BsGithub, BsInstagram, BsMailbox } from 'react-icons/bs'
 import Card from '../components/Card'
-import Profile from 'public/assets/my_profile.jpg'
-import Background from 'public/assets/bg_cloud1.jpg'
 import ExportedImage from 'next-image-export-optimizer'
 
 const About = () => {
@@ -34,7 +32,7 @@ const About = () => {
       <div
         className="h-96 w-full bg-cover bg-local bg-[left_calc(0%)_top_calc(80%)]"
         style={{
-          backgroundImage: `url(${Background.src})`,
+          backgroundImage: `url(assets/bg_cloud1.jpg)`,
         }}
       />
       <div className="mx-20 flex flex-col space-y-5">
@@ -51,8 +49,8 @@ const About = () => {
             <div className="flex flex-col">
               <div className="hidden flex-shrink-0 sm:block">
                 <ExportedImage
-                  alt="Paul Clapton"
-                  src={Profile}
+                  alt="Seong Jun, Hwang"
+                  src="/assets/my_profile.jpg"
                   className="rounded-lg object-cover shadow-sm"
                   width={200}
                   height={200}
