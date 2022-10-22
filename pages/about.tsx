@@ -50,7 +50,7 @@ const About = () => {
               <div className="hidden flex-shrink-0 sm:block">
                 <Image
                   alt="Seong Jun, Hwang"
-                  src="/assets/my_profile.jpg"
+                  src="assets/my_profile.jpg"
                   className="rounded-lg object-cover shadow-sm"
                   width={200}
                   height={200}
