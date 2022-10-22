@@ -19,7 +19,6 @@ const nextConfig = {
   ...withMDX({
     pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   }),
-  assetPrefix: './',
   //   isProd && !isDev ? undefined : '/Users/ittae/GitHub/get6.github.io/out/',
   // images: {
   //   unoptimized: true,
