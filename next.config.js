@@ -20,7 +20,7 @@ const nextConfig = {
     pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   }),
   assetPrefix: isProd
-    ? '/get6.github.io/'
+    ? '/'
     : isDev
     ? undefined
     : '/Users/ittae/GitHub/get6.github.io/out/',
