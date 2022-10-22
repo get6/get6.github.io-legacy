@@ -1,7 +1,7 @@
 import { NextSeo } from 'next-seo'
 import { BsGithub, BsInstagram, BsMailbox } from 'react-icons/bs'
 import Card from '../components/Card'
-import ExportedImage from 'next-image-export-optimizer'
+import Image from 'next/image'
 
 const About = () => {
   const Links = [
@@ -48,7 +48,7 @@ const About = () => {
           <div className="flex w-full space-x-4 sm:inline-flex">
             <div className="flex flex-col">
               <div className="hidden flex-shrink-0 sm:block">
-                <ExportedImage
+                <Image
                   alt="Seong Jun, Hwang"
                   src="/assets/my_profile.jpg"
                   className="rounded-lg object-cover shadow-sm"
