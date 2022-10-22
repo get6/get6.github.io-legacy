@@ -46,6 +46,7 @@ const Home: NextPage = () => {
                 alt=""
                 width={400}
                 height={400}
+                unoptimized={true}
               />
 
               <div className="mt-8">
@@ -92,6 +93,7 @@ const Home: NextPage = () => {
                 alt=""
                 width={500}
                 height={500}
+                unoptimized={true}
               />
 
               <div className="mt-8">
@@ -138,6 +140,7 @@ const Home: NextPage = () => {
                 alt=""
                 width={400}
                 height={400}
+                unoptimized={true}
               />
 
               <div className="mt-8">
