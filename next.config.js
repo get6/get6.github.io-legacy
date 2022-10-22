@@ -11,6 +11,7 @@ const withMDX = require('@next/mdx')({
 })
 
 let isProd = process.env.NODE_ENV === 'production'
+let isDev = !isProd && process.env.npm_lifecycle_script === 'next dev'
 
 const nextConfig = {
   reactStrictMode: true,
@@ -18,7 +19,11 @@ const nextConfig = {
   ...withMDX({
     pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   }),
-  assetPrefix: isProd ? './' : undefined,
+  assetPrefix: isProd
+    ? '/'
+    : isDev
+    ? undefined
+    : '/Users/ittae/GitHub/get6.github.io/out/',
   images: {
     unoptimized: true,
     domains: ['images.unsplash.com'],
