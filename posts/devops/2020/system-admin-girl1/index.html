@@ -1,0 +1,929 @@
+<!DOCTYPE html><html lang="ko"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width"/><meta name="next-head-count" content="2"/><meta charSet="utf-8"/><link rel="preload" href="/_next/static/css/b8016db199e3d50e.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b8016db199e3d50e.css" data-n-g=""/><link rel="preload" href="/_next/static/css/cf121497002c184d.css" as="style"/><link rel="stylesheet" href="/_next/static/css/cf121497002c184d.css" data-n-p=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/_next/static/chunks/webpack-8fa1640cc84ba8fe.js" defer=""></script><script src="/_next/static/chunks/framework-7751730b10fa0f74.js" defer=""></script><script src="/_next/static/chunks/main-591bb7ec51acdc0d.js" defer=""></script><script src="/_next/static/chunks/pages/_app-4db42315f1cad4cf.js" defer=""></script><script src="/_next/static/chunks/675-717e3cc8fb67a947.js" defer=""></script><script src="/_next/static/chunks/194-b74e21e59d8a75e2.js" defer=""></script><script src="/_next/static/chunks/pages/posts/%5B...slug%5D-f82e37ce8fef3000.js" defer=""></script><script src="/_next/static/gvvvKtR0vBN_FJ3fanf7F/_buildManifest.js" defer=""></script><script src="/_next/static/gvvvKtR0vBN_FJ3fanf7F/_ssgManifest.js" defer=""></script></head><body><div id="__next"><nav class="absolute flex w-full justify-between py-4"><div class="ml-20 mr-40 flex-none"><a class="text-lg font-bold" href="/">🌎 Sunhwang&#x27;s blog</a></div><ul class="flex flex-auto flex-row justify-evenly"><li><a class="hover:underline hover:underline-offset-8 " href="/categories">Categories</a></li><li><a class="hover:underline hover:underline-offset-8 " href="/tags">Tags</a></li><li><a class="hover:underline hover:underline-offset-8 " href="/books">Books</a></li><li><a class="hover:underline hover:underline-offset-8 " href="/about">About me</a></li></ul></nav><main><div class="container mx-auto px-5"><article class="mb-32"><h1 class="mb-12 text-center text-5xl font-bold leading-tight tracking-tighter md:text-left md:text-7xl md:leading-none lg:text-8xl">만화로 배우는 리눅스 시스템 관리 1권</h1><div class="mb-8 sm:mx-0 md:mb-16"><div class="sm:mx-0"><span style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0"><img alt="Cover Image for 만화로 배우는 리눅스 시스템 관리 1권" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" decoding="async" data-nimg="intrinsic" class="shadow-sm" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%"/><noscript><img alt="Cover Image for 만화로 배우는 리눅스 시스템 관리 1권" src="" decoding="async" data-nimg="intrinsic" style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" class="shadow-sm" loading="lazy"/></noscript></span></div></div><div class="mx-auto max-w-2xl"><div class="mb-6 text-lg"><time dateTime="2021-03-14">March	14, 2021</time></div></div><div class="mx-auto max-w-2xl"><div class="markdown-styles_markdown__h_8de"><p>전에 읽었던 책이지만, 설명을 쉽게 풀어서 리눅스 입문하기 좋은 책이라고 생각되어 찾아봤습니다.<br>
+서울전자도서관에선 계약 문제인지 검색이 더 이상 되지 않았습니다.<br>
+다행히 경기도사이버도서관에서 1,2권이 있어 대출 후 책을 읽어가며 요약을 해보려고 합니다.</p>
+<h2>명령어 &#x26; 셸 스크립트 입문</h2>
+<h3>1화 다른 컴퓨터를 리모트로 조작하고 싶어(SSH)</h3>
+<p><code>ssh</code>(Secure SHell) - 다른 PC에서 동작하는 프로그램을 자기 PC 화면에 표시해서 조작할 수 있게 하는 명령어.</p>
+<p>터미널을 실행해서 ssh 명령어 뒤에 로그인할 사용자명, @, 접속할 로그인 PC 주소를 입력합니다.</p>
+<pre><code>ssh {로그인할 사용자명}@{접속할 로그인 PC 주소}
+</code></pre>
+<p>X를 활용해 SSH 사용<br>
+<strong>ssh 옵션</strong>(X를 사용할 때, X는 리눅스에서 화면 표시와 입력을 담당하는 구조)<br>
+-Y : X 전송 지정<br>
+-C : 통신 내용을 압축(응답 속도를 좋게함)</p>
+<p>연결 후 nautilus 명령어 실행</p>
+<p>exit - 로그아웃 명령어, SSH 접속을 끊음</p>
+<p>rsh(Remote SHell)은 네트워크에 그대로 내보내기 때문에 네트워크 감시자가 모을 수 있습니다.<br>
+rsh 보다 ssh 사용을 하면 암호화된 통신이 가능합니다.</p>
+<hr>
+<h3>2화 임시로 관리자 권한을 얻고 싶어(sudo)</h3>
+<p>접근 권한은 파일 소유자가 아니면 바꿀 수 없지만, 처리할 수 있는 사용자가 있습니다. -> root</p>
+<p><code>sudo</code> - 관리자 권한을 행사할 수 있음</p>
+<pre><code>sudo {실제 사용하고 싶은 명령어} {명령어 인자}
+</code></pre>
+<p>GUI이라면 gksudo -sync 명령어 사용</p>
+<p><strong>우분투에서 root로 로그인하기</strong><br>
+sudo -i 또는 sudo su로 가능 (명령어 입력 후 비밀번호를 입력해야 한다.)</p>
+<hr>
+<h3>3화 다양한 문자열을 한 번에 검색하고 싶어(grep)</h3>
+<p><code>grep</code> - 파일 내용 중에 찾는 문자열이 포함되었는지를 조사해준다.(global regular expression print)</p>
+<pre><code>grep {옵션} "검색하고 싶은 문자열" {찾을 파일이 있는 폴더 경로(검색 시작점)}
+</code></pre>
+<p><strong>grep 옵션</strong><br>
+-r : 서브 폴더까지 검색하도록 지정</p>
+<p>정규 표현식(regular expression)<br>
+| 값 | 의미 |
+| --- | --- |
+| () | 그룹화 |
+| | | 좌우 중 하나 |
+| ? | 직전 표현이 0회 또는 1회 등장 |
+| * | 직전 표현이 0회 이상 연속해서 등장 |
+| + | 직전 표현이 1회 이상 연속해서 등장 |
+| . | 임의의 한 문자 |
+| ^ | 줄 머리 |
+| $ | 줄 끝 |</p>
+<blockquote>
+<p>파일 내용을 대문자 소문자 차이를 무시하고 검색</p>
+</blockquote>
+<pre><code>grep -r -i "sungjun hwang" 디렉토리 경로
+</code></pre>
+<blockquote>
+<p>파일 내용을 대문자 소문자 차이를 무시하고 정규 표현식으로 검색</p>
+</blockquote>
+<pre><code>grep -r -i -E "((성준) *(황)|sungjun +hwang)" 디렉토리 경로
+</code></pre>
+<hr>
+<h3>4화 터미널에서도 대화형으로 파일을 편집하고 싶어(vim)</h3>
+<p><code>vim</code> - 명령줄용 텍스트 에디터(vi의 강화판)</p>
+<blockquote>
+<p>vim 설치 명령어</p>
+</blockquote>
+<pre><code>sudo apt-get install vim
+또는
+yum install vim
+</code></pre>
+<pre><code>sudo vim {편집하고 싶은 파일 경로}
+</code></pre>
+<p>i - 끼워넣기, INSERT<br>
+끼워넣기 모드 조작 방법</p>
+<ul>
+<li>화살표로 키로 커서를 움직이기</li>
+<li>키 입력으로 문자를 입력하기</li>
+<li>백스페이스키나 Del 키로 글자 지우기 등</li>
+</ul>
+<p>ESC - 편집을 끝낸다.</p>
+<p><strong>모드의 종류</strong><br>
+노멀 모드 - ESC로 돌아온 경우<br>
+끼워넣기 모드 - i, 일반 에디터와 같은 조작 방법<br>
+치환 모드 - Shift + r, 치환 모드용 조작 방법<br>
+선택 모드 - v, 선택 모드용 조작 방법<br>
+검색 모드 - /, 검색 모드용 조작 방법<br>
+등등...</p>
+<p>:wq - 저장하고 종료(Write, Quit)</p>
+<p><strong>검색 모드</strong><br>
+/ 키를 눌러서 검색 모드로 들어가고 검색하고 싶은 문자열을 입력하고 Enter<br>
+N - 다음으로 검색된 곳으로 이동<br>
+Shift + N - 이전에 검색된 곳으로 이동<br>
+정규 표현식도 사용 가능</p>
+<blockquote>
+<p>더 자세한 명령어는 아래 사이트 참조</p>
+</blockquote>
+<p><a href="https://vim.rtorr.com/lang/ko">Vim 치트 시트</a></p>
+<hr>
+<h3>5화 vim에서도 복사 &#x26; 붙이기 &#x26; 되돌리기를 하고 싶어(yank)</h3>
+<p><code>yank</code> - vim에 있는 클립보드 같은 것(vim 안에서만 사용)</p>
+<blockquote>
+<p>사용방법</p>
+</blockquote>
+<ol>
+<li>노멀 모드에서 v 키 입력 -> 비주얼 모드로 전환</li>
+<li>범위를 정하고 y 키 입력</li>
+<li>붙이고 장소로 이동하고 Shift + p 입력</li>
+<li>여러번 반복하고 싶은 경우 -> 10번 반복하고 싶다면 10 입력 후 Shift + p</li>
+</ol>
+<blockquote>
+<p>콘솔 일시정지</p>
+</blockquote>
+<ul>
+<li>Ctrl + z는 일시 정지 - 맥은 Control + z<br>
+fg를 입력해서 돌아가기(ForeGround)</li>
+</ul>
+<blockquote>
+<p>vim에서 되돌리기(Undo)</p>
+</blockquote>
+<ul>
+<li>노멀 모드에서 u 키 입력<br>
+다른 모드에 있다면 esc 키로 노멀 모드로 돌아온 다음 u 키</li>
+</ul>
+<blockquote>
+<p>되돌리기의 되살리기(Redo)</p>
+</blockquote>
+<ul>
+<li>Ctrl + r</li>
+</ul>
+<blockquote>
+<p>Undo, Redo 모두 횟수를 지정해 실행 가능</p>
+</blockquote>
+<ul>
+<li>10u / 10 ctrl + r</li>
+<li>9999u 는 첫 상태로 되돌아가는 것</li>
+</ul>
+<hr>
+<h3>6화 갑작스러운 네트워크 끊김에서 복귀하고 싶어(가상 터미널)</h3>
+<p>GNOME 단말은 데스크톱 환경에서 콘솔 환경을 들여다보는 창<br>
+가상 단말은 콘솔 환경에서 GNOME 단말이 하는 것과 같은 걸 하는 애플리케이션</p>
+<blockquote>
+<p>tmux 설치</p>
+</blockquote>
+<pre><code>sudo apt-get install tmux &#x3C;- ssh로 연결된 서버에 설치
+
+tmux &#x3C;- 입력해서 실행
+
+tmux attach &#x3C;- ssh로 다시 서버에 접속한 후 재연결
+</code></pre>
+<blockquote>
+<p>빠져나오기</p>
+</blockquote>
+<ul>
+<li>ctrl + b 입력 후 d(Detach) 키 입력</li>
+</ul>
+<blockquote>
+<p>ctrl + b 입력 후 동작 키</p>
+</blockquote>
+<ul>
+<li>d - Detach</li>
+<li>c - Create (새로운 탭 생성)</li>
+<li>p - Previous (이전 탭 이동)</li>
+<li>n - Next (다음 탭 이동)</li>
+</ul>
+<p>ctrl 키와 영숫자 키 조합은 다른 애플리케이션에서도 다양하게 사용되기 때문에 충돌이 나지 않기 위해 이렇게 씁니다.</p>
+<hr>
+<h3>7화 다른 화면도 보면서 작업하고 싶어(화면 분할)</h3>
+<blockquote>
+<p>tmux를 실행하고 화면 분할하는 방법</p>
+</blockquote>
+<ul>
+<li>ctrl + b 입력 후 " 키를 입력 -> 화면 중앙으로 나뉨</li>
+</ul>
+<blockquote>
+<p>분할된 화면의 포커스 전환</p>
+</blockquote>
+<ul>
+<li>ctrl + b 다음 가고싶은 방향 화살표 키 입력</li>
+</ul>
+<blockquote>
+<p>화살표나 마우스 휠로 스크롤 하는 법</p>
+</blockquote>
+<ol>
+<li>ctrl + b 다음 [ 키 입력</li>
+<li>내용 확인 끝났으면 q 키 또는 esc로 원래 상태로 돌아올 수 있다.</li>
+</ol>
+<blockquote>
+<p>세로 분할하는 방법</p>
+</blockquote>
+<ul>
+<li>ctrl + b 다음 % 키 입력</li>
+</ul>
+<p>화면을 종료하고 싶은게 있다면 포커스를 옮기고 exit</p>
+<blockquote>
+<p>분할된 화면의 크기 변경 방법</p>
+</blockquote>
+<ol>
+<li>ctrl + b 키를 눌러 tmux 자체를 조작하는 상태로 둔다.</li>
+<li>ctrl + 방향키로 분할 경계선을 움직인다.</li>
+</ol>
+<hr>
+<h3>8화 최근 실행한 명령어를 호출하고 싶어(명령어 이력)</h3>
+<p>셸에서 방향키를 위아래로 움직이면 이력을 확인할 수 있다.<br>
+vim ~/.bash_history 에서 이력을 볼 수 있다.<br>
+history 명령어 사용해도 볼 수 있다.</p>
+<blockquote>
+<p>예전의 명령어를 찾고 싶을 때(후방 검색)</p>
+</blockquote>
+<p>ctrl + r을 누른다. 맥은 control</p>
+<blockquote>
+<p>역방향으로 검색하는 방법</p>
+</blockquote>
+<p>zsh는 기본적으로 ctrl + s 입력하면 전방 검색이 가능</p>
+<p>vim ~/.bashrc로 bash 설정 파일을 열고 shift + g로 파일 마지막으로 이동<br>
+새로운 줄을 추가한 다음 stty stop undef 입력하고 저장<br>
+적용을 위해 bash를 재시작</p>
+<p>ctrl + s 키 입력 -> 검색 모드로 전환<br>
+현재 위치 기준으로 앞의 이력을 검색</p>
+<hr>
+<h3>9화 오래전에 실행한 명령어를 호출하고 싶어(명령어 이력 검색)</h3>
+<p>오랫동안 쓰지 않은 명령어는 보통 남아 있지 않는다.</p>
+<blockquote>
+<p>이력 개수를 늘리는 방법</p>
+</blockquote>
+<pre><code># 설정 파일을 연다.
+vim ~/.bashrc
+
+# shift + g로 파일 끝으로 이동하고
+# 삽입모드로 아래 코드 추가 후 :wq로 나오기 (로그아웃 로그인 필요)
+export HISTSIZE 10000
+export HISTFILESIZE=10000
+</code></pre>
+<blockquote>
+<p>GNOME 단말에 이력을 동기화시키는 방법</p>
+</blockquote>
+<pre><code># GNOME 단말로 여러 탭을 사용하면 각각 다른 이력을 가지게 된다.
+# 다른 화면에서 bash 명령어 이력을 검색할 수 없게 된다. 아래 설정으로 해결
+
+# 설정 파일을 연다.
+vim ~/.bashrc
+
+function share_history {
+    history -a
+    history -c
+    history -r
+}
+PROMPT_COMMAND='share_history'
+shopt -u histappend
+</code></pre>
+<blockquote>
+<p>SSH 넘어서 명령어를 하나만 실행하기</p>
+</blockquote>
+<pre><code># 명령어 끝에 접속한 곳에서 실행하고 싶은 명령어를 적는다.
+ssh mint@server /scripts/do_backup.sh
+</code></pre>
+<hr>
+<h3>10화 네트워크 건너서 파일을 복사하고 싶어(scp)</h3>
+<p><code>scp</code> - Secure CoPy의 약어, 네트워크를 통해서 파일을 복사하는 명령어.</p>
+<blockquote>
+<p>사용방법</p>
+</blockquote>
+<p>사용할 곳과 보낼 곳에 scp가 설치되어 있어야 한다.</p>
+<pre><code># scp 파일 로그인할 사용자@접속할 컴퓨터:복사할 위치
+scp .file.ext mint@192.168.1.10:/tmp/
+</code></pre>
+<p>로그인에 사용한 사용자 홈 = mint@192.168.1.10:~/<br>
+다른 사용자의 홈 = mint@192.168.1.10:~ohno/<br>
+상대 경로는 로그인한 홈 디렉터리가 기점이 됨 = mint@192.168.1.10:../../tmp/</p>
+<blockquote>
+<p>다른 PC에서 내 PC로 가져오기 (반대방향)</p>
+</blockquote>
+<p>scp 복사 원본 복사(다른 컴퓨터에 있는 파일) 대상(자신의 PC 경로)</p>
+<blockquote>
+<p>와이드카드나 디렉터리로 복사</p>
+</blockquote>
+<pre><code># 파일명 끝이 .log인 파일을 모드 복사
+scp mint@host:/tmp/*.log /tmp/
+
+# -r(recursively) 옵션으로 디렉터리를 재귀적으로 복사.
+# 복사 원본 경고로 디렉터리 지정 (/tmp/results 끝에 /)
+scp -r mint@host:/tmp/results/ /tmp/
+</code></pre>
+<hr>
+<h3>11화 시스템 과부하를 파악하고 싶어(top)</h3>
+<p><code>top</code> - 시스템 부하 상태를 조사하는 명령어</p>
+<pre><code>Processes: 708 total, 2 running, 706 sleeping, 2998 threads
+Load Avg: 1.29, 1.22, 1.33  CPU usage: 2.78% user, 2.90% sys, 94.30% idle
+SharedLibs: 474M resident, 89M data, 30M linkedit.
+MemRegions: 188421 total, 3982M resident, 290M private, 3083M shared.
+PhysMem: 15G used (2020M wired), 671M unused.
+VM: 263T vsize, 3210M framework vsize, 257988(0) swapins, 394738(0) swapouts.
+Networks: packets: 11857651/13G in, 8349910/1555M out.
+Disks: 7477011/195G read, 6148251/104G written.
+
+PID    COMMAND      %CPU TIME     #TH   #WQ  #PORT MEM    PURG   CMPRS  PGRP
+29678  iTerm2       9.0  00:15.52 7     4    265   135M   7072K  32M    29678
+349    WindowServer 8.1  04:13:24 24    4    2190  1502M  11M    364M   349
+63721  top          6.3  00:02.43 1/1   0    28    12M    0B     0B     63721
+0      kernel_task  4.5  02:38:05 460/8 0    0     80M    0B     0B     0
+340    bluetoothd   1.4  09:49.64 4     2    433   7298K  0B     1808K  340
+63126  Google Chrom 1.3  00:17.31 21    1    173   74M+   0B     16M    21772
+</code></pre>
+<p>Load Avg</p>
+<ul>
+<li>load average, 부하 지표</li>
+<li>CPU가 처리하는 걸 기다리는 작업의 갯수.</li>
+<li>1분당 평균으로 몇개의 일이 쌓이는지를 나타내는 값.</li>
+</ul>
+<p>%CPU와 TIME</p>
+<ul>
+<li>%CPU는 어느 프로세스가 얼만큼 쓰고 있는지 알려준다.</li>
+<li>TIME은 실제로 CPU를 사용한 시간</li>
+</ul>
+<p>top 명령어 실행 중</p>
+<ul>
+<li>c를 누르면 COMMAND 상세 표시 전환(나는 mode[n] 이런게 뜨면서 안된다..ㅜ)\</li>
+<li>q를 누르면 종료</li>
+</ul>
+<blockquote>
+<p>프로세스 종료 방법</p>
+</blockquote>
+<pre><code># 비밀번호 입력 후 성공하면 아무러 메시지가 표시되지 않는다.
+sudo kill {종료하고 싶은 PID}
+
+# 여러 프로세스를 한 번에 종료하기.
+# 프로세스 ID들을 스페이스로 띄어서 나열
+sudo kill {종료하고 싶은 PID} {종료하고 싶은 PID} {종료하고 싶은 PID}
+</code></pre>
+<blockquote>
+<p>민트의 정리</p>
+</blockquote>
+<ul>
+<li>load average >= CPU 코어수가 되면 과부하 상태</li>
+<li>CPU 사용률과 CPU 시간 양쪽이 큰 프로세스는 과부하 원인의 가능성이 높음</li>
+<li>과부하 원인인 프로세스는 kill 명령어로 종료함</li>
+</ul>
+<hr>
+<h3>12화 시스템 메모리 부족을 파악하고 싶어(top 표시 전환)</h3>
+<p>Load Avg가 높은 이유는 CPU 사용률 또는 메모리 부족이 원인</p>
+<p>프로그램은 필요할 때만 프로세스를 실행해서 처리가 끝나면 종료하는 것과<br>
+컴퓨터를 사용하는 동안 계속 프로세스를 실행시켜야 하는 것이 있다.<br>
+이런 상주형 프로세스를 서비스라고 부른다.</p>
+<blockquote>
+<p>기동 스크립트 사용법</p>
+</blockquote>
+<pre><code># service 명령어 (Ubuntu, CentOS, RedHat 등)
+sudo service apache2 restart
+
+# init.d 명령어 (Debian 등)
+sudo /etc/init.d/apache2 restart
+</code></pre>
+<p>스왑 영역도 전부 사용하게 되면 SSH 접속도 불가능할 때도 있다. (OOM Killer가 동작)</p>
+<p>메모리 사용량 순서 - shift + m<br>
+CPU 시간 순서로 나열 - shift + t<br>
+CPU 사용량 순서로 돌아가려면 - shift + p</p>
+<hr>
+<h3>13화 로그 파일에서 필요한 줄만 뽑고 싶어(파이프라인)</h3>
+<p><code>grep</code> - 파일에서 내용을 찾는 명령어</p>
+<blockquote>
+<p>사용방법</p>
+</blockquote>
+<pre><code># 재귀적으로 /var/log/apache2/ 안에서 orange를 포함하는 파일을 찾는다.
+grep -r "orange" /var/log/apache2/
+
+# 대상파일에서 orange를 찾는다.
+grep "orange" /var/log/apache2/access.log
+</code></pre>
+<p><code>less</code> - 텍스트 파일을 한 번에 한 화면씩 보여주는 터미널 페이저</p>
+<pre><code># grep과 파이프라인을 이용해 함께 사용된다.
+grep "orange" /var/log/apache2/access.log | less
+</code></pre>
+<p><code>cat</code> - 지정한 파일 내용을 읽어서 그대로 출력하는 명령어</p>
+<p><code>zcat</code> - 압축 파일을 읽어서 내용을 풀어서 출력하는 명령어(gzip 형식 전용 .gz, .tgz)</p>
+<p><code>xzcat</code> - xz 형식용 (.xz 파일)</p>
+<p><code>unzip</code> - zip 형식용</p>
+<p><code>tail</code> - 파일 내용 끝부분만 출력하는 명령어(-f 옵션을 통해 실시간으로 출력)</p>
+<pre><code># 이런식으로 조합해 사용 가능
+tail -F access.log | grep "/retro" | grep -v "/live" | less
+</code></pre>
+<blockquote>
+<p>파일 내용을 다음 명령어에 출력하는 시작 그룹</p>
+</blockquote>
+<p>파일 내용을 읽어서 출력</p>
+<ul>
+<li>cat</li>
+<li>zcat</li>
+<li>xzcat</li>
+</ul>
+<p>파일에 추가된 부분을 출력</p>
+<ul>
+<li>tail</li>
+</ul>
+<blockquote>
+<p>중간에서 이전 명령어 출력을 가공하는 중간 그룹</p>
+</blockquote>
+<ul>
+<li>grep - 해당하는 줄만 출력</li>
+<li>sort - 재정렬</li>
+<li>cut - 내용을 잘라냄</li>
+<li>uniq - 중복된 걸 제거</li>
+<li>sed - 내용을 변경</li>
+<li>awk - 내용을 변경</li>
+</ul>
+<blockquote>
+<p>이전 명령어 출력을 가공하는 최종 그룹</p>
+</blockquote>
+<ul>
+<li>less - 스크롤할 수 있게 출력</li>
+<li>tee - 파일을 저장</li>
+<li>wc - 줄 수나 문자 수를 카운트</li>
+<li>head - 첫 부분만 추출</li>
+</ul>
+<blockquote>
+<p>오코의 정리</p>
+</blockquote>
+<ul>
+<li>파이프라인을 사용하면 명령어끼리 조합해서 사용 가능</li>
+<li>grep은 다른 명령어 출력을 가공하는 데도 사용 가능</li>
+<li>zcat을 사용하면 압축된 로그 파일에서 바로 파이프라인으로 연결 가능</li>
+</ul>
+<hr>
+<h3>14화 작업 절차를 자동화하고 싶어(셸 스크립트)</h3>
+<p>cd 명령어를 인수 없이 실행하면 홈 디렉터리로 이동함.</p>
+<pre><code>  Documents cd
+  ~
+</code></pre>
+<blockquote>
+<p>스크립트 작성방법</p>
+</blockquote>
+<p>setup.sh 같은 sh 확장자 파일을 생성한다.<br>
+vim setup.sh을 실행해 편집한다.<br>
+첫번째 줄에 아래와 같이 입력한다.</p>
+<pre><code>#!/bin/bash
+</code></pre>
+<p>셔뱅(shebang)으로 스크립트를 실행하는 프로그램(인터프리터)을 지정, Hash-Bang이라고도 한다.<br>
+프로그램 전체 경로를 적으면 스크립트를 실행하는 프로그램을 셸이 자동으로 전환해준다.<br>
+bash 이외에도 /usr/bin/perl /usr/bin/ruby1.9.1 등이 있다.</p>
+<blockquote>
+<p>스크립트를 실행 권한</p>
+</blockquote>
+<p>스크립트가 만들어졌다면 실행 권한을 주어야 한다.<br>
+<code>chmod</code> - 권한을 설정하는 명령어</p>
+<pre><code>chmod +x setup.sh
+</code></pre>
+<blockquote>
+<p>스크립트 실행</p>
+</blockquote>
+<p>파일명을 쳐서 명령어 실행이 가능한 건 파일이 /bin/이나 /usr/bin/ 같은 특별한 장소에 있을 때 가능하다.</p>
+<ul>
+<li>O - /home/mint/setup.sh</li>
+<li>O - ./setup.sh</li>
+<li>O - ~mint/setup.sh</li>
+<li>X - setup.sh</li>
+</ul>
+<blockquote>
+<p>에러가 발생한 곳에서 처리를 끝내도록 하는 법</p>
+</blockquote>
+<pre><code># 이전 명령어가 정상 종료했는지 확인하기
+# 이상 종료했으면 스크립트 실행을 중단하기
+if [ $? != 0 ]; then exit; fi
+</code></pre>
+<blockquote>
+<p>민트의 정리</p>
+</blockquote>
+<ul>
+<li>bash용 셸 스크립트를 작성하려면 텍스트 파일 첫 줄에 #!bin/bash라고 적고 두 번째 줄 이후는 자동 실행하고 싶은 셸 명령어를 작성한다.</li>
+<li>셸 스크립트는 chmod +x 파일명으로 실행 권한을 설정한다.</li>
+<li>명령어가 이상이 생겨서 그 시점에서 스크립트 실행을 중단하고 싶을 땐 if [ $? != 0 ]; then exit; fi 라고 적는다.</li>
+</ul>
+<hr>
+<h3>15화 같은 문자열을 스크립트에서 재사용하고 싶어(셸 변수)</h3>
+<blockquote>
+<p>스크립트 일괄 치환</p>
+</blockquote>
+<p>vim에서 일괄 치환을 쓰려면 esc키로 노멀 모드로 돌아간 후 아래 명령어 입력 후 enter</p>
+<pre><code># %s 전체 치환 명령어
+# 명령어 각 부분을 구분하는 문자 / 이외에도 임의의 문자를 사용 가능
+%s/원문/수정문/
+</code></pre>
+<blockquote>
+<p>변수 지정</p>
+</blockquote>
+<pre><code># 변수명 = 변수값, x를 ~이라고 함이라는 표현에 가깝다.
+log=/var/log/apache2/access.log
+
+# 사용은 $log, ${log}
+less $log
+</code></pre>
+<blockquote>
+<p>명령어를 변수 지정</p>
+</blockquote>
+<pre><code># tar xfv 파일 경로 -> 파일 압축 풀기
+# tar cfv 파일 경로 -> 파일 압축
+tar_extract="tar xfv"
+tar_compress="tar cfv"
+
+# 문자열을 eval 명령어에 넘기면 명령어열로 실행 가능
+eval "$tar_extract file.tar.gz"
+eval "$tar_compress directory"
+</code></pre>
+<blockquote>
+<p>공통 부분을 변수로 지정하는 방법</p>
+</blockquote>
+<pre><code>base=/var/log/apache2
+latest=${base}/access.log
+prev=${base}/acesss.log.7.gz
+</code></pre>
+<blockquote>
+<p>오코의 정리</p>
+</blockquote>
+<ul>
+<li>터미널이나 셸 스크립트에서 변수명=문자열이라고 작성하면 오른쪽 문자열이 값이고 왼쪽에 있는 게 이름인 변수가 정의됨</li>
+<li>그 이후는 $변수명 또는 ${변수명}으로 그 값과 동일하게 사용 가능</li>
+<li>유지 보수하기 쉽도록 변수명은 변수에 저장될 내용을 잘 설명하는 이름을 사용하기</li>
+</ul>
+<hr>
+<h3>16화 작업 환경과 상태를 정해서 스크립트를 실행하고 싶어(환경 변수)</h3>
+<p><code>환경 변수</code> - 자기가 정의하지 않아도 $변수명으로 값을 참조할 수 있는 특수한 변수.</p>
+<p>${HOME} or $HOME - 홈 디렉토리 경로(/home/user, /home/admin, /home/mint)</p>
+<pre><code># 지금 환경에서 어떤 환경 변수를 쓸 수 있는지 볼 수 있다.
+env
+</code></pre>
+<blockquote>
+<p>사용하기 편한 환경 변수</p>
+</blockquote>
+<ul>
+<li>HOME - 현재 사용자의 홈 디렉터리 경로</li>
+<li>PWD - 현재 디렉터리(작업 디렉터리) 경로</li>
+<li>EDITOR - 정해진 텍스트 에디터(vim, Emacs, nano 등) 경로</li>
+<li>PAGER - 정해진 페이저(less, lv 등) 경로</li>
+<li>USER - 현재 사용자의 사용자명</li>
+<li>GROUP - 현재 사용자의 그룹명</li>
+<li>HOSTNAME - 머신의 호스트명</li>
+</ul>
+<blockquote>
+<p>명령어 치환</p>
+</blockquote>
+<p>명령어열 실행 결과의 문자열로 치환된다.</p>
+<pre><code># 2021년 3월 29일 월요일 22시 50분 43초 KST
+date
+
+# 210329
+date +%y%m%d
+
+# 2021-03-29
+date +%Y-%m-%d
+
+# 2021y03m29d22h
+date +%Yy%mm%dd%Hh
+</code></pre>
+<blockquote>
+<p>오코의 정리</p>
+</blockquote>
+<ul>
+<li>환경 변수를 사용하면 셸 스크립트 실행 시 값이 변하므로 환경에 맞는 처리가 가능해짐</li>
+<li>$(명령어열) 또는 `명령어열`이라고 적으면 명령어열 실행 결과를 문자열로 적은 것과 같아짐(명령어 치환)</li>
+<li>명령어 치환에서 파이프라인이나 변수 등도 사용 가능</li>
+</ul>
+<hr>
+<h3>17화 로그 파일에서 필요한 줄만 뽑고 싶어(cut)</h3>
+<p>파이프라인을 써서 명령어끼리 조합하기</p>
+<p>STEP 1</p>
+<pre><code># calculator 파일 내용 보기
+cat calculator.py
+
+# 기본 계산기
+def add(a, b):
+  return a+b
+
+def subtract(a, b):
+  return a-b
+
+def multifply(a, b):
+  return a*b
+</code></pre>
+<p>STEP 2</p>
+<pre><code># return을 포함하지 않은 줄만 출력
+cat calculator.py | grep -v "return"
+
+# 기본 계산기
+def add(a, b):
+
+def subtract(a, b):
+
+def multifply(a, b):
+</code></pre>
+<p>STEP 3</p>
+<pre><code># 원하는 부분만 잘라내기, less를 연결해 결과를 눈으로 확인할 수 있음
+cat calculator.py | grep -v "return" | cut -d " " -f 1 | less
+#
+def
+
+def
+
+def
+</code></pre>
+<hr>
+<h3>18화 같은 내용의 줄을 세어보고 싶어(sort와 uniq)</h3>
+<blockquote>
+<p>페이지 순위를 만드는 방법</p>
+</blockquote>
+<ul>
+<li>적절하지 않은 줄은 제외하고 필요한 줄만 집계대상으로 삼음</li>
+<li>로그 각 줄에서 접속한 페이지 경로를 추출</li>
+<li>경로 등장 횟수를 카운트</li>
+<li>등장 횟수로 경로를 재정렬</li>
+<li>상위와 하위 항목을 추출</li>
+</ul>
+<p><code>sort</code> - 입력된 내용을 알파벳 순서로 재정렬하는 명령어</p>
+<pre><code># 알파벳순
+cat input.txt | sort
+</code></pre>
+<p><strong>sort 옵션</strong></p>
+<p>--reverse, -r : 내림차순 정렬 (sort는 기본 오름차순 정렬)</p>
+<p><code>uniq</code> - IT 용어에서는 '같은 것이 없음'이라는 의미 사용할 때가 많다.</p>
+<pre><code># 같은 내용의 중복은 제거됨
+cat input.txt | uniq
+</code></pre>
+<p><strong>uniq 옵션</strong></p>
+<p>--count, -c : 각각 내용이 몇 번 등장했는가 출력</p>
+<p><strong>함께 사용한다면 이렇게 사용</strong></p>
+<pre><code># 결과를 less에 넘겨서 간단히 확인 가능
+cat /var/log/apache2/access.log | grep -v "/live" | cut -d " " -f 7 | sort | uniq -c | less
+</code></pre>
+<pre><code># 결과를 less에 넘겨서 간단히 확인 가능
+cat /var/log/apache2/access.log | grep -v "/live" | cut -d " " -f 7 | sort | uniq -c | less
+</code></pre>
+<blockquote>
+<p>요코의 정리</p>
+</blockquote>
+<pre><code>#!/bin/bash
+
+# 집계 대상 로그 위치를 변경하기 쉽도록 변수로 정의
+log=/var/log/apache2/access.log
+# 출력할 건수를 변경하기 쉽도록 변수로 정의
+count=10
+
+# 결과 이전에 echo로 설명 텍스트를 출력
+echo "접속수가 많은 ${count}개 페이지:"
+# 상위 10건 출력
+cat $log | grep -v "/live" | cut -d " " -f 7 | sort | uniq -c | sort -r | head -n $count
+
+echo "접속수가 적은 ${count}개 페이지:"
+# 상위 10건 출력
+cat $log | grep -v "/live" | cut -d " " -f 7 | sort | uniq -c | sort -r | tail -n $count
+
+# cut -d " " -f 7 | sort | uniq -c : 페이지별 접속수 집계
+# sort -r : 접속수가 많은 순서로 정렬
+</code></pre>
+<blockquote>
+<p>첫 N줄, 마지막 N줄을 제외하기</p>
+</blockquote>
+<pre><code># 앞에서 5줄째
+head -n 5
+# 앞에서 5줄째
+head -n +5
+# 마지막 5줄을 제외한 나머지 모든 줄을 출력
+head -n -5
+
+# 뒤에서 5줄째
+tail -n 5
+# 앞에 5줄을 제외한 나머지 모든 줄을 출력
+tail -n +5
+# 뒤에서 5줄째
+tail -n -5
+</code></pre>
+<p>MacOS에서 <code>head -n -5</code>를 하면 <code>head: illegal line count -- -5</code> 에러가 뜸</p>
+<hr>
+<h3>CSV 파일을 열의 내용에 따라 정렬하고 싶어(sort와 리다이렉트)</h3>
+<blockquote>
+<p>작업 순서</p>
+</blockquote>
+<ul>
+<li>불필요한 열을 삭제하기</li>
+<li>줄을 재고수 크기로 재정렬</li>
+<li>결과를 파일로 출력하기</li>
+</ul>
+<pre><code># 저는 liverpool.csv가 있습니다.
+cat liverpool.csv
+# 결과
+Name,Position,Born,Number,Nationality
+Roberto Firmino,FW,1991,no. 9,Brazil
+Sadio Mane,FW,1992,no. 10,Senegal
+Mohamed Salah,FW,1992,no. 11,Egypt
+Joe Gomez,DF,1997,no. 12,England
+Alisson Becker,GK,1992,no. 13,Brazil
+
+# cut을 써서 간단히 열 단위로 정보를 추출 (시작 번호 1)
+cat liverpool.csv | cut -d "," -f 3
+
+Born
+1991
+1992
+1992
+1997
+1992
+
+# 여러 숫자를 지정하거나 열 범위를 지정할 수 있다. (, 사이에 공백이 들어가면 cut: [-cf] list: values may not include zero 에러 발생)
+cat liverpool.csv | cut -d "," -f 1,3
+Name,Born
+Roberto Firmino,1991
+Sadio Mane,1992
+Mohamed Salah,1992
+Joe Gomez,1997
+Alisson Becker,1992
+</code></pre>
+<p>cut 명령어</p>
+<ul>
+<li>사용법 cut -d "," -f 1,3</li>
+<li>-d는 --delimiter와 같다. (구분자를 지정하지 않으면 탭문자를 사용)</li>
+<li>-f는 --fields와 같다.</li>
+</ul>
+<p>sort 명령어</p>
+<ul>
+<li>사용법 sort -t "," -k 2 -n -b</li>
+<li>-t는 --field-separator와 같다.</li>
+<li>-k는 --key와 같다.</li>
+<li>숫자 정렬을 위해 --number 또는 -n 옵션을 지정한다.</li>
+<li>-b는 --ignore-leading-blanks로 오른쪽 줄맞춤을 위해서 넣은 스페이스를 무시하고 문자열을 정렬할 수 있게 해줌</li>
+</ul>
+<pre><code>cat liverpool.csv | cut -d "," -f 1,3 | sort -t "," -k 2 -n -b
+Name,Born
+Roberto Firmino,1991
+Alisson Becker,1992
+Mohamed Salah,1992
+Sadio Mane,1992
+Joe Gomez,1997
+</code></pre>
+<blockquote>
+<p>리다이렉트를 사용해 파일 만들기</p>
+</blockquote>
+<p>> 를 사용해 텍스트 파일로 만들 수 있다.<br>
+>> 두번 이어서 쓴다면 기존 파일에 추가된다. (덧붙여짐)</p>
+<pre><code>cat liverpool.csv | cut -d "," -f 1,3 | sort -t "," -k 2 -n -b > test.csv
+</code></pre>
+<hr>
+<h3>20화 명령줄 지정으로 작업 내용을 바꾸고 싶어(명령줄 인수)</h3>
+<p>명령어명 뒤에 스페이스를 입력하고 대상을 적는 것 예) cat /var/log.apache2/access.log<br>
+명령어에 대해 추가 지시를 내리는 게 명령어 라인 인수\</p>
+<p><strong>옵션은 인수의 한 종류</strong><br>
+생략 가능(지정하면 행동이 변하는)한 인수를 옵션 인수</p>
+<p>셸 스크립트 내부에서는 실행 시 지정한 인수 값을 $1, $2 같은 변수로 참조할 수 있다.<br>
+예) ./some_script.sh first second</p>
+<p>일반 명령어도 인수가 3개 이상이면 옵션으로 각각 의미가 있는 이름을 붙인다.</p>
+<pre><code># -b 옵션값을 base라는 변수로도 참조할 수 있다. 나머지도 동일.
+while getopts b:n:p:o: OPT
+do
+  case $OPT in
+    b) base="$OPTARG" ;;
+    n) next="$OPTARG" ;;
+    p) previous="$OPTARG" ;;
+    o) output="$OPTARG" ;;
+  esac
+done
+</code></pre>
+<hr>
+<h3>21화 조건에 따라 처리 흐름을 바꾸고 싶어(조건 분기)</h3>
+<p>셸 스크립트 안에 조건문을 넣어서 여러 상황을 처리할 수 있도록 한다.</p>
+<pre><code># $#은 스크립트에서 지정한 인수 개수를 의미하는 특수한 변수
+if [ $# = 2]
+then # 줄바꿈 다음에 then을 써야 한다.
+  echo "Hello!" # 조건을 만족하면 실행하는 내용
+else
+  echo "Hi!" # 조건을 만족하지 않으면 실행하는 내용
+fi
+
+# 줄바꿈 대신에 ;(세미콜론)을 사용하면 여러 줄을 한 줄로 합칠 수 있음
+if [ $# = 2 ]; then echo "Hello!"; else echo "Hi!"; fi
+</code></pre>
+<blockquote>
+<p>옵션이 있는지 확인하는 조건문</p>
+</blockquote>
+<pre><code>while getopts f:r: OPT
+do
+  case $OPT in
+    f) filename="$OPTARG" ;;
+    r) reportname="$OPTARG" ;;
+  esac
+done
+
+# 부정 조건, 좌우 값이 다를 때를 의미
+if [ "$reportname" != "" ]
+then
+  echo "reportname O"
+else
+  echo "reportname X"
+fi
+</code></pre>
+<blockquote>
+<p>요코의 정리</p>
+</blockquote>
+<p>단순 조건 분기</p>
+<pre><code>if [ $a = "문자열" ]
+then
+  $a 내용이 "문자열"과 같다면 실행하는 처리
+fi
+</code></pre>
+<p>부정 조건으로 조건 분기</p>
+<pre><code>if [ $a != "문자열" ]
+then
+  $a 내용이 "문자열"과 다르면 실행하는 처리
+fi
+</code></pre>
+<p>조건에 해당하지 않을 때 처리</p>
+<pre><code>if [ 조건 ]
+then
+  조건을 만족하면 실행하는 처리
+else
+  조건을 만족하지 않으면 실행하는 처리
+fi
+</code></pre>
+<p>시점을 넓혀서 생각하면 새로운 스크립트를 작성하기 전에 '이건 기존에 하던 작업의 일환으로 처리하는 게 자연스럽겠네'라는 게 보이기 시작한다.</p>
+<blockquote>
+<p>if나 [에 스페이스가 필요한 이유</p>
+</blockquote>
+<p>[도 명령어다.<br>
+실제 파일은 /usr/bin/[에 있다. (mac에서는 찾을 수 가 없음 ㅜㅜ)<br>
+[ - 명령어<br>
+$#, =, ] - 세 개가 다 인수</p>
+<hr>
+<h3>22화 명령어 이상 종료에 대응하고 싶어(종료 상태)</h3>
+<p><code>에러 핸들링</code> - 어떤 문제가 발생했을 때 그것에 맞게 적절하게 처리하는 것<br>
+<code>$?</code> - 바로 전에 실행한 명령어 종료 상태, 0은 성공, 이상 종료는 값이 0이 아니다.</p>
+<pre><code># 줄바꿈 대신에 ;(세미콜론)을 사용하면 여러 줄을 한 줄로 합칠 수 있음
+# 이전 명령어 종료 상태가 0이 아니라면 스크립트 실행을 중단, 종료한다.
+# exit만 적으면 exit 0과 같다.
+if [ $? != 0 ]; then exit; fi
+
+if [ $1 = "" ]
+then
+  echo "처리할 파일을 지정해야 함"
+  # 0 이외라면 무엇을 지정해도 됨(특별히 에러 종류를 구별할 필요가 없으면 1을 지정하는 게 보통)
+  exit 1
+fi
+</code></pre>
+<blockquote>
+<p>요코의 정리</p>
+</blockquote>
+<ul>
+<li>$?으로 직전에 실행한 명령어 종료 상태를 참조 가능</li>
+<li>$? 값은 명령어가 정상 종료하면 0, 이상 종료하면 0 이외의 값이 됨</li>
+<li>exit에 인수로 숫자를 지정하면 셸 스크립트의 종료 상태가 됨</li>
+<li>if로 종료 상태를 참조하면 명령어가 정상 종료했는지에 따라 조건 분기가 가능</li>
+</ul>
+<blockquote>
+<p>종료 상태 범위</p>
+</blockquote>
+<p>0은 정상 종료<br>
+0 ~ 255까지 범위가 있다.</p>
+<hr>
+<h3>23화 같은 처리를 반복해서 실행하고 싶어(for)</h3>
+<p>for 반복문 - 같은 처리를 조금씩 인수(처리 대상 파일명 등)를 바꿔가면서 반복 실행하는 구문</p>
+<pre><code># 네개의 값을 하나의 변수명으로 순서대로 참조한다는 의미
+for filename in redmine.log kintail.log download.log notice.log
+do
+  ./create-report.sh $filename
+done
+</code></pre>
+<p>줄바꿈으로 표시하는 법</p>
+<pre><code># for ~ in 열은 줄바꿈을 넣으면 안된다.
+# 백슬래쉬(이스케이프)를 넣으면 가능하다. 한글 폰트에서는 원화 기호로 표시되기도 함
+for filename in redmine.log \
+                kintail.log \
+                download.log \
+                notice.log
+
+# 보기 쉽게 변수로 만드는 것도 좋은 방법.
+filieList=redmine.log kintail.log download.log notice.log
+for filename in $fileList
+
+# error.log를 제외한 /var/log/apache2/ 위치에 있는 확장자가 .log인 파일 목록
+for filename in `cd /var/log/apache2; ls *.log | grep -v error.log`
+</code></pre>
+<blockquote>
+<p>요코의 정리</p>
+</blockquote>
+<ul>
+<li>for 반복문을 사용하면 값 리스트에 따라 같은 처리를 인수를 바꿔가며 반복 실행 가능</li>
+<li>반복문에서 사용하는 값 리스트로 변수나 명령어 치환 결과도 사용 가능</li>
+</ul>
+<blockquote>
+<p>for 반복물 한 줄로 쓰기</p>
+</blockquote>
+<pre><code>for file in data log scripts; do echo $file; done
+</code></pre>
+<hr>
+<h3>공통 처리를 계속 재사용하고 싶어(셸 함수)</h3>
+<p>함수 - 프로그램에서 하나로 모아놓은 처리 단위에 이름을 붙여서 부품으로 사용하기 쉽게 만든 걸 뜻한다.</p>
+<pre><code>#!/bin/bash
+
+hello() {
+  echo "안녕하세요"
+  echo "$1입니다"
+  echo "잘 부탁합니다"
+}
+
+hello 황성준
+</code></pre>
+<p>hello.sh로 만들고 <code>chmod +x hello.sh</code>으로 실행권한 부여 그 다음 ./hello.sh 실행하면 출력됨</p>
+<blockquote>
+<p>함수 종료 상태</p>
+</blockquote>
+<pre><code>report() {
+  if [ $1 = "" ]
+  then
+    echo "인수가 필요함"
+    # 함수내에서 exit를 사용하면 함수뿐만 아니라 스크립트 자체 처리까지 도중에 중단.
+    return 1 # 함수 실행을 중단하고 종료 상태를 1로 지정함
+}
+
+today() {
+  # return date +%Y-%m-%d 으로 하면 반환되는 줄 알았지만 실행하면 아래와 같은 에러가 출력
+  # ./today.sh: line 4: return: date: numeric argument required
+
+  date +%Y-%m-%d # 함수 실행 결과는 명령어 실행 결과의 문자열이 됨
+}
+
+report marketing.log mail-$(today).csv
+</code></pre>
+<blockquote>
+<p>요코의 정리</p>
+</blockquote>
+<ul>
+<li>어떤 처리를 하나도 묶어서 함수로 정의 가능함</li>
+<li>정의한 함수는 같은 스크립트 안에서 원하는 곳에서 몇번이고 호출할 수 있음</li>
+<li>함수도 인수를 사용 가능</li>
+<li>함수 실행을 중단하고 원래 처리로 돌아갈 때는 exit가 아니라 return 사용</li>
+</ul>
+<p>셸 스크립트는 기본적으로 실행하고 싶은 명령어를 실행 순서대로 작성하는 거지만<br>
+함수를 사용한다면 실행 순서를 신경 쓰지 않고 중요한 부분부터 스크립트를 작성한다.</p>
+<blockquote>
+<p>섈 스크립트의 인수와 함수의 인수</p>
+</blockquote>
+<p>함수 안에서 $1이라고 하면 셸 스크립트의 인수가 아니라 함수의 인수를 참조</p>
+</div></div></article></div></main></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"title":"만화로 배우는 리눅스 시스템 관리 1권","date":"2021-03-14","slug":"devops/2020/system-admin-girl1/index","content":"\u003cp\u003e전에 읽었던 책이지만, 설명을 쉽게 풀어서 리눅스 입문하기 좋은 책이라고 생각되어 찾아봤습니다.\u003cbr\u003e\n서울전자도서관에선 계약 문제인지 검색이 더 이상 되지 않았습니다.\u003cbr\u003e\n다행히 경기도사이버도서관에서 1,2권이 있어 대출 후 책을 읽어가며 요약을 해보려고 합니다.\u003c/p\u003e\n\u003ch2\u003e명령어 \u0026#x26; 셸 스크립트 입문\u003c/h2\u003e\n\u003ch3\u003e1화 다른 컴퓨터를 리모트로 조작하고 싶어(SSH)\u003c/h3\u003e\n\u003cp\u003e\u003ccode\u003essh\u003c/code\u003e(Secure SHell) - 다른 PC에서 동작하는 프로그램을 자기 PC 화면에 표시해서 조작할 수 있게 하는 명령어.\u003c/p\u003e\n\u003cp\u003e터미널을 실행해서 ssh 명령어 뒤에 로그인할 사용자명, @, 접속할 로그인 PC 주소를 입력합니다.\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003essh {로그인할 사용자명}@{접속할 로그인 PC 주소}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eX를 활용해 SSH 사용\u003cbr\u003e\n\u003cstrong\u003essh 옵션\u003c/strong\u003e(X를 사용할 때, X는 리눅스에서 화면 표시와 입력을 담당하는 구조)\u003cbr\u003e\n-Y : X 전송 지정\u003cbr\u003e\n-C : 통신 내용을 압축(응답 속도를 좋게함)\u003c/p\u003e\n\u003cp\u003e연결 후 nautilus 명령어 실행\u003c/p\u003e\n\u003cp\u003eexit - 로그아웃 명령어, SSH 접속을 끊음\u003c/p\u003e\n\u003cp\u003ersh(Remote SHell)은 네트워크에 그대로 내보내기 때문에 네트워크 감시자가 모을 수 있습니다.\u003cbr\u003e\nrsh 보다 ssh 사용을 하면 암호화된 통신이 가능합니다.\u003c/p\u003e\n\u003chr\u003e\n\u003ch3\u003e2화 임시로 관리자 권한을 얻고 싶어(sudo)\u003c/h3\u003e\n\u003cp\u003e접근 권한은 파일 소유자가 아니면 바꿀 수 없지만, 처리할 수 있는 사용자가 있습니다. -\u003e root\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003esudo\u003c/code\u003e - 관리자 권한을 행사할 수 있음\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003esudo {실제 사용하고 싶은 명령어} {명령어 인자}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eGUI이라면 gksudo -sync 명령어 사용\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e우분투에서 root로 로그인하기\u003c/strong\u003e\u003cbr\u003e\nsudo -i 또는 sudo su로 가능 (명령어 입력 후 비밀번호를 입력해야 한다.)\u003c/p\u003e\n\u003chr\u003e\n\u003ch3\u003e3화 다양한 문자열을 한 번에 검색하고 싶어(grep)\u003c/h3\u003e\n\u003cp\u003e\u003ccode\u003egrep\u003c/code\u003e - 파일 내용 중에 찾는 문자열이 포함되었는지를 조사해준다.(global regular expression print)\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003egrep {옵션} \"검색하고 싶은 문자열\" {찾을 파일이 있는 폴더 경로(검색 시작점)}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003cstrong\u003egrep 옵션\u003c/strong\u003e\u003cbr\u003e\n-r : 서브 폴더까지 검색하도록 지정\u003c/p\u003e\n\u003cp\u003e정규 표현식(regular expression)\u003cbr\u003e\n| 값 | 의미 |\n| --- | --- |\n| () | 그룹화 |\n| | | 좌우 중 하나 |\n| ? | 직전 표현이 0회 또는 1회 등장 |\n| * | 직전 표현이 0회 이상 연속해서 등장 |\n| + | 직전 표현이 1회 이상 연속해서 등장 |\n| . | 임의의 한 문자 |\n| ^ | 줄 머리 |\n| $ | 줄 끝 |\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e파일 내용을 대문자 소문자 차이를 무시하고 검색\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003egrep -r -i \"sungjun hwang\" 디렉토리 경로\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e파일 내용을 대문자 소문자 차이를 무시하고 정규 표현식으로 검색\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003egrep -r -i -E \"((성준) *(황)|sungjun +hwang)\" 디렉토리 경로\n\u003c/code\u003e\u003c/pre\u003e\n\u003chr\u003e\n\u003ch3\u003e4화 터미널에서도 대화형으로 파일을 편집하고 싶어(vim)\u003c/h3\u003e\n\u003cp\u003e\u003ccode\u003evim\u003c/code\u003e - 명령줄용 텍스트 에디터(vi의 강화판)\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003evim 설치 명령어\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003esudo apt-get install vim\n또는\nyum install vim\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003esudo vim {편집하고 싶은 파일 경로}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003ei - 끼워넣기, INSERT\u003cbr\u003e\n끼워넣기 모드 조작 방법\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e화살표로 키로 커서를 움직이기\u003c/li\u003e\n\u003cli\u003e키 입력으로 문자를 입력하기\u003c/li\u003e\n\u003cli\u003e백스페이스키나 Del 키로 글자 지우기 등\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eESC - 편집을 끝낸다.\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e모드의 종류\u003c/strong\u003e\u003cbr\u003e\n노멀 모드 - ESC로 돌아온 경우\u003cbr\u003e\n끼워넣기 모드 - i, 일반 에디터와 같은 조작 방법\u003cbr\u003e\n치환 모드 - Shift + r, 치환 모드용 조작 방법\u003cbr\u003e\n선택 모드 - v, 선택 모드용 조작 방법\u003cbr\u003e\n검색 모드 - /, 검색 모드용 조작 방법\u003cbr\u003e\n등등...\u003c/p\u003e\n\u003cp\u003e:wq - 저장하고 종료(Write, Quit)\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e검색 모드\u003c/strong\u003e\u003cbr\u003e\n/ 키를 눌러서 검색 모드로 들어가고 검색하고 싶은 문자열을 입력하고 Enter\u003cbr\u003e\nN - 다음으로 검색된 곳으로 이동\u003cbr\u003e\nShift + N - 이전에 검색된 곳으로 이동\u003cbr\u003e\n정규 표현식도 사용 가능\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e더 자세한 명령어는 아래 사이트 참조\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e\u003ca href=\"https://vim.rtorr.com/lang/ko\"\u003eVim 치트 시트\u003c/a\u003e\u003c/p\u003e\n\u003chr\u003e\n\u003ch3\u003e5화 vim에서도 복사 \u0026#x26; 붙이기 \u0026#x26; 되돌리기를 하고 싶어(yank)\u003c/h3\u003e\n\u003cp\u003e\u003ccode\u003eyank\u003c/code\u003e - vim에 있는 클립보드 같은 것(vim 안에서만 사용)\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e사용방법\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003col\u003e\n\u003cli\u003e노멀 모드에서 v 키 입력 -\u003e 비주얼 모드로 전환\u003c/li\u003e\n\u003cli\u003e범위를 정하고 y 키 입력\u003c/li\u003e\n\u003cli\u003e붙이고 장소로 이동하고 Shift + p 입력\u003c/li\u003e\n\u003cli\u003e여러번 반복하고 싶은 경우 -\u003e 10번 반복하고 싶다면 10 입력 후 Shift + p\u003c/li\u003e\n\u003c/ol\u003e\n\u003cblockquote\u003e\n\u003cp\u003e콘솔 일시정지\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003eCtrl + z는 일시 정지 - 맥은 Control + z\u003cbr\u003e\nfg를 입력해서 돌아가기(ForeGround)\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003evim에서 되돌리기(Undo)\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003e노멀 모드에서 u 키 입력\u003cbr\u003e\n다른 모드에 있다면 esc 키로 노멀 모드로 돌아온 다음 u 키\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e되돌리기의 되살리기(Redo)\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003eCtrl + r\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003eUndo, Redo 모두 횟수를 지정해 실행 가능\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003e10u / 10 ctrl + r\u003c/li\u003e\n\u003cli\u003e9999u 는 첫 상태로 되돌아가는 것\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr\u003e\n\u003ch3\u003e6화 갑작스러운 네트워크 끊김에서 복귀하고 싶어(가상 터미널)\u003c/h3\u003e\n\u003cp\u003eGNOME 단말은 데스크톱 환경에서 콘솔 환경을 들여다보는 창\u003cbr\u003e\n가상 단말은 콘솔 환경에서 GNOME 단말이 하는 것과 같은 걸 하는 애플리케이션\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003etmux 설치\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003esudo apt-get install tmux \u0026#x3C;- ssh로 연결된 서버에 설치\n\ntmux \u0026#x3C;- 입력해서 실행\n\ntmux attach \u0026#x3C;- ssh로 다시 서버에 접속한 후 재연결\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e빠져나오기\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003ectrl + b 입력 후 d(Detach) 키 입력\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003ectrl + b 입력 후 동작 키\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003ed - Detach\u003c/li\u003e\n\u003cli\u003ec - Create (새로운 탭 생성)\u003c/li\u003e\n\u003cli\u003ep - Previous (이전 탭 이동)\u003c/li\u003e\n\u003cli\u003en - Next (다음 탭 이동)\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003ectrl 키와 영숫자 키 조합은 다른 애플리케이션에서도 다양하게 사용되기 때문에 충돌이 나지 않기 위해 이렇게 씁니다.\u003c/p\u003e\n\u003chr\u003e\n\u003ch3\u003e7화 다른 화면도 보면서 작업하고 싶어(화면 분할)\u003c/h3\u003e\n\u003cblockquote\u003e\n\u003cp\u003etmux를 실행하고 화면 분할하는 방법\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003ectrl + b 입력 후 \" 키를 입력 -\u003e 화면 중앙으로 나뉨\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e분할된 화면의 포커스 전환\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003ectrl + b 다음 가고싶은 방향 화살표 키 입력\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e화살표나 마우스 휠로 스크롤 하는 법\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003col\u003e\n\u003cli\u003ectrl + b 다음 [ 키 입력\u003c/li\u003e\n\u003cli\u003e내용 확인 끝났으면 q 키 또는 esc로 원래 상태로 돌아올 수 있다.\u003c/li\u003e\n\u003c/ol\u003e\n\u003cblockquote\u003e\n\u003cp\u003e세로 분할하는 방법\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003ectrl + b 다음 % 키 입력\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e화면을 종료하고 싶은게 있다면 포커스를 옮기고 exit\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e분할된 화면의 크기 변경 방법\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003col\u003e\n\u003cli\u003ectrl + b 키를 눌러 tmux 자체를 조작하는 상태로 둔다.\u003c/li\u003e\n\u003cli\u003ectrl + 방향키로 분할 경계선을 움직인다.\u003c/li\u003e\n\u003c/ol\u003e\n\u003chr\u003e\n\u003ch3\u003e8화 최근 실행한 명령어를 호출하고 싶어(명령어 이력)\u003c/h3\u003e\n\u003cp\u003e셸에서 방향키를 위아래로 움직이면 이력을 확인할 수 있다.\u003cbr\u003e\nvim ~/.bash_history 에서 이력을 볼 수 있다.\u003cbr\u003e\nhistory 명령어 사용해도 볼 수 있다.\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e예전의 명령어를 찾고 싶을 때(후방 검색)\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003ectrl + r을 누른다. 맥은 control\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e역방향으로 검색하는 방법\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003ezsh는 기본적으로 ctrl + s 입력하면 전방 검색이 가능\u003c/p\u003e\n\u003cp\u003evim ~/.bashrc로 bash 설정 파일을 열고 shift + g로 파일 마지막으로 이동\u003cbr\u003e\n새로운 줄을 추가한 다음 stty stop undef 입력하고 저장\u003cbr\u003e\n적용을 위해 bash를 재시작\u003c/p\u003e\n\u003cp\u003ectrl + s 키 입력 -\u003e 검색 모드로 전환\u003cbr\u003e\n현재 위치 기준으로 앞의 이력을 검색\u003c/p\u003e\n\u003chr\u003e\n\u003ch3\u003e9화 오래전에 실행한 명령어를 호출하고 싶어(명령어 이력 검색)\u003c/h3\u003e\n\u003cp\u003e오랫동안 쓰지 않은 명령어는 보통 남아 있지 않는다.\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e이력 개수를 늘리는 방법\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003e# 설정 파일을 연다.\nvim ~/.bashrc\n\n# shift + g로 파일 끝으로 이동하고\n# 삽입모드로 아래 코드 추가 후 :wq로 나오기 (로그아웃 로그인 필요)\nexport HISTSIZE 10000\nexport HISTFILESIZE=10000\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003eGNOME 단말에 이력을 동기화시키는 방법\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003e# GNOME 단말로 여러 탭을 사용하면 각각 다른 이력을 가지게 된다.\n# 다른 화면에서 bash 명령어 이력을 검색할 수 없게 된다. 아래 설정으로 해결\n\n# 설정 파일을 연다.\nvim ~/.bashrc\n\nfunction share_history {\n    history -a\n    history -c\n    history -r\n}\nPROMPT_COMMAND='share_history'\nshopt -u histappend\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003eSSH 넘어서 명령어를 하나만 실행하기\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003e# 명령어 끝에 접속한 곳에서 실행하고 싶은 명령어를 적는다.\nssh mint@server /scripts/do_backup.sh\n\u003c/code\u003e\u003c/pre\u003e\n\u003chr\u003e\n\u003ch3\u003e10화 네트워크 건너서 파일을 복사하고 싶어(scp)\u003c/h3\u003e\n\u003cp\u003e\u003ccode\u003escp\u003c/code\u003e - Secure CoPy의 약어, 네트워크를 통해서 파일을 복사하는 명령어.\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e사용방법\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e사용할 곳과 보낼 곳에 scp가 설치되어 있어야 한다.\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# scp 파일 로그인할 사용자@접속할 컴퓨터:복사할 위치\nscp .file.ext mint@192.168.1.10:/tmp/\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e로그인에 사용한 사용자 홈 = mint@192.168.1.10:~/\u003cbr\u003e\n다른 사용자의 홈 = mint@192.168.1.10:~ohno/\u003cbr\u003e\n상대 경로는 로그인한 홈 디렉터리가 기점이 됨 = mint@192.168.1.10:../../tmp/\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e다른 PC에서 내 PC로 가져오기 (반대방향)\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003escp 복사 원본 복사(다른 컴퓨터에 있는 파일) 대상(자신의 PC 경로)\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e와이드카드나 디렉터리로 복사\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003e# 파일명 끝이 .log인 파일을 모드 복사\nscp mint@host:/tmp/*.log /tmp/\n\n# -r(recursively) 옵션으로 디렉터리를 재귀적으로 복사.\n# 복사 원본 경고로 디렉터리 지정 (/tmp/results 끝에 /)\nscp -r mint@host:/tmp/results/ /tmp/\n\u003c/code\u003e\u003c/pre\u003e\n\u003chr\u003e\n\u003ch3\u003e11화 시스템 과부하를 파악하고 싶어(top)\u003c/h3\u003e\n\u003cp\u003e\u003ccode\u003etop\u003c/code\u003e - 시스템 부하 상태를 조사하는 명령어\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eProcesses: 708 total, 2 running, 706 sleeping, 2998 threads\nLoad Avg: 1.29, 1.22, 1.33  CPU usage: 2.78% user, 2.90% sys, 94.30% idle\nSharedLibs: 474M resident, 89M data, 30M linkedit.\nMemRegions: 188421 total, 3982M resident, 290M private, 3083M shared.\nPhysMem: 15G used (2020M wired), 671M unused.\nVM: 263T vsize, 3210M framework vsize, 257988(0) swapins, 394738(0) swapouts.\nNetworks: packets: 11857651/13G in, 8349910/1555M out.\nDisks: 7477011/195G read, 6148251/104G written.\n\nPID    COMMAND      %CPU TIME     #TH   #WQ  #PORT MEM    PURG   CMPRS  PGRP\n29678  iTerm2       9.0  00:15.52 7     4    265   135M   7072K  32M    29678\n349    WindowServer 8.1  04:13:24 24    4    2190  1502M  11M    364M   349\n63721  top          6.3  00:02.43 1/1   0    28    12M    0B     0B     63721\n0      kernel_task  4.5  02:38:05 460/8 0    0     80M    0B     0B     0\n340    bluetoothd   1.4  09:49.64 4     2    433   7298K  0B     1808K  340\n63126  Google Chrom 1.3  00:17.31 21    1    173   74M+   0B     16M    21772\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eLoad Avg\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eload average, 부하 지표\u003c/li\u003e\n\u003cli\u003eCPU가 처리하는 걸 기다리는 작업의 갯수.\u003c/li\u003e\n\u003cli\u003e1분당 평균으로 몇개의 일이 쌓이는지를 나타내는 값.\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e%CPU와 TIME\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e%CPU는 어느 프로세스가 얼만큼 쓰고 있는지 알려준다.\u003c/li\u003e\n\u003cli\u003eTIME은 실제로 CPU를 사용한 시간\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003etop 명령어 실행 중\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003ec를 누르면 COMMAND 상세 표시 전환(나는 mode[n] 이런게 뜨면서 안된다..ㅜ)\\\u003c/li\u003e\n\u003cli\u003eq를 누르면 종료\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e프로세스 종료 방법\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003e# 비밀번호 입력 후 성공하면 아무러 메시지가 표시되지 않는다.\nsudo kill {종료하고 싶은 PID}\n\n# 여러 프로세스를 한 번에 종료하기.\n# 프로세스 ID들을 스페이스로 띄어서 나열\nsudo kill {종료하고 싶은 PID} {종료하고 싶은 PID} {종료하고 싶은 PID}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e민트의 정리\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003eload average \u003e= CPU 코어수가 되면 과부하 상태\u003c/li\u003e\n\u003cli\u003eCPU 사용률과 CPU 시간 양쪽이 큰 프로세스는 과부하 원인의 가능성이 높음\u003c/li\u003e\n\u003cli\u003e과부하 원인인 프로세스는 kill 명령어로 종료함\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr\u003e\n\u003ch3\u003e12화 시스템 메모리 부족을 파악하고 싶어(top 표시 전환)\u003c/h3\u003e\n\u003cp\u003eLoad Avg가 높은 이유는 CPU 사용률 또는 메모리 부족이 원인\u003c/p\u003e\n\u003cp\u003e프로그램은 필요할 때만 프로세스를 실행해서 처리가 끝나면 종료하는 것과\u003cbr\u003e\n컴퓨터를 사용하는 동안 계속 프로세스를 실행시켜야 하는 것이 있다.\u003cbr\u003e\n이런 상주형 프로세스를 서비스라고 부른다.\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e기동 스크립트 사용법\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003e# service 명령어 (Ubuntu, CentOS, RedHat 등)\nsudo service apache2 restart\n\n# init.d 명령어 (Debian 등)\nsudo /etc/init.d/apache2 restart\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e스왑 영역도 전부 사용하게 되면 SSH 접속도 불가능할 때도 있다. (OOM Killer가 동작)\u003c/p\u003e\n\u003cp\u003e메모리 사용량 순서 - shift + m\u003cbr\u003e\nCPU 시간 순서로 나열 - shift + t\u003cbr\u003e\nCPU 사용량 순서로 돌아가려면 - shift + p\u003c/p\u003e\n\u003chr\u003e\n\u003ch3\u003e13화 로그 파일에서 필요한 줄만 뽑고 싶어(파이프라인)\u003c/h3\u003e\n\u003cp\u003e\u003ccode\u003egrep\u003c/code\u003e - 파일에서 내용을 찾는 명령어\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e사용방법\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003e# 재귀적으로 /var/log/apache2/ 안에서 orange를 포함하는 파일을 찾는다.\ngrep -r \"orange\" /var/log/apache2/\n\n# 대상파일에서 orange를 찾는다.\ngrep \"orange\" /var/log/apache2/access.log\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ccode\u003eless\u003c/code\u003e - 텍스트 파일을 한 번에 한 화면씩 보여주는 터미널 페이저\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# grep과 파이프라인을 이용해 함께 사용된다.\ngrep \"orange\" /var/log/apache2/access.log | less\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003ccode\u003ecat\u003c/code\u003e - 지정한 파일 내용을 읽어서 그대로 출력하는 명령어\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003ezcat\u003c/code\u003e - 압축 파일을 읽어서 내용을 풀어서 출력하는 명령어(gzip 형식 전용 .gz, .tgz)\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003exzcat\u003c/code\u003e - xz 형식용 (.xz 파일)\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003eunzip\u003c/code\u003e - zip 형식용\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003etail\u003c/code\u003e - 파일 내용 끝부분만 출력하는 명령어(-f 옵션을 통해 실시간으로 출력)\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# 이런식으로 조합해 사용 가능\ntail -F access.log | grep \"/retro\" | grep -v \"/live\" | less\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e파일 내용을 다음 명령어에 출력하는 시작 그룹\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e파일 내용을 읽어서 출력\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003ecat\u003c/li\u003e\n\u003cli\u003ezcat\u003c/li\u003e\n\u003cli\u003exzcat\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e파일에 추가된 부분을 출력\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003etail\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e중간에서 이전 명령어 출력을 가공하는 중간 그룹\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003egrep - 해당하는 줄만 출력\u003c/li\u003e\n\u003cli\u003esort - 재정렬\u003c/li\u003e\n\u003cli\u003ecut - 내용을 잘라냄\u003c/li\u003e\n\u003cli\u003euniq - 중복된 걸 제거\u003c/li\u003e\n\u003cli\u003esed - 내용을 변경\u003c/li\u003e\n\u003cli\u003eawk - 내용을 변경\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e이전 명령어 출력을 가공하는 최종 그룹\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003eless - 스크롤할 수 있게 출력\u003c/li\u003e\n\u003cli\u003etee - 파일을 저장\u003c/li\u003e\n\u003cli\u003ewc - 줄 수나 문자 수를 카운트\u003c/li\u003e\n\u003cli\u003ehead - 첫 부분만 추출\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e오코의 정리\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003e파이프라인을 사용하면 명령어끼리 조합해서 사용 가능\u003c/li\u003e\n\u003cli\u003egrep은 다른 명령어 출력을 가공하는 데도 사용 가능\u003c/li\u003e\n\u003cli\u003ezcat을 사용하면 압축된 로그 파일에서 바로 파이프라인으로 연결 가능\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr\u003e\n\u003ch3\u003e14화 작업 절차를 자동화하고 싶어(셸 스크립트)\u003c/h3\u003e\n\u003cp\u003ecd 명령어를 인수 없이 실행하면 홈 디렉터리로 이동함.\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e  Documents cd\n  ~\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e스크립트 작성방법\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003esetup.sh 같은 sh 확장자 파일을 생성한다.\u003cbr\u003e\nvim setup.sh을 실행해 편집한다.\u003cbr\u003e\n첫번째 줄에 아래와 같이 입력한다.\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e#!/bin/bash\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e셔뱅(shebang)으로 스크립트를 실행하는 프로그램(인터프리터)을 지정, Hash-Bang이라고도 한다.\u003cbr\u003e\n프로그램 전체 경로를 적으면 스크립트를 실행하는 프로그램을 셸이 자동으로 전환해준다.\u003cbr\u003e\nbash 이외에도 /usr/bin/perl /usr/bin/ruby1.9.1 등이 있다.\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e스크립트를 실행 권한\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e스크립트가 만들어졌다면 실행 권한을 주어야 한다.\u003cbr\u003e\n\u003ccode\u003echmod\u003c/code\u003e - 권한을 설정하는 명령어\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003echmod +x setup.sh\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e스크립트 실행\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e파일명을 쳐서 명령어 실행이 가능한 건 파일이 /bin/이나 /usr/bin/ 같은 특별한 장소에 있을 때 가능하다.\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eO - /home/mint/setup.sh\u003c/li\u003e\n\u003cli\u003eO - ./setup.sh\u003c/li\u003e\n\u003cli\u003eO - ~mint/setup.sh\u003c/li\u003e\n\u003cli\u003eX - setup.sh\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e에러가 발생한 곳에서 처리를 끝내도록 하는 법\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003e# 이전 명령어가 정상 종료했는지 확인하기\n# 이상 종료했으면 스크립트 실행을 중단하기\nif [ $? != 0 ]; then exit; fi\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e민트의 정리\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003ebash용 셸 스크립트를 작성하려면 텍스트 파일 첫 줄에 #!bin/bash라고 적고 두 번째 줄 이후는 자동 실행하고 싶은 셸 명령어를 작성한다.\u003c/li\u003e\n\u003cli\u003e셸 스크립트는 chmod +x 파일명으로 실행 권한을 설정한다.\u003c/li\u003e\n\u003cli\u003e명령어가 이상이 생겨서 그 시점에서 스크립트 실행을 중단하고 싶을 땐 if [ $? != 0 ]; then exit; fi 라고 적는다.\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr\u003e\n\u003ch3\u003e15화 같은 문자열을 스크립트에서 재사용하고 싶어(셸 변수)\u003c/h3\u003e\n\u003cblockquote\u003e\n\u003cp\u003e스크립트 일괄 치환\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003evim에서 일괄 치환을 쓰려면 esc키로 노멀 모드로 돌아간 후 아래 명령어 입력 후 enter\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# %s 전체 치환 명령어\n# 명령어 각 부분을 구분하는 문자 / 이외에도 임의의 문자를 사용 가능\n%s/원문/수정문/\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e변수 지정\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003e# 변수명 = 변수값, x를 ~이라고 함이라는 표현에 가깝다.\nlog=/var/log/apache2/access.log\n\n# 사용은 $log, ${log}\nless $log\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e명령어를 변수 지정\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003e# tar xfv 파일 경로 -\u003e 파일 압축 풀기\n# tar cfv 파일 경로 -\u003e 파일 압축\ntar_extract=\"tar xfv\"\ntar_compress=\"tar cfv\"\n\n# 문자열을 eval 명령어에 넘기면 명령어열로 실행 가능\neval \"$tar_extract file.tar.gz\"\neval \"$tar_compress directory\"\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e공통 부분을 변수로 지정하는 방법\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003ebase=/var/log/apache2\nlatest=${base}/access.log\nprev=${base}/acesss.log.7.gz\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e오코의 정리\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003e터미널이나 셸 스크립트에서 변수명=문자열이라고 작성하면 오른쪽 문자열이 값이고 왼쪽에 있는 게 이름인 변수가 정의됨\u003c/li\u003e\n\u003cli\u003e그 이후는 $변수명 또는 ${변수명}으로 그 값과 동일하게 사용 가능\u003c/li\u003e\n\u003cli\u003e유지 보수하기 쉽도록 변수명은 변수에 저장될 내용을 잘 설명하는 이름을 사용하기\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr\u003e\n\u003ch3\u003e16화 작업 환경과 상태를 정해서 스크립트를 실행하고 싶어(환경 변수)\u003c/h3\u003e\n\u003cp\u003e\u003ccode\u003e환경 변수\u003c/code\u003e - 자기가 정의하지 않아도 $변수명으로 값을 참조할 수 있는 특수한 변수.\u003c/p\u003e\n\u003cp\u003e${HOME} or $HOME - 홈 디렉토리 경로(/home/user, /home/admin, /home/mint)\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# 지금 환경에서 어떤 환경 변수를 쓸 수 있는지 볼 수 있다.\nenv\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e사용하기 편한 환경 변수\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003eHOME - 현재 사용자의 홈 디렉터리 경로\u003c/li\u003e\n\u003cli\u003ePWD - 현재 디렉터리(작업 디렉터리) 경로\u003c/li\u003e\n\u003cli\u003eEDITOR - 정해진 텍스트 에디터(vim, Emacs, nano 등) 경로\u003c/li\u003e\n\u003cli\u003ePAGER - 정해진 페이저(less, lv 등) 경로\u003c/li\u003e\n\u003cli\u003eUSER - 현재 사용자의 사용자명\u003c/li\u003e\n\u003cli\u003eGROUP - 현재 사용자의 그룹명\u003c/li\u003e\n\u003cli\u003eHOSTNAME - 머신의 호스트명\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e명령어 치환\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e명령어열 실행 결과의 문자열로 치환된다.\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# 2021년 3월 29일 월요일 22시 50분 43초 KST\ndate\n\n# 210329\ndate +%y%m%d\n\n# 2021-03-29\ndate +%Y-%m-%d\n\n# 2021y03m29d22h\ndate +%Yy%mm%dd%Hh\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e오코의 정리\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003e환경 변수를 사용하면 셸 스크립트 실행 시 값이 변하므로 환경에 맞는 처리가 가능해짐\u003c/li\u003e\n\u003cli\u003e$(명령어열) 또는 `명령어열`이라고 적으면 명령어열 실행 결과를 문자열로 적은 것과 같아짐(명령어 치환)\u003c/li\u003e\n\u003cli\u003e명령어 치환에서 파이프라인이나 변수 등도 사용 가능\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr\u003e\n\u003ch3\u003e17화 로그 파일에서 필요한 줄만 뽑고 싶어(cut)\u003c/h3\u003e\n\u003cp\u003e파이프라인을 써서 명령어끼리 조합하기\u003c/p\u003e\n\u003cp\u003eSTEP 1\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# calculator 파일 내용 보기\ncat calculator.py\n\n# 기본 계산기\ndef add(a, b):\n  return a+b\n\ndef subtract(a, b):\n  return a-b\n\ndef multifply(a, b):\n  return a*b\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eSTEP 2\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# return을 포함하지 않은 줄만 출력\ncat calculator.py | grep -v \"return\"\n\n# 기본 계산기\ndef add(a, b):\n\ndef subtract(a, b):\n\ndef multifply(a, b):\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eSTEP 3\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# 원하는 부분만 잘라내기, less를 연결해 결과를 눈으로 확인할 수 있음\ncat calculator.py | grep -v \"return\" | cut -d \" \" -f 1 | less\n#\ndef\n\ndef\n\ndef\n\u003c/code\u003e\u003c/pre\u003e\n\u003chr\u003e\n\u003ch3\u003e18화 같은 내용의 줄을 세어보고 싶어(sort와 uniq)\u003c/h3\u003e\n\u003cblockquote\u003e\n\u003cp\u003e페이지 순위를 만드는 방법\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003e적절하지 않은 줄은 제외하고 필요한 줄만 집계대상으로 삼음\u003c/li\u003e\n\u003cli\u003e로그 각 줄에서 접속한 페이지 경로를 추출\u003c/li\u003e\n\u003cli\u003e경로 등장 횟수를 카운트\u003c/li\u003e\n\u003cli\u003e등장 횟수로 경로를 재정렬\u003c/li\u003e\n\u003cli\u003e상위와 하위 항목을 추출\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003ccode\u003esort\u003c/code\u003e - 입력된 내용을 알파벳 순서로 재정렬하는 명령어\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# 알파벳순\ncat input.txt | sort\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003cstrong\u003esort 옵션\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e--reverse, -r : 내림차순 정렬 (sort는 기본 오름차순 정렬)\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003euniq\u003c/code\u003e - IT 용어에서는 '같은 것이 없음'이라는 의미 사용할 때가 많다.\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# 같은 내용의 중복은 제거됨\ncat input.txt | uniq\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003cstrong\u003euniq 옵션\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e--count, -c : 각각 내용이 몇 번 등장했는가 출력\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e함께 사용한다면 이렇게 사용\u003c/strong\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# 결과를 less에 넘겨서 간단히 확인 가능\ncat /var/log/apache2/access.log | grep -v \"/live\" | cut -d \" \" -f 7 | sort | uniq -c | less\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e# 결과를 less에 넘겨서 간단히 확인 가능\ncat /var/log/apache2/access.log | grep -v \"/live\" | cut -d \" \" -f 7 | sort | uniq -c | less\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e요코의 정리\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003e#!/bin/bash\n\n# 집계 대상 로그 위치를 변경하기 쉽도록 변수로 정의\nlog=/var/log/apache2/access.log\n# 출력할 건수를 변경하기 쉽도록 변수로 정의\ncount=10\n\n# 결과 이전에 echo로 설명 텍스트를 출력\necho \"접속수가 많은 ${count}개 페이지:\"\n# 상위 10건 출력\ncat $log | grep -v \"/live\" | cut -d \" \" -f 7 | sort | uniq -c | sort -r | head -n $count\n\necho \"접속수가 적은 ${count}개 페이지:\"\n# 상위 10건 출력\ncat $log | grep -v \"/live\" | cut -d \" \" -f 7 | sort | uniq -c | sort -r | tail -n $count\n\n# cut -d \" \" -f 7 | sort | uniq -c : 페이지별 접속수 집계\n# sort -r : 접속수가 많은 순서로 정렬\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e첫 N줄, 마지막 N줄을 제외하기\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003e# 앞에서 5줄째\nhead -n 5\n# 앞에서 5줄째\nhead -n +5\n# 마지막 5줄을 제외한 나머지 모든 줄을 출력\nhead -n -5\n\n# 뒤에서 5줄째\ntail -n 5\n# 앞에 5줄을 제외한 나머지 모든 줄을 출력\ntail -n +5\n# 뒤에서 5줄째\ntail -n -5\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eMacOS에서 \u003ccode\u003ehead -n -5\u003c/code\u003e를 하면 \u003ccode\u003ehead: illegal line count -- -5\u003c/code\u003e 에러가 뜸\u003c/p\u003e\n\u003chr\u003e\n\u003ch3\u003eCSV 파일을 열의 내용에 따라 정렬하고 싶어(sort와 리다이렉트)\u003c/h3\u003e\n\u003cblockquote\u003e\n\u003cp\u003e작업 순서\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003e불필요한 열을 삭제하기\u003c/li\u003e\n\u003cli\u003e줄을 재고수 크기로 재정렬\u003c/li\u003e\n\u003cli\u003e결과를 파일로 출력하기\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode\u003e# 저는 liverpool.csv가 있습니다.\ncat liverpool.csv\n# 결과\nName,Position,Born,Number,Nationality\nRoberto Firmino,FW,1991,no. 9,Brazil\nSadio Mane,FW,1992,no. 10,Senegal\nMohamed Salah,FW,1992,no. 11,Egypt\nJoe Gomez,DF,1997,no. 12,England\nAlisson Becker,GK,1992,no. 13,Brazil\n\n# cut을 써서 간단히 열 단위로 정보를 추출 (시작 번호 1)\ncat liverpool.csv | cut -d \",\" -f 3\n\nBorn\n1991\n1992\n1992\n1997\n1992\n\n# 여러 숫자를 지정하거나 열 범위를 지정할 수 있다. (, 사이에 공백이 들어가면 cut: [-cf] list: values may not include zero 에러 발생)\ncat liverpool.csv | cut -d \",\" -f 1,3\nName,Born\nRoberto Firmino,1991\nSadio Mane,1992\nMohamed Salah,1992\nJoe Gomez,1997\nAlisson Becker,1992\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003ecut 명령어\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e사용법 cut -d \",\" -f 1,3\u003c/li\u003e\n\u003cli\u003e-d는 --delimiter와 같다. (구분자를 지정하지 않으면 탭문자를 사용)\u003c/li\u003e\n\u003cli\u003e-f는 --fields와 같다.\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003esort 명령어\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e사용법 sort -t \",\" -k 2 -n -b\u003c/li\u003e\n\u003cli\u003e-t는 --field-separator와 같다.\u003c/li\u003e\n\u003cli\u003e-k는 --key와 같다.\u003c/li\u003e\n\u003cli\u003e숫자 정렬을 위해 --number 또는 -n 옵션을 지정한다.\u003c/li\u003e\n\u003cli\u003e-b는 --ignore-leading-blanks로 오른쪽 줄맞춤을 위해서 넣은 스페이스를 무시하고 문자열을 정렬할 수 있게 해줌\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode\u003ecat liverpool.csv | cut -d \",\" -f 1,3 | sort -t \",\" -k 2 -n -b\nName,Born\nRoberto Firmino,1991\nAlisson Becker,1992\nMohamed Salah,1992\nSadio Mane,1992\nJoe Gomez,1997\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e리다이렉트를 사용해 파일 만들기\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e\u003e 를 사용해 텍스트 파일로 만들 수 있다.\u003cbr\u003e\n\u003e\u003e 두번 이어서 쓴다면 기존 파일에 추가된다. (덧붙여짐)\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ecat liverpool.csv | cut -d \",\" -f 1,3 | sort -t \",\" -k 2 -n -b \u003e test.csv\n\u003c/code\u003e\u003c/pre\u003e\n\u003chr\u003e\n\u003ch3\u003e20화 명령줄 지정으로 작업 내용을 바꾸고 싶어(명령줄 인수)\u003c/h3\u003e\n\u003cp\u003e명령어명 뒤에 스페이스를 입력하고 대상을 적는 것 예) cat /var/log.apache2/access.log\u003cbr\u003e\n명령어에 대해 추가 지시를 내리는 게 명령어 라인 인수\\\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e옵션은 인수의 한 종류\u003c/strong\u003e\u003cbr\u003e\n생략 가능(지정하면 행동이 변하는)한 인수를 옵션 인수\u003c/p\u003e\n\u003cp\u003e셸 스크립트 내부에서는 실행 시 지정한 인수 값을 $1, $2 같은 변수로 참조할 수 있다.\u003cbr\u003e\n예) ./some_script.sh first second\u003c/p\u003e\n\u003cp\u003e일반 명령어도 인수가 3개 이상이면 옵션으로 각각 의미가 있는 이름을 붙인다.\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# -b 옵션값을 base라는 변수로도 참조할 수 있다. 나머지도 동일.\nwhile getopts b:n:p:o: OPT\ndo\n  case $OPT in\n    b) base=\"$OPTARG\" ;;\n    n) next=\"$OPTARG\" ;;\n    p) previous=\"$OPTARG\" ;;\n    o) output=\"$OPTARG\" ;;\n  esac\ndone\n\u003c/code\u003e\u003c/pre\u003e\n\u003chr\u003e\n\u003ch3\u003e21화 조건에 따라 처리 흐름을 바꾸고 싶어(조건 분기)\u003c/h3\u003e\n\u003cp\u003e셸 스크립트 안에 조건문을 넣어서 여러 상황을 처리할 수 있도록 한다.\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# $#은 스크립트에서 지정한 인수 개수를 의미하는 특수한 변수\nif [ $# = 2]\nthen # 줄바꿈 다음에 then을 써야 한다.\n  echo \"Hello!\" # 조건을 만족하면 실행하는 내용\nelse\n  echo \"Hi!\" # 조건을 만족하지 않으면 실행하는 내용\nfi\n\n# 줄바꿈 대신에 ;(세미콜론)을 사용하면 여러 줄을 한 줄로 합칠 수 있음\nif [ $# = 2 ]; then echo \"Hello!\"; else echo \"Hi!\"; fi\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e옵션이 있는지 확인하는 조건문\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003ewhile getopts f:r: OPT\ndo\n  case $OPT in\n    f) filename=\"$OPTARG\" ;;\n    r) reportname=\"$OPTARG\" ;;\n  esac\ndone\n\n# 부정 조건, 좌우 값이 다를 때를 의미\nif [ \"$reportname\" != \"\" ]\nthen\n  echo \"reportname O\"\nelse\n  echo \"reportname X\"\nfi\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e요코의 정리\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e단순 조건 분기\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eif [ $a = \"문자열\" ]\nthen\n  $a 내용이 \"문자열\"과 같다면 실행하는 처리\nfi\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e부정 조건으로 조건 분기\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eif [ $a != \"문자열\" ]\nthen\n  $a 내용이 \"문자열\"과 다르면 실행하는 처리\nfi\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e조건에 해당하지 않을 때 처리\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eif [ 조건 ]\nthen\n  조건을 만족하면 실행하는 처리\nelse\n  조건을 만족하지 않으면 실행하는 처리\nfi\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e시점을 넓혀서 생각하면 새로운 스크립트를 작성하기 전에 '이건 기존에 하던 작업의 일환으로 처리하는 게 자연스럽겠네'라는 게 보이기 시작한다.\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003eif나 [에 스페이스가 필요한 이유\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e[도 명령어다.\u003cbr\u003e\n실제 파일은 /usr/bin/[에 있다. (mac에서는 찾을 수 가 없음 ㅜㅜ)\u003cbr\u003e\n[ - 명령어\u003cbr\u003e\n$#, =, ] - 세 개가 다 인수\u003c/p\u003e\n\u003chr\u003e\n\u003ch3\u003e22화 명령어 이상 종료에 대응하고 싶어(종료 상태)\u003c/h3\u003e\n\u003cp\u003e\u003ccode\u003e에러 핸들링\u003c/code\u003e - 어떤 문제가 발생했을 때 그것에 맞게 적절하게 처리하는 것\u003cbr\u003e\n\u003ccode\u003e$?\u003c/code\u003e - 바로 전에 실행한 명령어 종료 상태, 0은 성공, 이상 종료는 값이 0이 아니다.\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# 줄바꿈 대신에 ;(세미콜론)을 사용하면 여러 줄을 한 줄로 합칠 수 있음\n# 이전 명령어 종료 상태가 0이 아니라면 스크립트 실행을 중단, 종료한다.\n# exit만 적으면 exit 0과 같다.\nif [ $? != 0 ]; then exit; fi\n\nif [ $1 = \"\" ]\nthen\n  echo \"처리할 파일을 지정해야 함\"\n  # 0 이외라면 무엇을 지정해도 됨(특별히 에러 종류를 구별할 필요가 없으면 1을 지정하는 게 보통)\n  exit 1\nfi\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e요코의 정리\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003e$?으로 직전에 실행한 명령어 종료 상태를 참조 가능\u003c/li\u003e\n\u003cli\u003e$? 값은 명령어가 정상 종료하면 0, 이상 종료하면 0 이외의 값이 됨\u003c/li\u003e\n\u003cli\u003eexit에 인수로 숫자를 지정하면 셸 스크립트의 종료 상태가 됨\u003c/li\u003e\n\u003cli\u003eif로 종료 상태를 참조하면 명령어가 정상 종료했는지에 따라 조건 분기가 가능\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e종료 상태 범위\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e0은 정상 종료\u003cbr\u003e\n0 ~ 255까지 범위가 있다.\u003c/p\u003e\n\u003chr\u003e\n\u003ch3\u003e23화 같은 처리를 반복해서 실행하고 싶어(for)\u003c/h3\u003e\n\u003cp\u003efor 반복문 - 같은 처리를 조금씩 인수(처리 대상 파일명 등)를 바꿔가면서 반복 실행하는 구문\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# 네개의 값을 하나의 변수명으로 순서대로 참조한다는 의미\nfor filename in redmine.log kintail.log download.log notice.log\ndo\n  ./create-report.sh $filename\ndone\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e줄바꿈으로 표시하는 법\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# for ~ in 열은 줄바꿈을 넣으면 안된다.\n# 백슬래쉬(이스케이프)를 넣으면 가능하다. 한글 폰트에서는 원화 기호로 표시되기도 함\nfor filename in redmine.log \\\n                kintail.log \\\n                download.log \\\n                notice.log\n\n# 보기 쉽게 변수로 만드는 것도 좋은 방법.\nfilieList=redmine.log kintail.log download.log notice.log\nfor filename in $fileList\n\n# error.log를 제외한 /var/log/apache2/ 위치에 있는 확장자가 .log인 파일 목록\nfor filename in `cd /var/log/apache2; ls *.log | grep -v error.log`\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e요코의 정리\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003efor 반복문을 사용하면 값 리스트에 따라 같은 처리를 인수를 바꿔가며 반복 실행 가능\u003c/li\u003e\n\u003cli\u003e반복문에서 사용하는 값 리스트로 변수나 명령어 치환 결과도 사용 가능\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003efor 반복물 한 줄로 쓰기\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003efor file in data log scripts; do echo $file; done\n\u003c/code\u003e\u003c/pre\u003e\n\u003chr\u003e\n\u003ch3\u003e공통 처리를 계속 재사용하고 싶어(셸 함수)\u003c/h3\u003e\n\u003cp\u003e함수 - 프로그램에서 하나로 모아놓은 처리 단위에 이름을 붙여서 부품으로 사용하기 쉽게 만든 걸 뜻한다.\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e#!/bin/bash\n\nhello() {\n  echo \"안녕하세요\"\n  echo \"$1입니다\"\n  echo \"잘 부탁합니다\"\n}\n\nhello 황성준\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003ehello.sh로 만들고 \u003ccode\u003echmod +x hello.sh\u003c/code\u003e으로 실행권한 부여 그 다음 ./hello.sh 실행하면 출력됨\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e함수 종료 상태\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003ereport() {\n  if [ $1 = \"\" ]\n  then\n    echo \"인수가 필요함\"\n    # 함수내에서 exit를 사용하면 함수뿐만 아니라 스크립트 자체 처리까지 도중에 중단.\n    return 1 # 함수 실행을 중단하고 종료 상태를 1로 지정함\n}\n\ntoday() {\n  # return date +%Y-%m-%d 으로 하면 반환되는 줄 알았지만 실행하면 아래와 같은 에러가 출력\n  # ./today.sh: line 4: return: date: numeric argument required\n\n  date +%Y-%m-%d # 함수 실행 결과는 명령어 실행 결과의 문자열이 됨\n}\n\nreport marketing.log mail-$(today).csv\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e요코의 정리\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003e어떤 처리를 하나도 묶어서 함수로 정의 가능함\u003c/li\u003e\n\u003cli\u003e정의한 함수는 같은 스크립트 안에서 원하는 곳에서 몇번이고 호출할 수 있음\u003c/li\u003e\n\u003cli\u003e함수도 인수를 사용 가능\u003c/li\u003e\n\u003cli\u003e함수 실행을 중단하고 원래 처리로 돌아갈 때는 exit가 아니라 return 사용\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e셸 스크립트는 기본적으로 실행하고 싶은 명령어를 실행 순서대로 작성하는 거지만\u003cbr\u003e\n함수를 사용한다면 실행 순서를 신경 쓰지 않고 중요한 부분부터 스크립트를 작성한다.\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e섈 스크립트의 인수와 함수의 인수\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e함수 안에서 $1이라고 하면 셸 스크립트의 인수가 아니라 함수의 인수를 참조\u003c/p\u003e\n"}},"__N_SSG":true},"page":"/posts/[...slug]","query":{"slug":["devops","2020","system-admin-girl1","index"]},"buildId":"gvvvKtR0vBN_FJ3fanf7F","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>
