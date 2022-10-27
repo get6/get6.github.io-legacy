@@ -3,9 +3,7 @@ import { Html, Head, Main, NextScript } from 'next/document'
 const Document = () => {
   return (
     <Html lang="ko">
-      <Head>
-        <meta charSet="utf-8" />
-      </Head>
+      <Head />
       <body>
         <Main />
         <NextScript />

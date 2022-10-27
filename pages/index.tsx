@@ -17,7 +17,7 @@ const Home: NextPage<Props> = ({ allPosts }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
+      <div className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
         <div className="container mx-auto py-20">
           <div className="flex items-center justify-between">
             <h1 className="text-3xl font-semibold capitalize text-gray-800 dark:text-white lg:text-4xl">
@@ -141,7 +141,7 @@ const Home: NextPage<Props> = ({ allPosts }) => {
             </div>
           </div>
         </div>
-      </main>
+      </div>
 
       <footer className="flex h-24 w-full items-center justify-center border-t">
         <a

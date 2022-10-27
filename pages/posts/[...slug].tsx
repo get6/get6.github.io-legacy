@@ -3,10 +3,11 @@ import ErrorPage from 'next/error'
 import { getPostBySlug, getAllPosts } from '../api/content'
 import markdownToHtml from '../api/markdownToHtml'
 import type PostType from '../../types/post'
-import PostTitle from '../../components/PostTitle'
 import PostHeader from '../../components/PostHeader'
 import PostBody from '../../components/PostBody'
 import Container from '../../components/Container'
+import { NextPage } from 'next'
+import Spinner from '../../components/Spinner'
 
 type Props = {
   post: PostType
@@ -14,7 +15,7 @@ type Props = {
   preview?: boolean
 }
 
-export default function Post({ post, morePosts, preview }: Props) {
+const Post: NextPage<Props> = ({ post, morePosts, preview }) => {
   const router = useRouter()
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
@@ -22,23 +23,25 @@ export default function Post({ post, morePosts, preview }: Props) {
   return (
     <Container>
       {router.isFallback ? (
-        <PostTitle>Loading…</PostTitle>
+        <div className="flex h-screen items-center justify-center">
+          <Spinner />
+        </div>
       ) : (
-        <>
-          <article className="mb-32">
-            <PostHeader
-              title={post.title}
-              coverImage={post.coverImage}
-              date={post.date}
-              author={post.author}
-            />
-            <PostBody content={post.content} />
-          </article>
-        </>
+        <article className="mb-32">
+          <PostHeader
+            title={post.title}
+            coverImage={post.coverImage}
+            date={post.date}
+            author={post.author}
+          />
+          <PostBody content={post.content} />
+        </article>
       )}
     </Container>
   )
 }
+
+export default Post
 
 type Params = {
   params: {

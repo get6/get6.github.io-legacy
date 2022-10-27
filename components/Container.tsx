@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react'
 
 const Container = ({ children }: PropsWithChildren) => {
-  return <div className="container mx-auto px-5">{children}</div>
+  return <div className="container mx-auto pt-10">{children}</div>
 }
 
 export default Container
