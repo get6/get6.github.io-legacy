@@ -1,5 +1,5 @@
 .markdown {
-  @apply text-lg leading-relaxed;
+  @apply prose dark:prose-invert prose-img:rounded-xl prose-headings:underline prose-a:text-blue-600 hover:prose-a:text-blue-500 lg:prose-xl text-lg leading-relaxed max-w-none;
 }
 
 .markdown p,
