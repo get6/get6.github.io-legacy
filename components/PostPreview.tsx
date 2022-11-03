@@ -48,7 +48,6 @@ const PostPreview = ({ title, coverImage, date, excerpt, slug }: Props) => {
             <p className="text-sm text-gray-500 dark:text-gray-400">{date}</p>
           </div>
           <Link as={`/posts/${slug}`} href="/posts/[...slug]">
-            {/* <Link href={`/posts/${slug}`}> */}
             <a className="inline-block text-blue-500 underline hover:text-blue-400">
               Read more
             </a>

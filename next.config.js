@@ -1,15 +1,3 @@
-/** @type {import('next').NextConfig} */
-
-const withMDX = require('@next/mdx')({
-  extension: /\.mdx?$/,
-  options: {
-    remarkPlugins: [],
-    rehypePlugins: [],
-    // If you use `MDXProvider`, uncomment the following line.
-    // providerImportSource: "@mdx-js/react",
-  },
-})
-
 let isLocalBuild =
   process.env.npm_lifecycle_script ===
   'NODE_ENV=development next build && next export'
@@ -17,9 +5,6 @@ let isLocalBuild =
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  ...withMDX({
-    pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
-  }),
   assetPrefix: isLocalBuild
     ? '/Users/ittae/GitHub/get6.github.io/out/'
     : undefined,
@@ -28,5 +13,5 @@ const nextConfig = {
     domains: ['images.unsplash.com'],
   },
 }
-
+// next.config.js -> next.config.mjs로 바꾸고 markdownToHtml.ts에서 하고있는 일인 remark, rehype를 여기서 처리하게끔 해줘도 될 것 같음.
 module.exports = nextConfig

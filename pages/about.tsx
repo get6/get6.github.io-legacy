@@ -1,7 +1,7 @@
 import { NextSeo } from 'next-seo'
 import { BsGithub, BsInstagram, BsMailbox } from 'react-icons/bs'
 import Card from '../components/Card'
-import Image from 'next/image'
+import ResponsiveImage from '../components/ResponsiveImage'
 
 const About = () => {
   const Links = [
@@ -45,66 +45,64 @@ const About = () => {
               Hi&nbsp;👋&nbsp;&nbsp;I&apos;m Seong Jun, Hwang
             </h3>
           </div>
-          <div className="flex w-full space-x-4 sm:inline-flex">
-            <div className="flex flex-col">
-              <div className="hidden flex-shrink-0 sm:block">
-                <Image
-                  alt="Seong Jun, Hwang"
-                  src="assets/my_profile.jpg"
-                  className="rounded-lg object-cover shadow-sm"
-                  width={200}
-                  height={200}
-                />
-              </div>
+          <div className="flex space-x-4 sm:inline-flex">
+            <div className="hidden h-72 flex-shrink-0 basis-1/5 sm:block">
+              <ResponsiveImage
+                src="assets/my_profile.jpg"
+                alt="profile"
+                className="aspect-auto rounded-lg object-cover shadow-sm"
+              />
             </div>
-            <div className="flex flex-col justify-evenly">
-              <p className="text-gray-500">
-                I&apos;m currently studying at
-                <a
-                  className="text-blue-500"
-                  href="https://42seoul.kr/seoul42/main/view"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  &nbsp;42 SEOUL
-                </a>
-                &nbsp;as a 6th cadet.
-                <br /> If you are 42 cadet, you can access&nbsp;
-                <a
-                  className="text-blue-500"
-                  href="https://profile.intra.42.fr/users/sunhwang"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  my 42 profile. 😃
-                </a>
-                <br />
-                Please say hello to me at the cluster.
-              </p>
-              <p className="text-gray-500">
-                <br /> I&apos;m Flutter enthusiast. My favorite framework is
-                Flutter now!
-                <br /> It helps to make it easy to create any app.
-                <br />
-                That&apos;s why I love Flutter.
-              </p>
-            </div>
-            <div className="flex flex-col justify-evenly space-y-4">
-              <p className="text-gray-500">
-                Anyone who wants to meet me can contact me using the below list.
-                🙌
-              </p>
-              <div className="inline-flex w-full justify-around space-x-4">
-                {Links.map(({ href, title, username, children }, index) => (
-                  <Card
-                    key={index}
-                    href={href}
-                    title={title}
-                    username={username}
+            <div className="flex basis-4/5 justify-around">
+              <div className="flex flex-col justify-evenly">
+                <p className="text-gray-500">
+                  I&apos;m currently studying at
+                  <a
+                    className="text-blue-500"
+                    href="https://42seoul.kr/seoul42/main/view"
+                    target="_blank"
+                    rel="noreferrer"
                   >
-                    {children}
-                  </Card>
-                ))}
+                    &nbsp;42 SEOUL
+                  </a>
+                  &nbsp;as a 6th cadet.
+                  <br /> If you are 42 cadet, you can access&nbsp;
+                  <a
+                    className="text-blue-500"
+                    href="https://profile.intra.42.fr/users/sunhwang"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    my 42 profile. 😃
+                  </a>
+                  <br />
+                  Please say hello to me at the cluster.
+                </p>
+                <p className="text-gray-500">
+                  <br /> I&apos;m Flutter enthusiast. My favorite framework is
+                  Flutter now!
+                  <br /> It helps to make it easy to create any app.
+                  <br />
+                  That&apos;s why I love Flutter.
+                </p>
+              </div>
+              <div className="flex basis-2/5 flex-col justify-evenly space-y-4">
+                <p className="text-gray-500">
+                  Anyone who wants to meet me can contact me using the below
+                  list. 🙌
+                </p>
+                <div className="inline-flex w-full justify-around space-x-4">
+                  {Links.map(({ href, title, username, children }, index) => (
+                    <Card
+                      key={index}
+                      href={href}
+                      title={title}
+                      username={username}
+                    >
+                      {children}
+                    </Card>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

@@ -10,7 +10,7 @@ const NavBar = () => {
   const router = useRouter()
 
   const menus: Menu[] = [
-    { name: 'Categories', href: '/categories' },
+    { name: 'Series', href: '/series' },
     { name: 'Tags', href: '/tags' },
     { name: 'Books', href: '/books' },
     { name: 'About me', href: '/about' },

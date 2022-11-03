@@ -23,7 +23,7 @@ const Home: NextPage<Props> = ({ allPosts }) => {
             <h1 className="text-3xl font-semibold capitalize text-gray-800 dark:text-white lg:text-4xl">
               recent posts{' '}
             </h1>
-
+            {/* TODO 전체 게시물 중에서 걸리는 텍스트만 검색되게끔 */}
             <button className="focus:outline-none">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
