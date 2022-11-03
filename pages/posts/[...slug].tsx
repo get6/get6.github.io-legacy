@@ -71,6 +71,7 @@ export async function getStaticProps({ params }: Params) {
   }
 }
 
+// TODO kebabCase를 적용해야 할까?
 export async function getStaticPaths() {
   const posts = getAllPosts(['slug'])
   return {
