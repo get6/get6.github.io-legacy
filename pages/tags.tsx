@@ -3,6 +3,7 @@ import { getAllPosts } from './api/content'
 import Post from '../types/post'
 import Container from '../components/Container'
 import Badge from '../components/Badge'
+import PostTitle from '../components/PostTitle'
 
 type Tag = {
   name: string
@@ -17,11 +18,10 @@ type Props = {
 const Tags: NextPage<Props> = ({ allPost, allTags }) => {
   return (
     <Container>
-      <div className="flex flex-wrap items-center space-x-2 space-y-2 py-2">
+      <PostTitle>All Tags</PostTitle>
+      <div className="mx-auto flex max-w-5xl flex-wrap space-x-2 space-y-2">
         {allTags.map((tag, index) => (
-          <Badge key={index}>
-            {tag.slug.length}&nbsp;{tag.name}
-          </Badge>
+          <Badge key={index}>{`${tag.slug.length} ${tag.name}`}</Badge>
         ))}
       </div>
     </Container>
@@ -41,7 +41,7 @@ export const getStaticProps = async () => {
       tags.push({ name: tag, slug: [post.slug] })
     }
   }
-  let allTags: Tag[] = tags.reduce((acc: Tag[], cur) => {
+  const allTags: Tag[] = tags.reduce((acc: Tag[], cur: Tag) => {
     const found = acc.find((tag) => tag.name === cur.name)
     if (found) {
       found.slug.push(cur.slug[0])
