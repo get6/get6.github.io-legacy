@@ -2,11 +2,16 @@ import { parseISO, format } from 'date-fns'
 
 type Props = {
   dateString: string
+  dateFormat?: string
 }
 
-const DateFormatter = ({ dateString }: Props) => {
+const DateFormatter = ({ dateString, dateFormat }: Props) => {
   const date = parseISO(dateString)
-  return <time dateTime={dateString}>{format(date, 'LLLL M월	d일, yyyy')}</time>
+  return (
+    <time dateTime={dateString}>
+      {format(date, dateFormat || 'yyyy-MM-dd')}
+    </time>
+  )
 }
 
 export default DateFormatter

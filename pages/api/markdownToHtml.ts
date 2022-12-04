@@ -1,5 +1,4 @@
 import { remark } from 'remark'
-import remarkPresetLintMarkdownStyleGuide from 'remark-preset-lint-markdown-style-guide'
 import remarkImages from 'remark-images'
 import remarkParse from 'remark-parse'
 import remarkSlug from 'remark-slug'
@@ -11,7 +10,6 @@ import rehypeStringify from 'rehype-stringify'
 
 const markdownToHtml = async (markdown: string) => {
   const result = await remark()
-    .use(remarkPresetLintMarkdownStyleGuide)
     .use(remarkParse)
     .use(remarkSlug)
     .use(remarkToc)

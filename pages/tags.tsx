@@ -4,6 +4,10 @@ import Post from '../types/post'
 import Container from '../components/Container'
 import Badge from '../components/Badge'
 import PostTitle from '../components/PostTitle'
+import HashTag from '../components/HashTag'
+import Table from '../components/Table'
+import DateFormatter from '../components/DateFormatter'
+import Link from 'next/link'
 
 type Tag = {
   name: string
@@ -11,19 +15,60 @@ type Tag = {
 }
 
 type Props = {
-  allPost: Post[]
+  allPosts: Post[]
   allTags: Tag[]
 }
 
-const Tags: NextPage<Props> = ({ allPost, allTags }) => {
+const Tags: NextPage<Props> = ({ allPosts, allTags }) => {
   return (
     <Container>
       <PostTitle>All Tags</PostTitle>
-      <div className="mx-auto flex max-w-5xl flex-wrap space-x-2 space-y-2">
+      <div className="mx-auto flex max-w-5xl flex-wrap">
         {allTags.map((tag, index) => (
           <Badge key={index}>{`${tag.slug.length} ${tag.name}`}</Badge>
         ))}
       </div>
+      <br />
+      <div className="mx-auto max-w-5xl">
+        <Table>
+          <Table.Head>
+            <Table.Header>Title</Table.Header>
+            <Table.Header>Date</Table.Header>
+            <Table.Header>Tags</Table.Header>
+          </Table.Head>
+          <Table.Body>
+            {allPosts.map((post, index) => (
+              <tr
+                key={index}
+                className="border-b bg-white transition duration-300 ease-in-out hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-900"
+              >
+                <th
+                  scope="row"
+                  className="whitespace-nowrap py-4 px-6 font-medium text-gray-900 dark:text-white"
+                >
+                  <Link href={`/posts/${post.slug}`}>
+                    <a>{post.title}</a>
+                  </Link>
+                </th>
+                <Table.Data>
+                  <DateFormatter dateString={post.date} />
+                  {/* {post.date}  */}
+                </Table.Data>
+                <Table.Data>
+                  <ul className="flex space-x-2">
+                    {post.tags.map((tag, index) => (
+                      <li key={index} className="hover:cursor-pointer">
+                        <HashTag>{tag}</HashTag>
+                      </li>
+                    ))}
+                  </ul>
+                </Table.Data>
+              </tr>
+            ))}
+          </Table.Body>
+        </Table>
+      </div>
+      <br />
     </Container>
   )
 }
