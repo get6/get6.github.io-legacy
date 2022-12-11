@@ -29,7 +29,7 @@ const Tags: NextPage<Props> = ({ allPosts, allTags }) => {
         ))}
       </div>
       <br />
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-6xl">
         <Table>
           <Table.Head>
             <Table.Header>Title</Table.Header>
