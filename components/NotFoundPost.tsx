@@ -7,10 +7,12 @@ const NotFoundPost = () => {
         <ResponsiveImage
           src="/assets/no_post.jpg"
           alt="No Posts Found."
-          className="rounded-3xl"
+          className="rounded-3xl object-center"
         />
       </div>
-      <p className="text-5xl font-semibold">No Posts Found</p>
+      <p className="text-5xl font-semibold capitalize text-gray-800 dark:text-white lg:text-6xl">
+        No Posts Found
+      </p>
     </div>
   )
 }

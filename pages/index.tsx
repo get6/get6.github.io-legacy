@@ -31,7 +31,7 @@ const Home: NextPage<Props> = ({ posts, initialDisplayPosts = [] }) => {
         <title>Sunhwang&apos;s blog</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
+      <div className="flex w-full flex-1 flex-col items-center justify-center px-20">
         <div className="container mx-auto py-20">
           <div className="flex items-center">
             <h1 className="text-3xl font-semibold capitalize text-gray-800 dark:text-white lg:text-4xl">

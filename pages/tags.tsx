@@ -23,7 +23,7 @@ const Tags: NextPage<Props> = ({ allPosts, allTags }) => {
   return (
     <Container>
       <PostTitle>All Tags</PostTitle>
-      <div className="mx-auto flex max-w-5xl flex-wrap">
+      <div className="mx-auto flex max-w-6xl flex-wrap">
         {allTags.map((tag, index) => (
           <Badge key={index}>{`${tag.slug.length} ${tag.name}`}</Badge>
         ))}
