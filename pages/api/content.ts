@@ -50,7 +50,8 @@ export const getPostBySlug = (
     if (field === 'content') {
       items[field] = content
     }
-
+    if (field === 'excerpt')
+      items[field] = content.substring(0, content.indexOf(' ', 100))
     if (typeof data[field] !== 'undefined') {
       items[field] = data[field]
     }

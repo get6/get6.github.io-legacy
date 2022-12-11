@@ -10,20 +10,21 @@ const NavBar = () => {
   const router = useRouter()
 
   const menus: Menu[] = [
-    { name: 'Series', href: '/series' },
+    // { name: 'Series', href: '/series' },
     { name: 'Tags', href: '/tags' },
-    { name: 'Books', href: '/books' },
+    // { name: 'Books', href: '/books' },
     { name: 'About me', href: '/about' },
   ]
 
   return (
     <nav className="absolute w-full pt-3">
-      {/* <nav className="border-gray-200 bg-white px-2 py-3 dark:bg-gray-900 sm:px-4"> */}
       <div className="container mx-auto flex flex-wrap">
         <Link href={'/'}>
           <a className="w-2/6 text-lg font-bold">🌎 Sunhwang&apos;s blog</a>
         </Link>
-        <ul className="flex grow justify-between">
+        {/* 4개 이상일 때 쓰는 속성 */}
+        {/* <ul className="flex grow justify-between"> */}
+        <ul className="flex grow justify-end space-x-10">
           {menus.map((menu, index) => (
             <li key={index}>
               <Link href={menu.href}>

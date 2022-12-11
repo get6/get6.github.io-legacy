@@ -2,6 +2,9 @@ import DateFormatter from './DateFormatter'
 import CoverImage from './CoverImage'
 import Link from 'next/link'
 import Image from 'next/image'
+import Tags from '../pages/tags'
+import Badge from './Badge'
+import HashTag from './HashTag'
 
 type Props = {
   title: string
@@ -9,50 +12,49 @@ type Props = {
   date: string
   excerpt: string
   slug: string
+  tags: string[]
 }
 
-const PostPreview = ({ title, coverImage, date, excerpt, slug }: Props) => {
+const PostPreview = ({
+  title,
+  coverImage,
+  date,
+  excerpt,
+  slug,
+  tags,
+}: Props) => {
   return (
-    // <div>
-    //   <div className="mb-5">
-    //     <CoverImage slug={slug} title={title} src={coverImage} />
-    //   </div>
-    //   <h3 className="mb-3 text-3xl leading-snug">
-    //     <Link as={`/posts/${slug}`} href="/posts/[slug]">
-    //       <a className="hover:underline">{title}</a>
-    //     </Link>
-    //   </h3>
-    //   <div className="mb-4 text-lg">
-    //     <DateFormatter dateString={date} />
-    //   </div>
-    //   <p className="mb-4 text-lg leading-relaxed">{excerpt}</p>
-    // </div>
-    <div>
+    <div className="flex flex-col">
       <Image
         className="h-64 w-full rounded-lg object-cover object-center lg:h-80"
-        src="https://images.unsplash.com/photo-1624996379697-f01d168b1a52?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+        src="/assets/coding.jpg"
         alt=""
         width={400}
         height={400}
       />
-
-      <div className="mt-8">
-        {/* TODO 카테고리 누르면 카테고리 페이지에 해당 카테고리 검색해서 보여주기 */}
-        <span className="uppercase text-blue-500">category</span>
-        <h1 className="mt-4 text-xl font-semibold text-gray-800 dark:text-white">
-          {title}
-        </h1>
-        <p className="mt-2 text-gray-500 dark:text-gray-400">{excerpt}</p>
-        <div className="mt-4 flex items-center justify-between">
-          <div>
-            <p className="text-sm text-gray-500 dark:text-gray-400">{date}</p>
-          </div>
-          <Link as={`/posts/${slug}`} href="/posts/[...slug]">
-            <a className="inline-block text-blue-500 underline hover:text-blue-400">
-              Read more
-            </a>
-          </Link>
+      <Link as={`/posts/${slug}`} href="/posts/[...slug]">
+        <div className="mt-6 flex flex-col hover:cursor-pointer">
+          <h1 className="text-xl font-semibold text-gray-800 dark:text-white">
+            {title}
+          </h1>
+          <p className="mt-4 text-gray-500 line-clamp-2 dark:text-gray-400">
+            {excerpt}
+          </p>
         </div>
+      </Link>
+      <div className="mt-4 flex items-center justify-between">
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          <DateFormatter dateString={date} />
+        </p>
+        <ul className="flex justify-end space-x-1">
+          {tags.slice(0, 3).map((tag, index) => {
+            return (
+              <li key={index} className="hover:cursor-pointer">
+                <HashTag>{tag}</HashTag>
+              </li>
+            )
+          })}
+        </ul>
       </div>
     </div>
   )
