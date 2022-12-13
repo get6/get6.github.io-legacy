@@ -8,6 +8,7 @@ import HashTag from '../components/HashTag'
 import Table from '../components/Table'
 import DateFormatter from '../components/DateFormatter'
 import Link from 'next/link'
+import React, { useState } from 'react'
 
 type Tag = {
   name: string
@@ -15,17 +16,33 @@ type Tag = {
 }
 
 type Props = {
-  allPosts: Post[]
-  allTags: Tag[]
+  posts: Post[]
+  initialDisplayPosts: Post[]
+  tags: Tag[]
 }
 
-const Tags: NextPage<Props> = ({ allPosts, allTags }) => {
+const Tags: NextPage<Props> = ({ posts, initialDisplayPosts = [], tags }) => {
+  const [selectValue, setSelectValue] = useState('')
+  const filteredBlogPosts = posts.filter((post) => {
+    const searchContent = post.tags.includes(selectValue.toLowerCase())
+    return searchContent
+  })
+  const displayPosts =
+    initialDisplayPosts.length > 0 && !selectValue
+      ? initialDisplayPosts
+      : filteredBlogPosts
   return (
     <Container>
       <PostTitle>All Tags</PostTitle>
       <div className="mx-auto flex max-w-6xl flex-wrap">
-        {allTags.map((tag, index) => (
-          <Badge key={index}>{`${tag.slug.length} ${tag.name}`}</Badge>
+        {tags.map((tag, index) => (
+          <button
+            key={index}
+            value={tag.name}
+            onClick={(e) => setSelectValue(e.currentTarget.value)}
+          >
+            <Badge>{`${tag.slug.length} ${tag.name}`}</Badge>
+          </button>
         ))}
       </div>
       <br />
@@ -37,7 +54,7 @@ const Tags: NextPage<Props> = ({ allPosts, allTags }) => {
             <Table.Header>Tags</Table.Header>
           </Table.Head>
           <Table.Body>
-            {allPosts.map((post, index) => (
+            {displayPosts.map((post, index) => (
               <tr
                 key={index}
                 className="border-b bg-white transition duration-300 ease-in-out hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-900"
@@ -52,13 +69,18 @@ const Tags: NextPage<Props> = ({ allPosts, allTags }) => {
                 </th>
                 <Table.Data>
                   <DateFormatter dateString={post.date} />
-                  {/* {post.date}  */}
                 </Table.Data>
                 <Table.Data>
                   <ul className="flex space-x-2">
                     {post.tags.map((tag, index) => (
-                      <li key={index} className="hover:cursor-pointer">
-                        <HashTag>{tag}</HashTag>
+                      <li key={index}>
+                        <button
+                          key={index}
+                          value={tag}
+                          onClick={(e) => setSelectValue(e.currentTarget.value)}
+                        >
+                          <HashTag>{tag}</HashTag>
+                        </button>
                       </li>
                     ))}
                   </ul>
@@ -76,17 +98,18 @@ const Tags: NextPage<Props> = ({ allPosts, allTags }) => {
 export default Tags
 
 export const getStaticProps = async () => {
-  const allPosts = getAllPosts(['title', 'tags', 'date', 'slug'])
+  const posts = getAllPosts(['title', 'tags', 'date', 'slug'])
+  const initialDisplayPosts = posts
   // TODO 체이닝으로 바꿔보기
-  let tags: Tag[] = []
-  for (let i = 0; i < allPosts.length; i++) {
-    const post = allPosts[i]
+  let allTags: Tag[] = []
+  for (let i = 0; i < posts.length; i++) {
+    const post = posts[i]
     for (let j = 0; j < post.tags.length; j++) {
       const tag = post.tags[j]
-      tags.push({ name: tag, slug: [post.slug] })
+      allTags.push({ name: tag, slug: [post.slug] })
     }
   }
-  const allTags: Tag[] = tags.reduce((acc: Tag[], cur: Tag) => {
+  const tags: Tag[] = allTags.reduce((acc: Tag[], cur: Tag) => {
     const found = acc.find((tag) => tag.name === cur.name)
     if (found) {
       found.slug.push(cur.slug[0])
@@ -97,6 +120,6 @@ export const getStaticProps = async () => {
   }, [])
 
   return {
-    props: { allPosts, allTags },
+    props: { posts, initialDisplayPosts, tags },
   }
 }

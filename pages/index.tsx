@@ -83,8 +83,8 @@ export const getStaticProps = async () => {
     'excerpt',
     'tags',
   ])
-
+  const initialDisplayPosts = posts
   return {
-    props: { posts },
+    props: { posts, initialDisplayPosts },
   }
 }
