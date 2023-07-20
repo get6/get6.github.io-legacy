@@ -35,6 +35,9 @@ const Tags: NextPage<Props> = ({ posts, initialDisplayPosts = [], tags }) => {
     <Container>
       <PostTitle>All Tags</PostTitle>
       <div className="mx-auto flex max-w-6xl flex-wrap">
+        <button key={'all'} onClick={() => setSelectValue('')}>
+          <Badge>{`${tags.length} all`}</Badge>
+        </button>
         {tags.map((tag, index) => (
           <button
             key={index}
@@ -63,9 +66,7 @@ const Tags: NextPage<Props> = ({ posts, initialDisplayPosts = [], tags }) => {
                   scope="row"
                   className="whitespace-nowrap py-4 px-6 font-medium text-gray-900 dark:text-white"
                 >
-                  <Link href={`/posts/${post.slug}`}>
-                    <a>{post.title}</a>
-                  </Link>
+                  <Link href={`/posts/${post.slug}`}>{post.title}</Link>
                 </th>
                 <Table.Data>
                   <DateFormatter dateString={post.date} />
